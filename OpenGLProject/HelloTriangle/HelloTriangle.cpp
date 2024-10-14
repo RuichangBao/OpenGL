@@ -1,4 +1,4 @@
-#include "HelloWindows.h"
+#include "HelloTriangle.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -15,10 +15,10 @@ int main()
 
 	// glfw window creation
 	// --------------------
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "HelloWindows", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "HelloTriangle", NULL, NULL);
 	if (window == NULL)
 	{
-		std::cout << "创建GLFW窗口失败！" << std::endl;
+		cout << "创建GLFW窗口失败！" << endl;
 		glfwTerminate();
 		return -1;
 	}
@@ -29,7 +29,7 @@ int main()
 	// ---------------------------------------
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
-		std::cout << "初始化GLAD失败" << std::endl;
+		cout << "初始化GLAD失败" << endl;
 		return -1;
 	}
 
@@ -50,7 +50,6 @@ int main()
 		// -------------------------------------------------------------------------------
 		glfwSwapBuffers(window);
 		glfwPollEvents();
-
 	}
 
 	// glfw: terminate, clearing all previously allocated GLFW resources.
@@ -68,12 +67,12 @@ void processInput(GLFWwindow* window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 	{
-		//std::cout << "AAAAAAAAAAAA有输入" << std::endl;
+		//cout << "AAAAAAAAAAAA有输入" << endl;
 		glfwSetWindowShouldClose(window, true);//设置指定窗口的关闭标志。
 	}
 	/*else
 	{
-		std::cout << "没有输入" << std::endl;
+		cout << "没有输入" << endl;
 	}*/
 }
 
@@ -84,7 +83,6 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	// make sure the viewport matches the new window dimensions; note that width and 
 	// height will be significantly larger than specified on retina displays.
 
-	//std::cout << "窗口大小改变" << width << "  " << height << std::endl;
+	//cout << "窗口大小改变" << width << "  " << height << endl;
 	glViewport(0, 0, width, height);//确保视口匹配新的窗口尺寸；
 }
-

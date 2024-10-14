@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloWindows", "HelloWindow
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test2", "Test2", "{EA73E234-8F72-4C86-8123-E849C0A6DC4E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloTriangle", "HelloTriangle\HelloTriangle.vcxproj", "{26C659E8-9F58-4405-B64C-E5CB8D0027C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -23,6 +25,14 @@ Global
 		{24AC51A3-092A-4C9F-898A-78772334AAFC}.Release|x64.Build.0 = Release|x64
 		{24AC51A3-092A-4C9F-898A-78772334AAFC}.Release|x86.ActiveCfg = Release|Win32
 		{24AC51A3-092A-4C9F-898A-78772334AAFC}.Release|x86.Build.0 = Release|Win32
+		{26C659E8-9F58-4405-B64C-E5CB8D0027C1}.Debug|x64.ActiveCfg = Debug|x64
+		{26C659E8-9F58-4405-B64C-E5CB8D0027C1}.Debug|x64.Build.0 = Debug|x64
+		{26C659E8-9F58-4405-B64C-E5CB8D0027C1}.Debug|x86.ActiveCfg = Debug|Win32
+		{26C659E8-9F58-4405-B64C-E5CB8D0027C1}.Debug|x86.Build.0 = Debug|Win32
+		{26C659E8-9F58-4405-B64C-E5CB8D0027C1}.Release|x64.ActiveCfg = Release|x64
+		{26C659E8-9F58-4405-B64C-E5CB8D0027C1}.Release|x64.Build.0 = Release|x64
+		{26C659E8-9F58-4405-B64C-E5CB8D0027C1}.Release|x86.ActiveCfg = Release|Win32
+		{26C659E8-9F58-4405-B64C-E5CB8D0027C1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
