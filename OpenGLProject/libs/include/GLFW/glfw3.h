@@ -3284,7 +3284,7 @@ GLFWAPI void glfwDestroyWindow(GLFWwindow* window);
 GLFWAPI int glfwWindowShouldClose(GLFWwindow* window);
 
 /*! @brief Sets the close flag of the specified window.
- *
+ *  设置指定窗口的关闭标志。
  *  This function sets the value of the close flag of the specified window.
  *  This can be used to override the user's attempt to close the window, or
  *  to signal that it should be closed.
