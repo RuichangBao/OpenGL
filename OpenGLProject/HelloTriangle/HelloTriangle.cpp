@@ -35,7 +35,9 @@ int main()
 		cout << "初始化GLAD(OpenGL函数指针错误)失败" << endl;
 		return -1;
 	}
-	//glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);//设置窗口大小
+	unsigned int VBO;
+	glGenBuffers(1, &VBO);//生成一个带有缓冲ID的VBO(Vertex Buffer Object)对象：vertex buffer object
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	// 循环渲染
 	// -----------
 	while (!glfwWindowShouldClose(window))//检查指定窗口的关闭标志。检查GLFW是否被要求退出
