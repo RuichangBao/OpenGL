@@ -1,4 +1,4 @@
-//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/01%20Getting%20started/03%20Hello%20Window.md
+//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/01%20Getting%20started/04%20Hello%20Triangle.md
 #include "HelloTriangle.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -12,13 +12,13 @@ int main()
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);//主版本3
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);//次版本3
-	//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);//OpenGL的配置文件和属性 核心模式
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);//OpenGL的配置文件和属性 核心模式
 	//glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);//不允许修改窗口大小
 #ifdef __APPLE__
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 	// glfw 创建窗口对象
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "HelloWindows", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "HelloTriangle", NULL, NULL);
 	if (window == NULL)
 	{
 		cout << "创建GLFW窗口失败！" << endl;
@@ -35,6 +35,7 @@ int main()
 		cout << "初始化GLAD(OpenGL函数指针错误)失败" << endl;
 		return -1;
 	}
+	//glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);//设置窗口大小
 	// 循环渲染
 	// -----------
 	while (!glfwWindowShouldClose(window))//检查指定窗口的关闭标志。检查GLFW是否被要求退出
@@ -51,7 +52,8 @@ int main()
 	}
 
 	// glfw: terminate, clearing all previously allocated GLFW resources.
-	//终止，清除之前分配的所有glfw资源
+	//终止，清除之前分配的所有glfw资源。
+	// ------------------------------------------------------------------
 	glfwTerminate();//清空glfw资源。
 	return 0;
 }
@@ -65,8 +67,12 @@ void processInput(GLFWwindow* window)
 		glfwSetWindowShouldClose(window, true);	//关闭窗口
 }
 // 窗口大小变化回调函数
+// ---------------------------------------------------------------------------------------------
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
+	// make sure the viewport matches the new window dimensions; note that width and 
+	// height will be significantly larger than specified on retina displays.
+
 	//cout << "窗口大小改变" << width << "  " << height << endl;
 	glViewport(0, 0, width, height);//确保视口匹配新的窗口尺寸；
 }

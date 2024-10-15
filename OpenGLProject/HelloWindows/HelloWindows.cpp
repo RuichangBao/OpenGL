@@ -1,4 +1,4 @@
-//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/01%20Getting%20started/03%20Hello%20Window.md
+//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/01%20Getting%20started/04%20Hello%20Triangle.md
 #include "HelloWindows.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -61,7 +61,6 @@ int main()
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // 处理所有输入：查询GLFW是否按下/释放了相关的键，并做出相应的反应
 // 按下鼠标或者键盘
-// ---------------------------------------------------------------------------------------------------------
 void processInput(GLFWwindow* window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)//如果ESC（GLFW_KEY_ESCAPE）键被按下（GLFW_PRESS）
