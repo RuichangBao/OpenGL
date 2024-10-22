@@ -3,6 +3,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+
 using namespace std;
 
 int main()
@@ -95,24 +96,18 @@ int main()
 			0.5f, -0.5f, 0.0f,
 			0.0f,  0.5f, 0.0f
 	};
-	unsigned int VBO;//顶点缓冲对象
+	unsigned int VBO, VAO;//顶点缓冲对象
 	// 0. 复制顶点数组到缓冲中供OpenGL使用
+	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);//生成顶点缓存对象VBO(Vertex Buffer Object)对象
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);//绑定顶点缓冲对象
-	unsigned int VAO;
-	glGenVertexArrays(1, &VAO);
-	// 1. 设置顶点属性指针
-	//把顶点数据复制到缓冲的内存中 
-	//GL_STATIC_DRAW：数据不会或者几乎不会改变，
-	//GL_DYNAMIC_DRAW：数据会被改变很多。
-	//GL_STREAM_DRAW ：数据每次绘制时都会改变。
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);//将顶点数据缓冲到顶点对象中
+	// 1. 绑定VAO
+	glBindVertexArray(VAO);
+	// 2. 把顶点数组复制到缓冲中供OpenGL使用
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	// 2. 当我们渲染一个物体时要使用着色器程序
-	glEnableVertexAttribArray(0);//启动顶点属性
-	// 3. 绘制物体
-	//someOpenGLFunctionThatDrawsOurTriangle();
-
+	glEnableVertexAttribArray(0);
 	// 循环渲染
 	// -----------
 	while (!glfwWindowShouldClose(window))//检查指定窗口的关闭标志。检查GLFW是否被要求退出
@@ -123,11 +118,18 @@ int main()
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);//清空屏幕所用的颜色
 		glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
+		glUseProgram(shaderProgram);
+		glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 		// -------------------------------------------------------------------------------
 		glfwSwapBuffers(window);//交换颜色缓冲区
 		glfwPollEvents();		//检查触发事件，并调用回调函数
 	}
-
+	// optional: de-allocate all resources once they've outlived their purpose:
+	// ------------------------------------------------------------------------
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+	glDeleteProgram(shaderProgram);
 	// glfw: terminate, clearing all previously allocated GLFW resources.
 	//终止，清除之前分配的所有glfw资源。
 	// ------------------------------------------------------------------
