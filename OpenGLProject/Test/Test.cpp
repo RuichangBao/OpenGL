@@ -2,8 +2,7 @@
 using namespace std;
 int main()
 {
-	int num = 8;
-	cout << !num << endl;
+	cout << sizeof(float) << endl;
 	cout << "Hello World!\n";
 }
 
