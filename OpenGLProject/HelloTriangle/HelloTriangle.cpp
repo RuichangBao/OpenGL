@@ -35,9 +35,78 @@ int main()
 		cout << "初始化GLAD(OpenGL函数指针错误)失败" << endl;
 		return -1;
 	}
+
+#pragma region 顶点着色器
+	//---------------顶点着色器 Start---------------------
+	unsigned int vertexShader;
+	vertexShader = glCreateShader(GL_VERTEX_SHADER);//创建顶点着色器对象
+	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);//把着色器源码赋值给着色器
+	glCompileShader(vertexShader);
+	int successVertex;
+	char infoLogVertex[512];
+	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &successVertex);//获取着色器状态
+	if (!successVertex)
+	{
+		glGetShaderInfoLog(vertexShader, 512, NULL, infoLogVertex);
+		cout << "顶点着色器编译错误，\n" << infoLogVertex << endl;
+	}
+	//---------------顶点着色器 End---------------------
+#pragma endregion
+
+#pragma region 片段着色器
+	//---------------片段着色器 Start-------------------
+	unsigned int fragmentShader;
+	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);//创建顶点着色器对象
+	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);//把着色器源码赋值给着色器
+	glCompileShader(fragmentShader);
+	int successFragment;
+	char infoLogFragment[512];
+	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &successFragment);//获取着色器状态
+	if (!successFragment)
+	{
+		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLogFragment);
+		cout << "片段着色器编译错误，\n" << infoLogFragment << endl;
+	}
+	//---------------片段着色器 End---------------------
+#pragma endregion
+
+#pragma region 着色器程序对象
+	//---------------着色器程序对象 Start-------------------
+	unsigned int shaderProgram;
+	shaderProgram = glCreateProgram();	//创建着色器程序对象
+	glAttachShader(shaderProgram, vertexShader);//把着色器加载到着色器程序对象上
+	glAttachShader(shaderProgram, fragmentShader);
+	glLinkProgram(shaderProgram);		//链接着色器对象
+	int shaderProgramSuccess;
+	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &shaderProgramSuccess);
+	if (!shaderProgramSuccess)
+	{
+		cout << "链接着色器程序错误，\n" << shaderProgramSuccess << endl;
+		return -1;
+	}
+	glUseProgram(shaderProgram);	//激活着色器程序对象
+	glDeleteShader(vertexShader);	//删除着色器对象
+	glDeleteShader(fragmentShader);
+	//---------------着色器程序对象 End-------------------
+#pragma endregion
+
+	float vertices[] = {
+			-0.5f, -0.5f, 0.0f,
+			0.5f, -0.5f, 0.0f,
+			0.0f,  0.5f, 0.0f
+	};
 	unsigned int VBO;
-	glGenBuffers(1, &VBO);//生成一个带有缓冲ID的VBO(Vertex Buffer Object)对象：vertex buffer object
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glGenBuffers(1, &VBO);//生成顶点缓存对象VBO(Vertex Buffer Object)对象
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);//绑定顶点缓冲对象
+	//把顶点数据复制到缓冲的内存中 
+	//GL_STATIC_DRAW：数据不会或者几乎不会改变，
+	//GL_DYNAMIC_DRAW：数据会被改变很多。
+	//GL_STREAM_DRAW ：数据每次绘制时都会改变。
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
 	// 循环渲染
 	// -----------
 	while (!glfwWindowShouldClose(window))//检查指定窗口的关闭标志。检查GLFW是否被要求退出
