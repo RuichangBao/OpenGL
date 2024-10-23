@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\GitProject\OpenGL\LearnOpenGL-master\src\6.pbr\2.1.2.ibl_irradiance\ibl_irradiance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\GitProject\OpenGL\LearnOpenGL-master\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\GitProject\OpenGL\LearnOpenGL-master\src\6.pbr\2.1.2.ibl_irradiance\2.1.2.background.fs" />
+    <None Include="D:\GitProject\OpenGL\LearnOpenGL-master\src\6.pbr\2.1.2.ibl_irradiance\2.1.2.background.vs" />
+    <None Include="D:\GitProject\OpenGL\LearnOpenGL-master\src\6.pbr\2.1.2.ibl_irradiance\2.1.2.cubemap.vs" />
+    <None Include="D:\GitProject\OpenGL\LearnOpenGL-master\src\6.pbr\2.1.2.ibl_irradiance\2.1.2.equirectangular_to_cubemap.fs" />
+    <None Include="D:\GitProject\OpenGL\LearnOpenGL-master\src\6.pbr\2.1.2.ibl_irradiance\2.1.2.irradiance_convolution.fs" />
+    <None Include="D:\GitProject\OpenGL\LearnOpenGL-master\src\6.pbr\2.1.2.ibl_irradiance\2.1.2.pbr.fs" />
+    <None Include="D:\GitProject\OpenGL\LearnOpenGL-master\src\6.pbr\2.1.2.ibl_irradiance\2.1.2.pbr.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{78DC7501-DAF0-3F87-ACCA-60D8C2AA6D77}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

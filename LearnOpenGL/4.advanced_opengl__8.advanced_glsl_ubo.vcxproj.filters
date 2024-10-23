@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\GitProject\OpenGL\LearnOpenGL-master\src\4.advanced_opengl\8.advanced_glsl_ubo\advanced_glsl_ubo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\GitProject\OpenGL\LearnOpenGL-master\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\GitProject\OpenGL\LearnOpenGL-master\src\4.advanced_opengl\8.advanced_glsl_ubo\8.advanced_glsl.vs" />
+    <None Include="D:\GitProject\OpenGL\LearnOpenGL-master\src\4.advanced_opengl\8.advanced_glsl_ubo\8.blue.fs" />
+    <None Include="D:\GitProject\OpenGL\LearnOpenGL-master\src\4.advanced_opengl\8.advanced_glsl_ubo\8.green.fs" />
+    <None Include="D:\GitProject\OpenGL\LearnOpenGL-master\src\4.advanced_opengl\8.advanced_glsl_ubo\8.red.fs" />
+    <None Include="D:\GitProject\OpenGL\LearnOpenGL-master\src\4.advanced_opengl\8.advanced_glsl_ubo\8.yellow.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{78DC7501-DAF0-3F87-ACCA-60D8C2AA6D77}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
