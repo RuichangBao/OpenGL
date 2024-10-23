@@ -14,6 +14,7 @@ int main()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);//主版本3
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);//次版本3
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);//OpenGL的配置文件和属性 核心模式
+
 #ifdef __APPLE__
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);//允许修改窗口大小
 #endif
@@ -42,10 +43,10 @@ int main()
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);//创建顶点着色器对象
 	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);//把着色器源码赋值给着色器
 	glCompileShader(vertexShader);
-	int successVertex;
+	int success;
 	char infoLogVertex[512];
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &successVertex);//获取着色器状态
-	if (!successVertex)
+	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);//获取着色器状态
+	if (!success)
 	{
 		glGetShaderInfoLog(vertexShader, 512, NULL, infoLogVertex);
 		cout << "顶点着色器编译错误，\n" << infoLogVertex << endl;
@@ -59,10 +60,9 @@ int main()
 	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);//创建顶点着色器对象
 	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);//把着色器源码赋值给着色器
 	glCompileShader(fragmentShader);
-	int successFragment;
 	char infoLogFragment[512];
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &successFragment);//获取着色器状态
-	if (!successFragment)
+	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);//获取着色器状态
+	if (!success)
 	{
 		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLogFragment);
 		cout << "片段着色器编译错误，\n" << infoLogFragment << endl;
@@ -77,14 +77,13 @@ int main()
 	glAttachShader(shaderProgram, vertexShader);//把着色器加载到着色器程序对象上
 	glAttachShader(shaderProgram, fragmentShader);
 	glLinkProgram(shaderProgram);		//链接着色器对象
-	int shaderProgramSuccess;
-	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &shaderProgramSuccess);
-	if (!shaderProgramSuccess)
+	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+	if (!success)
 	{
-		cout << "链接着色器程序错误，\n" << shaderProgramSuccess << endl;
+		cout << "链接着色器程序错误，\n" << success << endl;
 		return -1;
 	}
-	glUseProgram(shaderProgram);	//激活着色器程序对象
+	//glUseProgram(shaderProgram);	//激活着色器程序对象
 	glDeleteShader(vertexShader);	//删除着色器对象
 	glDeleteShader(fragmentShader);
 	//---------------着色器程序对象 End-------------------
@@ -99,14 +98,16 @@ int main()
 	// 0. 复制顶点数组到缓冲中供OpenGL使用
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);//生成顶点缓存对象VBO(Vertex Buffer Object)对象
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);//绑定顶点缓冲对象
 	// 1. 绑定VAO
 	glBindVertexArray(VAO);
+
 	// 2. 把顶点数组复制到缓冲中供OpenGL使用
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
 	// 循环渲染
 	// -----------
 	while (!glfwWindowShouldClose(window))//检查指定窗口的关闭标志。检查GLFW是否被要求退出
@@ -119,8 +120,7 @@ int main()
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-		//glDrawArrays(GL_TRIANGLES, 0, 3);
-		glDrawArrays(0, 0, 0);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 		// -------------------------------------------------------------------------------
 		glfwSwapBuffers(window);//交换颜色缓冲区
 		glfwPollEvents();		//检查触发事件，并调用回调函数
