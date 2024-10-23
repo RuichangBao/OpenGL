@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{473313b1-7497-480f-ad7e-8f40538c1b48}</ProjectGuid>
+    <ProjectGuid>{81FAE511-768A-4F34-A3CD-2C5F7F70F4F9}</ProjectGuid>
     <RootNamespace>My01ShaderUniform</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -108,16 +108,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Bscmake>
-      <PreserveSbr>true</PreserveSbr>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -137,10 +133,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\libs\c\glad.c" />
-    <ClCompile Include="ShaderUniform.cpp" />
+    <ClCompile Include="ShaderInterpolation.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ShaderUniform.h" />
+    <ClInclude Include="ShaderInterpolation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
