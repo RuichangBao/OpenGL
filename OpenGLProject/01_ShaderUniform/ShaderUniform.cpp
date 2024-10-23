@@ -1,5 +1,5 @@
 //https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/01%20Getting%20started/04%20Hello%20Triangle.md
-#include "HelloTriangle.h"
+#include "ShaderUniform.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -113,8 +113,12 @@ int main()
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);//清空屏幕所用的颜色
 		glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
 
+		float timeValue = glfwGetTime();
+		float greenValue = (sin(timeValue) / 2) + 0.5;
+		int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");	//查询uniform地址不要求你之前使用过着色器程序
 		//渲染一个物体时要使用着色器程序
 		glUseProgram(shaderProgram);
+		glUniform4f(vertexColorLocation, 0, greenValue, 0, 1);	//更新一个uniform之前你必须先使用程序
 		//绘制三角形
 		glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 		glDrawArrays(GL_TRIANGLES, 0, 3);
