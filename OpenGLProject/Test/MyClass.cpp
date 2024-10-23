@@ -2,13 +2,19 @@
 
 using namespace std;
 
-MyClass::MyClass() :num(100), data(100)
+MyClass::MyClass()
 {
-	cout << "构造函数" << data<<" "<<num << endl;
+	cout << "无参构造" << endl;
+	MyClass::MyClass(0, 0);
+}
+MyClass::MyClass(int num, int data)
+{
+	cout << "有参构造" << endl;
+	this->num = num;
+	this->data = data;
 }
 
-// 成员函数实现
-void MyClass::PrintMessage()
+void MyClass::ToString()
 {
-	std::cout << "Hello, World! Data: " << data << std::endl;
+	cout << "num:" << num << "	data:" << data << endl;
 }
