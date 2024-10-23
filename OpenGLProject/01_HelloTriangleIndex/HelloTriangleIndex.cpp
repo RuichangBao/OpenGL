@@ -1,5 +1,5 @@
 //https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/01%20Getting%20started/04%20Hello%20Triangle.md
-#include "HelloTriangle.h"
+#include "HelloTriangleIndex.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -18,7 +18,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);//允许修改窗口大小
 #endif
 	// glfw 创建窗口对象
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "HelloTriangle", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "HelloTriangleIndex", NULL, NULL);
 	if (window == NULL)
 	{
 		cout << "创建GLFW窗口失败！" << endl;
@@ -83,23 +83,37 @@ int main()
 #pragma endregion
 
 	float vertices[] = {
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		0.0f,  0.5f, 0.0f
+		0.5f, 0.5f, 0.0f,   // 右上角
+		0.5f, -0.5f, 0.0f,  // 右下角
+		-0.5f, -0.5f, 0.0f, // 左下角
+		-0.5f, 0.5f, 0.0f   // 左上角
+	};
+	unsigned int indices[] = {
+		// 注意索引从0开始! 
+		// 此例的索引(0,1,2,3)就是顶点数组vertices的下标，
+		// 这样可以由下标代表顶点组合成矩形
+		0, 1, 3, // 第一个三角形
+		1, 2, 3  // 第二个三角形
 	};
 
-	unsigned int VBO, VAO;//顶点缓冲对象
+	unsigned int VBO, VAO, EBO;//顶点缓冲对象
 	// 0. 复制顶点数组到缓冲中供OpenGL使用
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);//生成顶点缓存对象VBO(Vertex Buffer Object)对象
+	glGenBuffers(1, &EBO);
 	// 1. 绑定VAO
 	glBindVertexArray(VAO);
 
 	// 2. 把顶点数组复制到缓冲中供OpenGL使用
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
+
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
@@ -117,7 +131,8 @@ int main()
 		glUseProgram(shaderProgram);
 		//绘制三角形
 		glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		//glDrawArrays(GL_TRIANGLES, 0, 6);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		// -------------------------------------------------------------------------------
 		glfwSwapBuffers(window);//交换颜色缓冲区
@@ -127,6 +142,7 @@ int main()
 	// ------------------------------------------------------------------------
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
+	glDeleteBuffers(1, &EBO);
 	glDeleteProgram(shaderProgram);
 	// glfw: terminate, clearing all previously allocated GLFW resources.
 	//终止，清除之前分配的所有glfw资源。
