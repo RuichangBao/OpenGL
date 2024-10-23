@@ -8,13 +8,24 @@
     <Filter Include="源文件">
       <UniqueIdentifier>{8d0b99b7-a159-45a8-a6fd-1123fe3c3065}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{314be3f4-f060-4994-9139-ed9f64c615b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Test.cpp">
+    <ClCompile Include="Main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\libs\c\glad.c">
       <Filter>资源文件</Filter>
     </ClCompile>
+    <ClCompile Include="MyClass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MyClass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

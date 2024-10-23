@@ -20,7 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\libs\c\glad.c" />
-    <ClCompile Include="Test.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MyClass.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MyClass.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
