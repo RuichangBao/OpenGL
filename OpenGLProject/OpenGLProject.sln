@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloWindows", "HelloWindows\HelloWindows.vcxproj", "{D0AB44D4-D59F-41B2-9D88-F68ECF8E88C9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_HelloWindows", "01_HelloWindows\01_HelloWindows.vcxproj", "{D0AB44D4-D59F-41B2-9D88-F68ECF8E88C9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloTriangle", "HelloTriangle\HelloTriangle.vcxproj", "{FEB5D46B-018C-4E51-A002-56DE68BEE81B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_HelloTriangle", "01_HelloTriangle\01_HelloTriangle.vcxproj", "{FEB5D46B-018C-4E51-A002-56DE68BEE81B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "Test\Test.vcxproj", "{46DD9532-DE6B-47AA-9200-D29444D5ED0B}"
 EndProject

@@ -14,10 +14,10 @@ int main()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);//主版本3
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);//次版本3
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);//OpenGL的配置文件和属性 核心模式
-
 #ifdef __APPLE__
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);//允许修改窗口大小
 #endif
+
 	// glfw 创建窗口对象
 	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "HelloTriangle", NULL, NULL);
 	if (window == NULL)
@@ -36,38 +36,32 @@ int main()
 		cout << "初始化GLAD(OpenGL函数指针错误)失败" << endl;
 		return -1;
 	}
-
-#pragma region 顶点着色器
-	//---------------顶点着色器 Start---------------------
-	unsigned int vertexShader;
-	vertexShader = glCreateShader(GL_VERTEX_SHADER);//创建顶点着色器对象
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);//把着色器源码赋值给着色器
-	glCompileShader(vertexShader);
 	int success;
-	char infoLogVertex[512];
+	char infoLog[512];
+#pragma region 顶点着色器
+	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);//创建顶点着色器对象
+	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);//把着色器源码赋值给着色器
+	glCompileShader(vertexShader);	//编译顶点着色器
 	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);//获取着色器状态
 	if (!success)
 	{
-		glGetShaderInfoLog(vertexShader, 512, NULL, infoLogVertex);
-		cout << "顶点着色器编译错误，\n" << infoLogVertex << endl;
+		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+		cout << "顶点着色器编译错误，\n" << infoLog << endl;
+		return -1;
 	}
-	//---------------顶点着色器 End---------------------
 #pragma endregion
 
 #pragma region 片段着色器
-	//---------------片段着色器 Start-------------------
-	unsigned int fragmentShader;
-	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);//创建顶点着色器对象
+	unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);//创建片段着色器对象
 	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);//把着色器源码赋值给着色器
 	glCompileShader(fragmentShader);
-	char infoLogFragment[512];
 	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);//获取着色器状态
 	if (!success)
 	{
-		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLogFragment);
-		cout << "片段着色器编译错误，\n" << infoLogFragment << endl;
+		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+		cout << "片段着色器编译错误，\n" << infoLog << endl;
+		return -1;
 	}
-	//---------------片段着色器 End---------------------
 #pragma endregion
 
 #pragma region 着色器程序对象
@@ -77,7 +71,7 @@ int main()
 	glAttachShader(shaderProgram, vertexShader);//把着色器加载到着色器程序对象上
 	glAttachShader(shaderProgram, fragmentShader);
 	glLinkProgram(shaderProgram);		//链接着色器对象
-	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);//获取着色器程序状态
 	if (!success)
 	{
 		cout << "链接着色器程序错误，\n" << success << endl;
@@ -117,7 +111,7 @@ int main()
 		// 渲染
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);//清空屏幕所用的颜色
 		glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
-		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
+		//渲染一个物体时要使用着色器程序
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 		glDrawArrays(GL_TRIANGLES, 0, 3);
@@ -137,7 +131,6 @@ int main()
 	return 0;
 }
 
-// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // 处理所有输入：查询GLFW是否按下/释放了相关的键，并做出相应的反应
 // 按下鼠标或者键盘
 void processInput(GLFWwindow* window)
@@ -149,9 +142,6 @@ void processInput(GLFWwindow* window)
 // ---------------------------------------------------------------------------------------------
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-	// make sure the viewport matches the new window dimensions; note that width and 
-	// height will be significantly larger than specified on retina displays.
-
 	//cout << "窗口大小改变" << width << "  " << height << endl;
 	glViewport(0, 0, width, height);//确保视口匹配新的窗口尺寸；
 }
