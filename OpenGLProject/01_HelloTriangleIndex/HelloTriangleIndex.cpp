@@ -99,6 +99,7 @@ int main()
 	unsigned int VBO, VAO, EBO;//顶点缓冲对象
 	// 0. 复制顶点数组到缓冲中供OpenGL使用
 	glGenVertexArrays(1, &VAO);
+
 	glGenBuffers(1, &VBO);//生成顶点缓存对象VBO(Vertex Buffer Object)对象
 	glGenBuffers(1, &EBO);
 	// 1. 绑定VAO
