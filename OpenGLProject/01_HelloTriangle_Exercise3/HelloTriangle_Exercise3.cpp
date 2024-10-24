@@ -1,8 +1,9 @@
 //https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/01%20Getting%20started/04%20Hello%20Triangle.md
-#include "HelloTriangle_Exercise2.h"
+#include "HelloTriangle_Exercise3.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -18,7 +19,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);//允许修改窗口大小
 #endif
 	// glfw 创建窗口对象
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "HelloTriangle_Exercise2", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "HelloTriangle_Exercise3", NULL, NULL);
 	if (window == NULL)
 	{
 		cout << "创建GLFW窗口失败！" << endl;
@@ -37,50 +38,39 @@ int main()
 	}
 	int success;
 	char infoLog[512];
-#pragma region 顶点着色器
+
 	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);//创建顶点着色器对象
+	unsigned int fragmentShaderOrange = glCreateShader(GL_FRAGMENT_SHADER); //创建橙色片段着色器对象
+	unsigned int fragmentShaderYellow = glCreateShader(GL_FRAGMENT_SHADER); //创建黄色片段着色器对象
+	unsigned int shaderProgramOrange = glCreateProgram();	//创建橙色着色器程序对象
+	unsigned int shaderProgramYellow = glCreateProgram();	//创建黄色着色器程序对象
+
 	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);//把着色器源码赋值给着色器
 	glCompileShader(vertexShader);	//编译顶点着色器
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);//获取着色器状态
-	if (!success)
-	{
-		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-		cout << "顶点着色器编译错误，\n" << infoLog << endl;
-		return -1;
-	}
-#pragma endregion
+	checkCompileErrors(vertexShader, "", "顶点");
 
-#pragma region 片段着色器
-	unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);//创建片段着色器对象
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);//把着色器源码赋值给着色器
-	glCompileShader(fragmentShader);
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);//获取着色器状态
-	if (!success)
-	{
-		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-		cout << "片段着色器编译错误，\n" << infoLog << endl;
-		return -1;
-	}
-#pragma endregion
+	glShaderSource(fragmentShaderOrange, 1, &fragmentShader1Source, NULL);	//把着色器源码赋值给着色器
+	glCompileShader(fragmentShaderOrange);
+	checkCompileErrors(vertexShader, "", "Orange片段");
 
-#pragma region 着色器程序对象
-	//---------------着色器程序对象 Start-------------------
-	unsigned int shaderProgram;
-	shaderProgram = glCreateProgram();	//创建着色器程序对象
-	glAttachShader(shaderProgram, vertexShader);//把着色器加载到着色器程序对象上
-	glAttachShader(shaderProgram, fragmentShader);
-	glLinkProgram(shaderProgram);		//链接着色器对象
-	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);//获取着色器程序状态
-	if (!success)
-	{
-		cout << "链接着色器程序错误，\n" << success << endl;
-		return -1;
-	}
-	//glUseProgram(shaderProgram);	//激活着色器程序对象
+	glShaderSource(fragmentShaderYellow, 1, &fragmentShader2Source, NULL);	//把着色器源码赋值给着色器
+	glCompileShader(fragmentShaderYellow);
+	checkCompileErrors(vertexShader, "", "Yellow片段");
+
+	glAttachShader(shaderProgramOrange, vertexShader);//把着色器加载到着色器程序对象上
+	glAttachShader(shaderProgramOrange, fragmentShaderOrange);
+	glLinkProgram(shaderProgramOrange);		//链接着色器对象
+	checkCompileErrors(shaderProgramOrange, "PROGRAM", "Orange片段");
+
+	glAttachShader(shaderProgramYellow, vertexShader);//把着色器加载到着色器程序对象上
+	glAttachShader(shaderProgramYellow, fragmentShaderYellow);
+	glLinkProgram(shaderProgramYellow);		//链接着色器对象
+	checkCompileErrors(shaderProgramYellow, "PROGRAM", "Orange片段");
+
 	glDeleteShader(vertexShader);	//删除着色器对象
-	glDeleteShader(fragmentShader);
-	//---------------着色器程序对象 End-------------------
-#pragma endregion
+	glDeleteShader(fragmentShaderOrange);
+	glDeleteShader(fragmentShaderYellow);
+
 
 	float firstTriangle[] = {
 		   -0.9f, -0.5f, 0.0f,  // left 
@@ -132,10 +122,12 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
 
 		//渲染一个物体时要使用着色器程序
-		glUseProgram(shaderProgram);
+		glUseProgram(shaderProgramOrange);
 		//绘制三角形
 		glBindVertexArray(VAOs[0]); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 		glDrawArrays(GL_TRIANGLES, 0, 3);//绘制顶点数组 初始索引 长度
+		
+		glUseProgram(shaderProgramYellow);
 		glBindVertexArray(VAOs[1]); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 		glDrawArrays(GL_TRIANGLES, 0, 3);//绘制顶点数组 初始索引 长度
 		// -------------------------------------------------------------------------------
@@ -146,7 +138,8 @@ int main()
 	// ------------------------------------------------------------------------
 	glDeleteVertexArrays(2, VAOs);
 	glDeleteBuffers(2, VBOs);
-	glDeleteProgram(shaderProgram);
+	glDeleteProgram(shaderProgramOrange);
+	glDeleteProgram(shaderProgramYellow);
 	// glfw: terminate, clearing all previously allocated GLFW resources.
 	//终止，清除之前分配的所有glfw资源。
 	// ------------------------------------------------------------------
@@ -167,4 +160,28 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	//cout << "窗口大小改变" << width << "  " << height << endl;
 	glViewport(0, 0, width, height);//确保视口匹配新的窗口尺寸；
+}
+///<summary>检查编译失败日志</summary>
+void checkCompileErrors(unsigned int shader, string type, string name)
+{
+	int success;
+	char infoLog[1024];
+	if (type != "PROGRAM")
+	{
+		glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+		if (!success)
+		{
+			glGetShaderInfoLog(shader, 1024, NULL, infoLog);
+			cout << type << "着色器编译失败 " << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << endl;
+		}
+	}
+	else
+	{
+		glGetProgramiv(shader, GL_LINK_STATUS, &success);
+		if (!success)
+		{
+			glGetProgramInfoLog(shader, 1024, NULL, infoLog);
+			cout << name << "着色器程序链接失败 " << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << endl;
+		}
+	}
 }
