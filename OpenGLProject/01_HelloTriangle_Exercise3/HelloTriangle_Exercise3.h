@@ -11,7 +11,8 @@ void checkCompileErrors(unsigned int shader, string type, string name);
 const unsigned int SCR_WIDTH = 800;//unsigned ÎÞ·ûºÅ
 const unsigned int SCR_HEIGHT = 600;
 
-const char* vertexShaderSource = "#version 330 core\n"
+const char* vertexShaderSource = 
+"#version 330 core\n"
 "layout (location = 0) in vec3 aPos;\n"
 "void main()\n"
 "{\n"

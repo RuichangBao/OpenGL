@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\GitProject\OpenGL\OpenGLProject\libs\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\GitProject\OpenGL\OpenGLProject\libs\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\GitProject\OpenGL\OpenGLProject\includes;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\GitProject\OpenGL\OpenGLProject\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -131,7 +131,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Shader_s.h" />
+    <ClCompile Include="..\src\glad.c" />
+    <ClCompile Include="源.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\libs\include\KHR\Shader_s.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

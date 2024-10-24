@@ -72,8 +72,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\GitProject\OpenGL\OpenGLProject\libs\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\GitProject\OpenGL\OpenGLProject\libs\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\GitProject\OpenGL\OpenGLProject\includes;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\GitProject\OpenGL\OpenGLProject\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -137,7 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\libs\c\glad.c" />
+    <ClCompile Include="..\src\glad.c" />
     <ClCompile Include="HelloTriangle_Exercise2.cpp" />
   </ItemGroup>
   <ItemGroup>
