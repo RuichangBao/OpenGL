@@ -1,5 +1,5 @@
 //https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/01%20Getting%20started/04%20Hello%20Triangle.md
-#include "HelloTriangle.h"
+#include "HelloTriangle_Exercise2.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -82,26 +82,44 @@ int main()
 	//---------------着色器程序对象 End-------------------
 #pragma endregion
 
-	float vertices[] = {
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		0.0f,  0.5f, 0.0f
+	float firstTriangle[] = {
+		   -0.9f, -0.5f, 0.0f,  // left 
+		   -0.0f, -0.5f, 0.0f,  // right
+		   -0.45f, 0.5f, 0.0f,  // top 
+	};
+	float secondTriangle[] = {
+		0.0f, -0.5f, 0.0f,  // left
+		0.9f, -0.5f, 0.0f,  // right
+		0.45f, 0.5f, 0.0f   // top 
 	};
 
-	unsigned int VBO, VAO;//顶点缓冲对象
+	unsigned int VBOs[2], VAOs[2];//顶点缓冲对象
 	// 0. 复制顶点数组到缓冲中供OpenGL使用
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);//生成顶点缓存对象VBO(Vertex Buffer Object)对象
+	glGenVertexArrays(2, VAOs);
+	glGenBuffers(2, VBOs);//生成顶点缓存对象VBO(Vertex Buffer Object)对象
+#pragma region 第一个三角形
 	// 1. 绑定VAO
-	glBindVertexArray(VAO);
-
+	glBindVertexArray(VAOs[0]);
 	// 2. 把顶点数组复制到缓冲中供OpenGL使用
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOs[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(firstTriangle), firstTriangle, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+#pragma endregion
+
+#pragma region 第二个三角形
+	// 1. 绑定VAO
+	glBindVertexArray(VAOs[1]);
+	// 2. 把顶点数组复制到缓冲中供OpenGL使用
+	glBindBuffer(GL_ARRAY_BUFFER, VBOs[1]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(secondTriangle), secondTriangle, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+#pragma endregion
 
 	// 循环渲染
 	// -----------
@@ -116,17 +134,18 @@ int main()
 		//渲染一个物体时要使用着色器程序
 		glUseProgram(shaderProgram);
 		//绘制三角形
-		glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+		glBindVertexArray(VAOs[0]); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 		glDrawArrays(GL_TRIANGLES, 0, 3);//绘制顶点数组 初始索引 长度
-
+		glBindVertexArray(VAOs[1]); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+		glDrawArrays(GL_TRIANGLES, 0, 3);//绘制顶点数组 初始索引 长度
 		// -------------------------------------------------------------------------------
 		glfwSwapBuffers(window);//交换颜色缓冲区
 		glfwPollEvents();		//检查触发事件，并调用回调函数
 	}
 	// optional: de-allocate all resources once they've outlived their purpose:
 	// ------------------------------------------------------------------------
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
+	glDeleteVertexArrays(2, VAOs);
+	glDeleteBuffers(2, VBOs);
 	glDeleteProgram(shaderProgram);
 	// glfw: terminate, clearing all previously allocated GLFW resources.
 	//终止，清除之前分配的所有glfw资源。

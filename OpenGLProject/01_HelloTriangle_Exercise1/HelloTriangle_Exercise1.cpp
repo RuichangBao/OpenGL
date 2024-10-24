@@ -1,5 +1,5 @@
 //https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/01%20Getting%20started/04%20Hello%20Triangle.md
-#include "HelloTriangle.h"
+#include "HelloTriangle_Exercise1.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -83,9 +83,12 @@ int main()
 #pragma endregion
 
 	float vertices[] = {
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		0.0f,  0.5f, 0.0f
+		-1.0f, -0.5f, 0.0f,
+		0.0f, -0.5f, 0.0f,
+		-0.5f,  0.5f, 0.0f,
+		0.0f, -0.5f, 0.0f,
+		1.0f, -0.5f, 0.0f,
+		0.5f,  0.5f, 0.0f
 	};
 
 	unsigned int VBO, VAO;//顶点缓冲对象
@@ -117,8 +120,7 @@ int main()
 		glUseProgram(shaderProgram);
 		//绘制三角形
 		glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-		glDrawArrays(GL_TRIANGLES, 0, 3);//绘制顶点数组 初始索引 长度
-
+		glDrawArrays(GL_TRIANGLES, 0, 6);//绘制顶点数组 初始索引 长度
 		// -------------------------------------------------------------------------------
 		glfwSwapBuffers(window);//交换颜色缓冲区
 		glfwPollEvents();		//检查触发事件，并调用回调函数
