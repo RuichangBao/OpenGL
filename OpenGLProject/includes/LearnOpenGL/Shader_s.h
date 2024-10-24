@@ -111,19 +111,27 @@ private:
 		if (type != "PROGRAM")
 		{
 			glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-			if (!success)
+			if (success)
+			{
+				cout << type << "着色器编译成功" << endl;
+			}
+			else
 			{
 				glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-				cout << type << "着色器编译失败 " << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << endl;
+				cout << type << "着色器编译失败 " << "\n" << infoLog << "\n -- ---------- -- " << endl;
 			}
 		}
 		else
 		{
 			glGetProgramiv(shader, GL_LINK_STATUS, &success);
-			if (!success)
+			if (success)
+			{
+				cout << type << "着色器程序链接成功" << endl;
+			}
+			else
 			{
 				glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-				cout << "着色器程序链接失败 " << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << endl;
+				cout << "着色器程序链接失败 " << "\n" << infoLog << "\n -- ---------- -- " << endl;
 			}
 		}
 	}
