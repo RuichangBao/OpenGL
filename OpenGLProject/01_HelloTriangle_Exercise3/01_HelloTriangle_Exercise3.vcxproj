@@ -138,10 +138,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\libs\c\glad.c" />
-    <ClCompile Include="HelloTriangle_Exercise3.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="HelloTriangle_Exercise3.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.md" />
