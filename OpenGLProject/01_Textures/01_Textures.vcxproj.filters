@@ -32,6 +32,9 @@
     <ClInclude Include="..\includes\stb_image.h">
       <Filter>资源文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\includes\root_directory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\Fragment.shader">

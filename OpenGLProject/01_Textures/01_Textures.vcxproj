@@ -137,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\includes\LearnOpenGL\Shader_s.h" />
+    <ClInclude Include="..\includes\root_directory.h" />
     <ClInclude Include="..\includes\stb_image.h" />
     <ClInclude Include="Textures.h" />
   </ItemGroup>
