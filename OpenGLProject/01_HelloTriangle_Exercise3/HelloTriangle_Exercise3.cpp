@@ -9,8 +9,7 @@ using namespace std;
 
 int main()
 {
-	// glfw: 初始化配置
-	// ------------------------------
+	//glfw: 初始化配置
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);//主版本3
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);//次版本3

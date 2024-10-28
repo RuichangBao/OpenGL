@@ -18,7 +18,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);//允许修改窗口大小
 #endif
 	// glfw 创建窗口对象
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "HelloTriangle", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "ShaderClass", NULL, NULL);
 	if (window == NULL)
 	{
 		cout << "创建GLFW窗口失败！" << endl;
@@ -35,7 +35,6 @@ int main()
 		cout << "初始化GLAD(OpenGL函数指针错误)失败" << endl;
 		return -1;
 	}
-	//Shader ourShader("FragmentShader.txt","VertexShader.txt");
 	Shader ourShader("shader/Vertex.shader", "shader/Fragment.shader");
 	float vertices[] = {
 		-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
@@ -53,7 +52,7 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(0);//启用顶点属性
 	// color attribute
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
@@ -74,15 +73,12 @@ int main()
 		glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 		glDrawArrays(GL_TRIANGLES, 0, 3);//绘制顶点数组 初始索引 长度
 
-		// -------------------------------------------------------------------------------
 		glfwSwapBuffers(window);//交换颜色缓冲区
 		glfwPollEvents();		//检查触发事件，并调用回调函数
 	}
 	// optional: de-allocate all resources once they've outlived their purpose:
-	// ------------------------------------------------------------------------
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
-	// glfw: terminate, clearing all previously allocated GLFW resources.
 	//终止，清除之前分配的所有glfw资源。
 	// ------------------------------------------------------------------
 	glfwTerminate();//清空glfw资源。

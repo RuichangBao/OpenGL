@@ -29,5 +29,16 @@
     <ClInclude Include="..\includes\LearnOpenGL\Shader_s.h">
       <Filter>资源文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\includes\stb_image.h">
+      <Filter>资源文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shader\Fragment.shader">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Shader\Vertex.shader">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>
