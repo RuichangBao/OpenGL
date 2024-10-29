@@ -4,8 +4,6 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
-using namespace std;
-
 int main()
 {
 	// glfw: 初始化配置
@@ -21,7 +19,7 @@ int main()
 	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "ShaderUniform", NULL, NULL);
 	if (window == NULL)
 	{
-		cout << "创建GLFW窗口失败！" << endl;
+		std::cout << "创建GLFW窗口失败！" << std::endl;
 		glfwTerminate();
 		return -1;
 	}
@@ -32,7 +30,7 @@ int main()
 	// ---------------------------------------
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
-		cout << "初始化GLAD(OpenGL函数指针错误)失败" << endl;
+		std::cout << "初始化GLAD(OpenGL函数指针错误)失败" << std::endl;
 		return -1;
 	}
 	int success;
@@ -45,7 +43,7 @@ int main()
 	if (!success)
 	{
 		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-		cout << "顶点着色器编译错误，\n" << infoLog << endl;
+		std::cout << "顶点着色器编译错误，\n" << infoLog << std::endl;
 		return -1;
 	}
 #pragma endregion
@@ -58,7 +56,7 @@ int main()
 	if (!success)
 	{
 		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-		cout << "片段着色器编译错误，\n" << infoLog << endl;
+		std::cout << "片段着色器编译错误，\n" << infoLog << std::endl;
 		return -1;
 	}
 #pragma endregion
@@ -73,7 +71,7 @@ int main()
 	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);//获取着色器程序状态
 	if (!success)
 	{
-		cout << "链接着色器程序错误，\n" << success << endl;
+		std::cout << "链接着色器程序错误，\n" << success << std::endl;
 		return -1;
 	}
 	//glUseProgram(shaderProgram);	//激活着色器程序对象

@@ -1,4 +1,5 @@
-#include"Textures.h"
+//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/01%20Getting%20started/06%20Textures.md
+#include "Textures.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stb_image.h>
