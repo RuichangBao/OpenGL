@@ -21,6 +21,9 @@
     <ClCompile Include="..\src\glad.c">
       <Filter>资源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\includes\StbImage\stb_image.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Textures.h">
@@ -32,7 +35,7 @@
     <ClInclude Include="..\includes\root_directory.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\includes\stb_image.h">
+    <ClInclude Include="..\includes\StbImage\stb_image.h">
       <Filter>资源文件</Filter>
     </ClInclude>
   </ItemGroup>

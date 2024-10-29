@@ -132,13 +132,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\includes\StbImage\stb_image.cpp" />
     <ClCompile Include="..\src\glad.c" />
     <ClCompile Include="Textures.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\includes\LearnOpenGL\Shader_s.h" />
     <ClInclude Include="..\includes\root_directory.h" />
-    <ClInclude Include="..\includes\stb_image.h" />
+    <ClInclude Include="..\includes\StbImage\stb_image.h" />
     <ClInclude Include="Textures.h" />
   </ItemGroup>
   <ItemGroup>

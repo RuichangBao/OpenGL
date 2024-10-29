@@ -2,7 +2,7 @@
 #include "Textures.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <stb_image.h>
+#include <stbimage/stb_image.h>
 #include <learnopengl/filesystem.h>
 #include <learnopengl/shader_s.h>
 
@@ -92,6 +92,7 @@ int main()
 	int width, height, nrChannels;
 	// The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
 	unsigned char* data = stbi_load(FileSystem::getPath("resources/textures/container.jpg").c_str(), &width, &height, &nrChannels, 0);
+	
 	if (data)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -116,7 +117,7 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
 
 		// bind Texture
-		//glBindTexture(GL_TEXTURE_2D, texture);
+		glBindTexture(GL_TEXTURE_2D, texture);
 
 		//渲染一个物体时要使用着色器程序
 		ourShader.use();
