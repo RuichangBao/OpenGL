@@ -4,7 +4,7 @@
     <ClCompile Include="ShaderClass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\glad.c">
+    <ClCompile Include="..\includes\glad\glad.c">
       <Filter>资源文件</Filter>
     </ClCompile>
   </ItemGroup>

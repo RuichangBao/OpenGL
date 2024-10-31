@@ -132,7 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\glad.c" />
+    <ClCompile Include="..\includes\glad\glad.c" />
     <ClCompile Include="ShaderClass.cpp" />
   </ItemGroup>
   <ItemGroup>
