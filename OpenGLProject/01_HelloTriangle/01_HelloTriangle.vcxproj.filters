@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="HelloTriangle.cpp" />
-    <ClCompile Include="..\src\glad.c" />
+    <ClCompile Include="..\includes\glad\glad.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HelloTriangle.h" />
