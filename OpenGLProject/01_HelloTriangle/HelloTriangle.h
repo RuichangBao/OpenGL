@@ -4,7 +4,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
 // settings
-const unsigned int SCR_WIDTH = 800;//unsigned ÎÞ·ûºÅ
+const unsigned int SCR_WIDTH = 800;//unsigned ï¿½Þ·ï¿½ï¿½ï¿½
 const unsigned int SCR_HEIGHT = 600;
 
 //const char* vertexShaderSource =
@@ -39,5 +39,5 @@ const char* fragmentShaderSource =
 "in vec4 vertexColor;\n"
 "void main()\n"
 "{\n"
-"	FragColor = vertexColor;\n"//Êä³öÑÕÉ«ÊÇºìÉ«
+"	FragColor = vertexColor;\n"//ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½Çºï¿½É«
 "}\n";

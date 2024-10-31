@@ -1,0 +1,10 @@
+{
+    "files.exclude": {
+        "**/*.vcxproj": true,
+        "**/*.filters": true,
+        "**/*.user": true,
+        "**/*.h": true,
+        "**/*.cpp": true,
+        "**/*.lib": true,
+    }
+}
