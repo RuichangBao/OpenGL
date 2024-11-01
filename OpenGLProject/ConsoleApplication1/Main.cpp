@@ -19,6 +19,6 @@ int main()
 		cout << *p << endl;
 		*p = *(p++);
 	}
-
+	MyClass::Main();
 	return 0;
 }

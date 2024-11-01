@@ -23,7 +23,7 @@ int main()
 	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
 	if (window == NULL)
 	{
-		std::cout << "Failed to create GLFW window" << std::endl;
+		std::cout << "创建GLFW窗口失败" << std::endl;
 		glfwTerminate();
 		return -1;
 	}
@@ -84,13 +84,13 @@ int main()
 	glBindTexture(GL_TEXTURE_2D, texture); // 绑定纹理对象
 	//设置纹理环绕
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);//重复平铺
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);//重复平铺
 	//设置缩小时候的过滤方式
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	// load image, create texture and generate mipmaps
 	int width, height, nrChannels;
-	// The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
+	//char const* filename = ;
 	unsigned char* data = stbi_load(FileSystem::getPath("resources/textures/container.jpg").c_str(), &width, &height, &nrChannels, 0);
 	
 	if (data)
@@ -105,8 +105,7 @@ int main()
 	stbi_image_free(data);
 
 
-	// render loop
-	// -----------
+	//循环渲染
 	while (!glfwWindowShouldClose(window))
 	{
 		//输入检查

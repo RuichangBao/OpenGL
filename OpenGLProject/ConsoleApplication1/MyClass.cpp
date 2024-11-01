@@ -18,3 +18,7 @@ void MyClass::ToString()
 {
 	cout << "num:" << num << "	data:" << data << endl;
 }
+void MyClass::Main()
+{
+	cout << "BBBBBBBBBB" << endl;;
+}
