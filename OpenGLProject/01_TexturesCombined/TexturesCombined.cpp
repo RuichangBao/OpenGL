@@ -8,6 +8,7 @@
 
 #include <iostream>
 
+
 int main()
 {
 	//glfw: 初始化配置
@@ -41,7 +42,7 @@ int main()
 
 	// 设置顶点数据（和缓冲区）并配置顶点属性
 	float vertices[] = {
-		// 位置               // 颜色             // texture1 coords
+		// 位置               // 颜色             // texture coords
 		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // 右上角
 		 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // 右下角
 		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // 左下角
@@ -76,9 +77,12 @@ int main()
 	glEnableVertexAttribArray(2);
 
 
-	// load and create a texture1 
+	// load and create a texture 
 	// -------------------------
-	unsigned int texture1,texture2;
+	unsigned int texture1;
+	int width, height, nrChannels;
+	unsigned char* data;
+
 	glGenTextures(1, &texture1);//生成纹理对象
 	glBindTexture(GL_TEXTURE_2D, texture1); // 绑定纹理对象
 	//设置纹理环绕
@@ -87,40 +91,18 @@ int main()
 	//设置缩小时候的过滤方式
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	// load image, create texture1 and generate mipmaps
-	int width, height, nrChannels;
-	//char const* filename = ;
-	unsigned char* data = stbi_load(FileSystem::getPath("resources/textures/container.jpg").c_str(), &width, &height, &nrChannels, 0);
-
+	//加载图像，创建纹理生成贴图
+	data = stbi_load(FileSystem::getPath("resources/textures/container.jpg").c_str(), &width, &height, &nrChannels, 0);
 	if (data)
 	{
+		//图像数据上传到 GPU 并定义纹理的格式和数据
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		//生成 Mipmap 纹理层级
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
 	{
-		std::cout << "创建图片1失败" << std::endl;
-	}
-	stbi_image_free(data);
-
-
-	glGenTextures(1, &texture2);//生成纹理对象
-	glBindTexture(GL_TEXTURE_2D, texture2); // 绑定纹理对象
-	//设置纹理环绕
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);//重复平铺
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);//重复平铺
-	//设置缩小时候的过滤方式
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	data = stbi_load(FileSystem::getPath("resources/textures/awesomeface.jpg").c_str(), &width, &height, &nrChannels, 0);
-	if (data)
-	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
-	else
-	{
-		std::cout << "创建图片2失败" << std::endl;
+		std::cout << "图片加载失败" << std::endl;
 	}
 	stbi_image_free(data);
 
@@ -157,16 +139,14 @@ int main()
 	return 0;
 }
 
-// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-// ---------------------------------------------------------------------------------------------------------
+//处理输入
 void processInput(GLFWwindow* window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 }
 
-// glfw: whenever the window size changed (by OS or user resize) this callback function executes
-// ---------------------------------------------------------------------------------------------
+// 窗口大小发生变化的时候调用
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	// make sure the viewport matches the new window dimensions; note that width and 
