@@ -25,12 +25,13 @@ int main()
 
 
 	//FuncPtr myFunc1 = add;
-	glGenBuffers myFunc1 = add;
+	funcPtr myFunc1 = add;
 	// 调用函数
 	int result = myFunc1(3, 4);
 	std::cout << "Result: " << result << std::endl;  // 输出：Result: 7
 	myFunc1 = sub;
 	result = myFunc1(3, 4);
 	std::cout << "Result: " << result << std::endl;  // 输出：Result: 7
+	std::cout << Add(5, 8) << std::endl;  // 输出：13
 	return 0;
 }
