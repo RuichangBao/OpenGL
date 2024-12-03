@@ -61,6 +61,10 @@ int main()
 	//unsigned int indices[] = {
 	//	0, 1, 3, // 第一个三角形
 	//	1, 2, 3  // 第二个三角形
+	// 
+	// 
+	// 
+	// 
 	//};
 	unsigned int indices[] = {
 		1, 2, 4 // 第一个三角形
