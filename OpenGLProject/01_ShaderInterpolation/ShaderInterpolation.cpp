@@ -88,17 +88,25 @@ int main()
 		-0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // 左下
 		 0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // 顶部
 	};
-
-	unsigned int VBO, VAO;//顶点缓冲对象
+	unsigned int indices[] = {
+		0, 1, 2, // 第一个三角形
+	};
+	unsigned int VBO, VAO, EBO;//顶点缓冲对象
 	// 0. 复制顶点数组到缓冲中供OpenGL使用
 	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);//生成顶点缓存对象VBO(Vertex Buffer Object)对象
+
+	glGenBuffers(1, &VBO);//生成顶点缓存对象VBO(Vertex Buffer Object)对象	
+	glGenBuffers(1, &EBO);
 	// 1. 绑定VAO
 	glBindVertexArray(VAO);
+
 
 	// 2. 把顶点数组复制到缓冲中供OpenGL使用
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 	//位置信息
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
@@ -122,9 +130,9 @@ int main()
 		glUseProgram(shaderProgram);
 		//绘制三角形
 		glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-
-		// -------------------------------------------------------------------------------
+		//glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+		//-------------------------------------------------------------------------------
 		glfwSwapBuffers(window);//交换颜色缓冲区
 		glfwPollEvents();		//检查触发事件，并调用回调函数
 	}

@@ -36,11 +36,12 @@ int main()
 		return -1;
 	}
 	Shader ourShader("shader/Vertex.shader", "shader/Fragment.shader");
-	float vertices[] = {
+	float vertices[] = {//顶点位置、颜色信息
 		-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
 		 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
 		 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
 	};
+
 	unsigned int VBO, VAO;//顶点缓冲对象
 	// 0. 复制顶点数组到缓冲中供OpenGL使用
 	glGenVertexArrays(1, &VAO);
