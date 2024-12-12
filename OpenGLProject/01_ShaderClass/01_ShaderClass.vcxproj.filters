@@ -34,5 +34,7 @@
     <None Include="Shader\Vertex.shader">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="Shader\Vertex-exercise1.shader" />
+    <None Include="Shader\Vertex-exercise2.shader" />
   </ItemGroup>
 </Project>

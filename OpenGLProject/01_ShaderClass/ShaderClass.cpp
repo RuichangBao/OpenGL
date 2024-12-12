@@ -35,23 +35,31 @@ int main()
 		cout << "初始化GLAD(OpenGL函数指针错误)失败" << endl;
 		return -1;
 	}
-	Shader ourShader("shader/Vertex.shader", "shader/Fragment.shader");
+	Shader ourShader("shader/Vertex-exercise2.shader", "shader/Fragment.shader");//向左偏移
 	float vertices[] = {//顶点位置、颜色信息
 		-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
 		 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
 		 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
 	};
-
+	//unsigned int indices[] = {
+	//	0, 1, 2, // 第一个三角形
+	//};
+	//unsigned int VBO, VAO, EBO;//顶点缓冲对象
 	unsigned int VBO, VAO;//顶点缓冲对象
 	// 0. 复制顶点数组到缓冲中供OpenGL使用
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);//生成顶点缓存对象VBO(Vertex Buffer Object)对象
+	//glGenBuffers(1, &EBO);
 	// 1. 绑定VAO
 	glBindVertexArray(VAO);
 
 	// 2. 把顶点数组复制到缓冲中供OpenGL使用
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	/*glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);*/
+
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);//启用顶点属性
 	// color attribute
@@ -70,16 +78,23 @@ int main()
 
 		//渲染一个物体时要使用着色器程序
 		ourShader.use();
+
+#pragma region 使用Uniform 实现向左偏移功能
+		int vertexColorLocation = glGetUniformLocation(ourShader.ID, "xOffset");	//查询uniform地址不要求你之前使用过着色器程序		
+		glUniform1f(vertexColorLocation, 0.5f);	//更新一个uniform之前你必须先使用程序
+#pragma endregion
+
 		//绘制三角形
 		glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 		glDrawArrays(GL_TRIANGLES, 0, 3);//绘制顶点数组 初始索引 长度
-
+		//glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
 		glfwSwapBuffers(window);//交换颜色缓冲区
 		glfwPollEvents();		//检查触发事件，并调用回调函数
 	}
 	// optional: de-allocate all resources once they've outlived their purpose:
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
+	//glDeleteBuffers(1, &EBO);
 	//终止，清除之前分配的所有glfw资源。
 	// ------------------------------------------------------------------
 	glfwTerminate();//清空glfw资源。

@@ -62,17 +62,16 @@ public:
 		int success;
 		char infoLog[512];
 		// 顶点着色器
-		vertex = glCreateShader(GL_VERTEX_SHADER);
-		glShaderSource(vertex, 1, &vShaderCode, NULL);
-		glCompileShader(vertex);
+		vertex = glCreateShader(GL_VERTEX_SHADER);		//创建顶点着色器对象
+		glShaderSource(vertex, 1, &vShaderCode, NULL);	//将着色器源码附加到顶点着色器对象
+		glCompileShader(vertex);//编译顶点着色器
 		// 打印编译错误（如果有的话）
 		checkCompileErrors(vertex, "顶点");
 
 		// 片段着色器
-		fragment = glCreateShader(GL_FRAGMENT_SHADER);
-		glShaderSource(fragment, 1, &fShaderCode, NULL);
-		glCompileShader(fragment);
-		glGetShaderiv(fragment, GL_COMPILE_STATUS, &success);
+		fragment = glCreateShader(GL_FRAGMENT_SHADER);	//创建片段着色器对象
+		glShaderSource(fragment, 1, &fShaderCode, NULL);//将着色器源码附加到片段着色器对象	
+		glCompileShader(fragment);//编译片段着色器
 		checkCompileErrors(fragment, "片段");
 
 		// 着色器程序
@@ -88,7 +87,7 @@ public:
 
 	void use()
 	{
-		glUseProgram(ID);
+		glUseProgram(ID);//激活使用着色器
 	}
 	void setBool(const string& name, bool value) const
 	{
