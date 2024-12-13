@@ -12,9 +12,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\includes\LearnOpenGL\Shader_s.h">
-      <Filter>资源文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\includes\LearnOpenGL\filesystem.h">
       <Filter>资源文件</Filter>
     </ClInclude>

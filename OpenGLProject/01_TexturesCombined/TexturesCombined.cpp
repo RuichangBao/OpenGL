@@ -20,7 +20,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);//允许修改窗口大小
 #endif
 	// glfw 创建窗口对象
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "TexturesCombined", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "创建GLFW窗口失败" << std::endl;
@@ -72,17 +72,17 @@ int main()
 	// 颜色属性
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-	// 纹理属性
+	//// 纹理属性
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 
 
-	// load and create a texture 
-	// -------------------------
+	//创建加载纹理
 	unsigned int texture1, texture2;
+	//unsigned int texture2;
 	int width, height, nrChannels;
 	unsigned char* data;
-
+	stbi_set_flip_vertically_on_load(true);//是否垂直翻转像素
 	glGenTextures(1, &texture1);//生成纹理对象
 	glBindTexture(GL_TEXTURE_2D, texture1); // 绑定纹理对象
 	//设置纹理环绕
@@ -115,12 +115,13 @@ int main()
 	//设置缩小时候的过滤方式
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 	//加载图像，创建纹理生成贴图
 	data = stbi_load(FileSystem::getPath("resources/textures/awesomeface.png").c_str(), &width, &height, &nrChannels, 0);
 	if (data)
 	{
 		//图像数据上传到 GPU 并定义纹理的格式和数据
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		//生成 Mipmap 纹理层级
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
@@ -130,6 +131,15 @@ int main()
 	}
 	stbi_image_free(data);
 
+	ourShader.use(); // 不要忘记在设置制服之前激活/使用着色器
+	GLint num = glGetUniformLocation(ourShader.ID, "num");
+	glUniform1f(num, 0.2f);
+	// 手动设置
+	 /* glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), 0);
+	  glUniform1i(glGetUniformLocation(ourShader.ID, "texture2"), 1);*/
+	  //通过纹理类设置
+	ourShader.setInt("texture1", 0);
+	ourShader.setInt("texture2", 1);
 
 	//循环渲染
 	while (!glfwWindowShouldClose(window))
@@ -141,7 +151,9 @@ int main()
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);//清空屏幕所用的颜色
 		glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
 
-		// bind Texture
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texture1);
+		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, texture2);
 
 		//渲染一个物体时要使用着色器程序
