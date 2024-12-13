@@ -9,9 +9,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ShaderClass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\includes\LearnOpenGL\Shader_s.h">
       <Filter>资源文件</Filter>
     </ClInclude>

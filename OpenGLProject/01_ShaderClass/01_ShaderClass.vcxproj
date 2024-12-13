@@ -141,7 +141,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\includes\LearnOpenGL\Shader_s.h" />
-    <ClInclude Include="ShaderClass.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\Fragment.shader" />

@@ -1,10 +1,14 @@
 {
     "files.exclude": {
         "**/*.vcxproj": true,
-        "**/*.filters": true,
+        "**/*.filters": true, 
         "**/*.user": true,
+        "**/*.lib": true,
         "**/*.h": true,
         "**/*.cpp": true,
-        "**/*.lib": true,
+
+        
+        "**/Debug":true,
+        "**/x64":true,
     }
 }
