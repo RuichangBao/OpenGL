@@ -19,11 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>17.0</VCProjectVersion>
+    <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{8b0c76fc-1df1-4051-b4b2-5cd26a1b0d3e}</ProjectGuid>
-    <RootNamespace>My01ShaderClass</RootNamespace>
+    <ProjectGuid>{3F50598B-8759-45F1-AC08-5E55090433BB}</ProjectGuid>
+    <RootNamespace>HelloWindows</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>01_03_HelloWindows</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -113,7 +114,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -137,16 +138,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\includes\glad\glad.c" />
-    <ClCompile Include="ShaderClass.cpp" />
+    <ClCompile Include="HelloWindows.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\includes\LearnOpenGL\Shader_s.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Shader\Fragment.shader" />
-    <None Include="Shader\Vertex-exercise2.shader" />
-    <None Include="Shader\Vertex-exercise1.shader" />
-    <None Include="Shader\Vertex.shader" />
+    <ClInclude Include="HelloWindows.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
