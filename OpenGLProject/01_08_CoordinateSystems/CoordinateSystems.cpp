@@ -1,4 +1,5 @@
-//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/01%20Getting%20started/07%20Transformations.md
+//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/01%20Getting%20started/08%20Coordinate%20Systems.md
+//得到一个绕x轴旋转45度的平面
 #include "CoordinateSystems.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -164,16 +165,33 @@ int main()
 		glBindTexture(GL_TEXTURE_2D, texture1);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, texture2);
+		
+		//透视投影  左右 下上 近远
+		//glm::ortho(0.0f, 800.0f, 0.0f, 600.0f, 0.1f, 100.0f);
+		//正交投影矩阵 fov,宽高比，近距离，远距离
+		//glm::mat4 proj = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 100.0f);
 
-		mat4 transform = mat4(1.0f); // make sure to initialize matrix to identity matrix first
-		transform = translate(transform, vec3(0.5f, -0.5f, 0.0f));	//移动
-		transform = rotate(transform, (float)glfwGetTime(), vec3(0.0f, 0.0f, 1.0f));	//旋转
+		//模型矩阵
+		glm::mat4 model = mat4(1);
+		model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0, 0));
+		
+		//观察矩阵
+		glm::mat4 view = mat4(1);
+		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));//OpenGL右手坐标系，z轴由屏幕内向外，所以向反方向移动
 
+		//投影矩阵
+		glm::mat4 projection;
+		projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / SCR_HEIGHT, 0.1f, 100.0f);
+		
 		//渲染一个物体时要使用着色器程序
 		ourShader.use();
-		unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "transform");
-		float* num = value_ptr(transform);
-		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, num);
+		unsigned int modelLoc = glGetUniformLocation(ourShader.ID, "model");
+		unsigned int viewLoc = glGetUniformLocation(ourShader.ID, "view");
+		unsigned int projectionLoc = glGetUniformLocation(ourShader.ID, "projection");
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, value_ptr(model));
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, value_ptr(view));
+		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, value_ptr(projection));
+
 
 		glBindVertexArray(VAO);//绑定顶点数组
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);//绘制图元函数
