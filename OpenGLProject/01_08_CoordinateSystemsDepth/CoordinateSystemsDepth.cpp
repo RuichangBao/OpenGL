@@ -1,6 +1,6 @@
 //https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/01%20Getting%20started/08%20Coordinate%20Systems.md
 //得到一个绕x轴旋转45度的平面
-#include "CoordinateSystems.h"
+#include "CoordinateSystemsDepth.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -24,7 +24,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);//允许修改窗口大小
 #endif
 	// glfw 创建窗口对象
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "TexturesCombined", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "CoordinateSystemsDepth", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "创建GLFW窗口失败" << std::endl;
@@ -41,28 +41,69 @@ int main()
 		cout << "初始化GLAD(OpenGL函数指针错误)失败" << endl;
 		return -1;
 	}
-
+	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	// 构建并编译shader程序
 	Shader ourShader("shader/Vertex.shader", "shader/Fragment.shader");
 
 	// 设置顶点数据（和缓冲区）并配置顶点属性
+	//float vertices[] = {
+	//	// 位置              //texture coords
+	//	 0.5f,  0.5f, 0.0f,   1.0f, 1.0f, // 右上角
+	//	 0.5f, -0.5f, 0.0f,   1.0f, 0.0f, // 右下角
+	//	-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, // 左下角
+	//	-0.5f,  0.5f, 0.0f,   0.0f, 1.0f  // 左上角
+	//};
+
 	float vertices[] = {
-		// 位置               // 颜色             // texture coords
-		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // 右上角
-		 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // 右下角
-		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // 左下角
-		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // 左上角
+		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 	};
-	unsigned int indices[] = {
-		0, 1, 3, // 第一个三角形
-		1, 2, 3  // 第二个三角形
-	};
+
 
 
 	unsigned int VBO, VAO, EBO;
 	glGenVertexArrays(1, &VAO);//生成顶点数组对象。VAO 在 OpenGL 中用来存储顶点属性的配置，以便在后续绘制时快速访问这些属性。
 	glGenBuffers(1, &VBO);		//生成顶点缓存对象VBO(Vertex Buffer Object)对象
-	glGenBuffers(1, &EBO);
+	//glGenBuffers(1, &EBO);
 
 
 
@@ -72,23 +113,19 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);//GL_ARRAY_BUFFER:顶点缓冲对象的绑定目标
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	//绑定 EBO 并传输索引数据
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	/*glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);*/
 
 	// 位置属性
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);	//启用顶点属性
-	// 颜色属性
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	// 纹理属性
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-	//// 纹理属性
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-	glEnableVertexAttribArray(2);
 
 
 	//创建加载纹理
 	unsigned int texture1, texture2;
-	//unsigned int texture2;
 	int width, height, nrChannels;
 	unsigned char* data;
 
@@ -159,13 +196,14 @@ int main()
 
 		// 渲染
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);//清空屏幕所用的颜色
-		glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
+		//glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // also clear the depth buffer now!
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture1);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, texture2);
-		
+
 		//透视投影  左右 下上 近远
 		//glm::ortho(0.0f, 800.0f, 0.0f, 600.0f, 0.1f, 100.0f);
 		//正交投影矩阵 fov,宽高比，近距离，远距离
@@ -173,8 +211,8 @@ int main()
 
 		//模型矩阵
 		glm::mat4 model = mat4(1);
-		model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0, 0));
-		
+		//model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(0.5f, 1, 0));
+		model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
 		//观察矩阵
 		glm::mat4 view = mat4(1);
 		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));//OpenGL右手坐标系，z轴由屏幕内向外，所以向反方向移动
@@ -182,7 +220,7 @@ int main()
 		//投影矩阵
 		glm::mat4 projection;
 		projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / SCR_HEIGHT, 0.1f, 100.0f);
-		
+
 		//渲染一个物体时要使用着色器程序
 		ourShader.use();
 		unsigned int modelLoc = glGetUniformLocation(ourShader.ID, "model");
@@ -194,7 +232,8 @@ int main()
 		ourShader.setMat4("projection", projection);
 
 		glBindVertexArray(VAO);//绑定顶点数组
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);//绘制图元函数
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);//绘制图元函数
 
 		glfwSwapBuffers(window);//交换颜色缓冲区
 		glfwPollEvents();		//检查触发事件，并调用回调函数
@@ -203,7 +242,7 @@ int main()
 	//终止，清除之前分配的所有glfw资源。
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
-	glDeleteBuffers(1, &EBO);
+	//glDeleteBuffers(1, &EBO);
 
 	//终止，清除之前分配的所有glfw资源。
 	glfwTerminate();
