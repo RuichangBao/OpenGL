@@ -137,8 +137,6 @@
     <ClCompile Include="Transformations_Exercise2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\includes\glad\glad.h" />
-    <ClInclude Include="..\includes\LearnOpenGL\filesystem.h" />
     <ClInclude Include="..\includes\StbImage\stb_image.h" />
     <ClInclude Include="Transformations_Exercise2.h" />
   </ItemGroup>

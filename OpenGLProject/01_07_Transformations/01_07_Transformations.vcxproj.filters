@@ -28,11 +28,5 @@
     <ClInclude Include="..\includes\StbImage\stb_image.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\includes\LearnOpenGL\filesystem.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\includes\glad\glad.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

@@ -141,7 +141,6 @@
     <ClCompile Include="TexturesCombined.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\includes\LearnOpenGL\filesystem.h" />
     <ClInclude Include="TexturesCombined.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
