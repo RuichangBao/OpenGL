@@ -107,7 +107,7 @@ int main()
 	{
 		cout << "Í¼Æ¬¼ÓÔØÊ§°Ü" << endl;
 	}
-	stbi_image_free(data);
+	stbi_image_free(data);//ÊÍ·Åº¯Êı·ÖÅäµÄÍ¼ÏñÄÚ´æ
 
 	//Ñ­»·äÖÈ¾
 	while (!glfwWindowShouldClose(window))

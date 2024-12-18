@@ -103,7 +103,7 @@ int main()
 	{
 		std::cout << "Í¼Æ¬¼ÓÔØÊ§°Ü" << std::endl;
 	}
-	stbi_image_free(data);
+	stbi_image_free(data);//ÊÍ·Åº¯Êı·ÖÅäµÄÍ¼ÏñÄÚ´æ
 
 
 	//Ñ­»·äÖÈ¾

@@ -25,13 +25,16 @@ int main()
 
 
 	//FuncPtr myFunc1 = add;
-	funcPtr myFunc1 = add;
-	// 调用函数
-	int result = myFunc1(3, 4);
-	std::cout << "Result: " << result << std::endl;  // 输出：Result: 7
-	myFunc1 = sub;
-	result = myFunc1(3, 4);
-	std::cout << "Result: " << result << std::endl;  // 输出：Result: 7
-	std::cout << Add(5, 8) << std::endl;  // 输出：13
+	//funcPtr myFunc1 = add;
+	//// 调用函数
+	//int result = myFunc1(3, 4);
+	//std::cout << "Result: " << result << std::endl;  // 输出：Result: 7
+	//myFunc1 = sub;
+	//result = myFunc1(3, 4);
+	//std::cout << "Result: " << result << std::endl;  // 输出：Result: 7
+	//std::cout << Add(5, 8) << std::endl;  // 输出：13
+	float nums[10] = {1,2,3,4,5,6,7,8,9,10};
+	float* f = nums;
+	cout << f << endl;
 	return 0;
 }

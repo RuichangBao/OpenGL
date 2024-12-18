@@ -104,7 +104,7 @@ int main()
 	{
 		std::cout << "图片加载失败" << std::endl;
 	}
-	stbi_image_free(data);
+	stbi_image_free(data);//释放函数分配的图像内存
 
 
 	glGenTextures(1, &texture2);//生成纹理对象
@@ -129,7 +129,7 @@ int main()
 	{
 		std::cout << "图片加载失败" << std::endl;
 	}
-	stbi_image_free(data);
+	stbi_image_free(data);//释放函数分配的图像内存
 
 	ourShader.use(); // 不要忘记在设置制服之前激活/使用着色器
 	GLint num = glGetUniformLocation(ourShader.ID, "num");
