@@ -7,7 +7,9 @@
 #include <stbimage/stb_image.h>
 #include <learnopengl/filesystem.h>
 #include <learnopengl/shader_s.h>
-
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 using namespace std;
 using namespace glm;
