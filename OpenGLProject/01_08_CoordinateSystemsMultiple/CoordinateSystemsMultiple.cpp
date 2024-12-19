@@ -1,6 +1,6 @@
 //https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/01%20Getting%20started/08%20Coordinate%20Systems.md
-//得到旋转的立方体
-#include "CoordinateSystemsDepth.h"
+//创建多个正方体
+#include "CoordinateSystemsMultiple.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -89,7 +89,19 @@ int main()
 		-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
 		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 	};
-
+	// 立方体的世界坐标
+	glm::vec3 cubePositions[] = {
+		glm::vec3(0.0f,  0.0f,  0.0f),
+		glm::vec3(2.0f,  5.0f, -15.0f),
+		glm::vec3(-1.5f, -2.2f, -2.5f),
+		glm::vec3(-3.8f, -2.0f, -12.3f),
+		glm::vec3(2.4f, -0.4f, -3.5f),
+		glm::vec3(-1.7f,  3.0f, -7.5f),
+		glm::vec3(1.3f, -2.0f, -2.5f),
+		glm::vec3(1.5f,  2.0f, -2.5f),
+		glm::vec3(1.5f,  0.2f, -1.5f),
+		glm::vec3(-1.3f,  1.0f, -1.5f)
+	};
 
 
 	unsigned int VBO, VAO, EBO;
@@ -115,7 +127,7 @@ int main()
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
-
+#pragma region 图像处理
 	//创建加载纹理
 	unsigned int texture1, texture2;
 	int width, height, nrChannels;
@@ -178,7 +190,7 @@ int main()
 	  //通过纹理类设置
 	ourShader.setInt("texture1", 0);
 	ourShader.setInt("texture2", 1);
-
+#pragma endregion
 
 	//循环渲染
 	while (!glfwWindowShouldClose(window))
@@ -201,10 +213,7 @@ int main()
 		//正交投影矩阵 fov,宽高比，近距离，远距离
 		//glm::mat4 proj = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 100.0f);
 
-		//模型矩阵
-		glm::mat4 model = mat4(1);
-		//model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(0.5f, 1, 0));
-		model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
+		
 		//观察矩阵
 		glm::mat4 view = mat4(1);
 		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));//OpenGL右手坐标系，z轴由屏幕内向外，所以向反方向移动
@@ -215,17 +224,27 @@ int main()
 
 		//渲染一个物体时要使用着色器程序
 		ourShader.use();
-		unsigned int modelLoc = glGetUniformLocation(ourShader.ID, "model");
 		unsigned int viewLoc = glGetUniformLocation(ourShader.ID, "view");
 		unsigned int projectionLoc = glGetUniformLocation(ourShader.ID, "projection");
-		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, value_ptr(model));
+		
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, value_ptr(view));
 		//glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, value_ptr(projection));
 		ourShader.setMat4("projection", projection);
 
 		glBindVertexArray(VAO);//绑定顶点数组
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);//绘制图元函数
+		
+		for (size_t i = 0, length = 10; i < length; i++)
+		{
+			//模型矩阵
+			glm::mat4 model = mat4(1);
+			model = glm::translate(model, cubePositions[i]);
+			float angle = 20.0f * i;
+			model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+			unsigned int modelLoc = glGetUniformLocation(ourShader.ID, "model");
+			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, value_ptr(model));
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+		}
+
 
 		glfwSwapBuffers(window);//交换颜色缓冲区
 		glfwPollEvents();		//检查触发事件，并调用回调函数
