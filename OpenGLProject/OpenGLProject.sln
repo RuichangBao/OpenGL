@@ -43,7 +43,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_08_CoordinateSystemsMult
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_08_CoordinateSystemsMultiple_Exercise", "01_08_CoordinateSystemsMultiple_Exercise\01_08_CoordinateSystemsMultiple_Exercise.vcxproj", "{7ADF14A9-E3AE-463D-8F4C-588870377AB1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_09_Camera_Circle", "01_09_Camera_Circle\01_09_Camera_Circle.vcxproj", "{31074D1C-9AA4-4696-892E-51CF58EE897D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_09_CameraCircle", "01_09_CameraCircle\01_09_CameraCircle.vcxproj", "{31074D1C-9AA4-4696-892E-51CF58EE897D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
