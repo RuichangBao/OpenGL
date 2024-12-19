@@ -41,6 +41,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_08_CoordinateSystemsDept
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_08_CoordinateSystemsMultiple", "01_08_CoordinateSystemsMultiple\01_08_CoordinateSystemsMultiple.vcxproj", "{F8DE7C0B-81AF-4E28-A8AB-D871A1A63262}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_08_CoordinateSystemsMultiple_Exercise", "01_08_CoordinateSystemsMultiple_Exercise\01_08_CoordinateSystemsMultiple_Exercise.vcxproj", "{7ADF14A9-E3AE-463D-8F4C-588870377AB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -201,6 +203,14 @@ Global
 		{F8DE7C0B-81AF-4E28-A8AB-D871A1A63262}.Release|x64.Build.0 = Release|x64
 		{F8DE7C0B-81AF-4E28-A8AB-D871A1A63262}.Release|x86.ActiveCfg = Release|Win32
 		{F8DE7C0B-81AF-4E28-A8AB-D871A1A63262}.Release|x86.Build.0 = Release|Win32
+		{7ADF14A9-E3AE-463D-8F4C-588870377AB1}.Debug|x64.ActiveCfg = Debug|x64
+		{7ADF14A9-E3AE-463D-8F4C-588870377AB1}.Debug|x64.Build.0 = Debug|x64
+		{7ADF14A9-E3AE-463D-8F4C-588870377AB1}.Debug|x86.ActiveCfg = Debug|Win32
+		{7ADF14A9-E3AE-463D-8F4C-588870377AB1}.Debug|x86.Build.0 = Debug|Win32
+		{7ADF14A9-E3AE-463D-8F4C-588870377AB1}.Release|x64.ActiveCfg = Release|x64
+		{7ADF14A9-E3AE-463D-8F4C-588870377AB1}.Release|x64.Build.0 = Release|x64
+		{7ADF14A9-E3AE-463D-8F4C-588870377AB1}.Release|x86.ActiveCfg = Release|Win32
+		{7ADF14A9-E3AE-463D-8F4C-588870377AB1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
