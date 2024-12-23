@@ -47,6 +47,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_09_CameraCircle", "01_09
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_09_CameraKeyboard", "01_09_CameraKeyboard\01_09_CameraKeyboard.vcxproj", "{7C7B480C-C93A-4BFB-A5E8-205A3B0A71C1}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_09_CameraMouseRoom", "01_09_CameraMouseRoom\01_09_CameraMouseRoom.vcxproj", "{757BB072-ED36-4350-9B34-21EE5AF1C6A3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_09_CameraClass", "01_09_CameraClass\01_09_CameraClass.vcxproj", "{92A5DE7E-FEFC-49A2-98C8-66616596A5E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -231,6 +235,22 @@ Global
 		{7C7B480C-C93A-4BFB-A5E8-205A3B0A71C1}.Release|x64.Build.0 = Release|x64
 		{7C7B480C-C93A-4BFB-A5E8-205A3B0A71C1}.Release|x86.ActiveCfg = Release|Win32
 		{7C7B480C-C93A-4BFB-A5E8-205A3B0A71C1}.Release|x86.Build.0 = Release|Win32
+		{757BB072-ED36-4350-9B34-21EE5AF1C6A3}.Debug|x64.ActiveCfg = Debug|x64
+		{757BB072-ED36-4350-9B34-21EE5AF1C6A3}.Debug|x64.Build.0 = Debug|x64
+		{757BB072-ED36-4350-9B34-21EE5AF1C6A3}.Debug|x86.ActiveCfg = Debug|Win32
+		{757BB072-ED36-4350-9B34-21EE5AF1C6A3}.Debug|x86.Build.0 = Debug|Win32
+		{757BB072-ED36-4350-9B34-21EE5AF1C6A3}.Release|x64.ActiveCfg = Release|x64
+		{757BB072-ED36-4350-9B34-21EE5AF1C6A3}.Release|x64.Build.0 = Release|x64
+		{757BB072-ED36-4350-9B34-21EE5AF1C6A3}.Release|x86.ActiveCfg = Release|Win32
+		{757BB072-ED36-4350-9B34-21EE5AF1C6A3}.Release|x86.Build.0 = Release|Win32
+		{92A5DE7E-FEFC-49A2-98C8-66616596A5E1}.Debug|x64.ActiveCfg = Debug|x64
+		{92A5DE7E-FEFC-49A2-98C8-66616596A5E1}.Debug|x64.Build.0 = Debug|x64
+		{92A5DE7E-FEFC-49A2-98C8-66616596A5E1}.Debug|x86.ActiveCfg = Debug|Win32
+		{92A5DE7E-FEFC-49A2-98C8-66616596A5E1}.Debug|x86.Build.0 = Debug|Win32
+		{92A5DE7E-FEFC-49A2-98C8-66616596A5E1}.Release|x64.ActiveCfg = Release|x64
+		{92A5DE7E-FEFC-49A2-98C8-66616596A5E1}.Release|x64.Build.0 = Release|x64
+		{92A5DE7E-FEFC-49A2-98C8-66616596A5E1}.Release|x86.ActiveCfg = Release|Win32
+		{92A5DE7E-FEFC-49A2-98C8-66616596A5E1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
