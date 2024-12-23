@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\includes\glad\glad.c" />
+    <ClCompile Include="..\includes\StbImage\stb_image.cpp" />
+    <ClCompile Include="Transformations_Exercise2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\includes\StbImage\stb_image.h" />
+    <ClInclude Include="Transformations_Exercise2.h" />
+  </ItemGroup>
+</Project>

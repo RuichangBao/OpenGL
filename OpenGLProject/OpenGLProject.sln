@@ -45,6 +45,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_08_CoordinateSystemsMult
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_09_CameraCircle", "01_09_CameraCircle\01_09_CameraCircle.vcxproj", "{CB194966-0FA4-49E9-B9C1-AB607282EC5B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_09_CameraKeyboard", "01_09_CameraKeyboard\01_09_CameraKeyboard.vcxproj", "{7C7B480C-C93A-4BFB-A5E8-205A3B0A71C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -221,6 +223,14 @@ Global
 		{CB194966-0FA4-49E9-B9C1-AB607282EC5B}.Release|x64.Build.0 = Release|x64
 		{CB194966-0FA4-49E9-B9C1-AB607282EC5B}.Release|x86.ActiveCfg = Release|Win32
 		{CB194966-0FA4-49E9-B9C1-AB607282EC5B}.Release|x86.Build.0 = Release|Win32
+		{7C7B480C-C93A-4BFB-A5E8-205A3B0A71C1}.Debug|x64.ActiveCfg = Debug|x64
+		{7C7B480C-C93A-4BFB-A5E8-205A3B0A71C1}.Debug|x64.Build.0 = Debug|x64
+		{7C7B480C-C93A-4BFB-A5E8-205A3B0A71C1}.Debug|x86.ActiveCfg = Debug|Win32
+		{7C7B480C-C93A-4BFB-A5E8-205A3B0A71C1}.Debug|x86.Build.0 = Debug|Win32
+		{7C7B480C-C93A-4BFB-A5E8-205A3B0A71C1}.Release|x64.ActiveCfg = Release|x64
+		{7C7B480C-C93A-4BFB-A5E8-205A3B0A71C1}.Release|x64.Build.0 = Release|x64
+		{7C7B480C-C93A-4BFB-A5E8-205A3B0A71C1}.Release|x86.ActiveCfg = Release|Win32
+		{7C7B480C-C93A-4BFB-A5E8-205A3B0A71C1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
