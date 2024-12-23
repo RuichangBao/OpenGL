@@ -22,7 +22,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CameraClass.h">
+    <ClInclude Include="MainCameraClass.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\includes\StbImage\stb_image.h">
