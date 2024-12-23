@@ -133,11 +133,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\includes\camera_class.h" />
-    <ClInclude Include="..\includes\glad\glad.h" />
+    <ClInclude Include="..\includes\StbImage\stb_image.h" />
     <ClInclude Include="LightColor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\includes\glad\glad.c" />
+    <ClCompile Include="..\includes\StbImage\stb_image.cpp" />
     <ClCompile Include="LightColor.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

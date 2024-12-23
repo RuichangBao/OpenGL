@@ -280,10 +280,6 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 	float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
 	lastX = xpos;
 	lastY = ypos;
-
-	float sensitivity = 0.1f; //灵敏度
-	xoffset *= sensitivity;
-	yoffset *= sensitivity;
 	camera.ProcessMouseMovement(xoffset, yoffset);
 }
 //鼠标滚轮回调函数
