@@ -8,10 +8,10 @@
 #include <stbimage/stb_image.h>
 #include <learnopengl/filesystem.h>
 #include <learnopengl/shader_s.h>
-
+#include <learnopengl/CameraClass.h>
 
 using namespace std;
-
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 int main()
 {
 	//glfw: 初始化配置
@@ -204,27 +204,18 @@ int main()
 		glBindTexture(GL_TEXTURE_2D, texture2);
 
 		//观察矩阵
-		glm::mat4 view = glm::mat4(1.0f); // 单位矩阵
-		float radius = 10.0f;
-		//摄像机绕着y轴转
-		float camX = static_cast<float>(sin(glfwGetTime()) * radius);
-		float camZ = static_cast<float>(cos(glfwGetTime()) * radius);
-		view = glm::lookAt(
-			cameraPos, //相机位置
-			cameraPos + cameraFront, //相机目标
-			cameraUp  //相机坐标上方向
-		);
+		glm::mat4 view = camera.GetViewMatrix();
 		ourShader.setMat4("view", view);
 
 
 		//投影矩阵
-		glm::mat4 projection = glm::perspective(glm::radians(fov), (float)SCR_WIDTH / SCR_HEIGHT, 0.1f, 100.0f);
+		//glm::mat4 projection = glm::perspective(glm::radians(fov), (float)SCR_WIDTH / SCR_HEIGHT, 0.1f, 100.0f);
+		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		//渲染一个物体时要使用着色器程序
 		ourShader.use();
 		unsigned int modelLoc = glGetUniformLocation(ourShader.ID, "model");
 		unsigned int viewLoc = glGetUniformLocation(ourShader.ID, "view");
 		unsigned int projectionLoc = glGetUniformLocation(ourShader.ID, "projection");
-
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, value_ptr(view));
 		//glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, value_ptr(projection));
 		ourShader.setMat4("projection", projection);
@@ -262,15 +253,15 @@ void processInput(GLFWwindow* window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)//如果ESC（GLFW_KEY_ESCAPE）键被按下（GLFW_PRESS）
 		glfwSetWindowShouldClose(window, true);	//关闭窗口
-	float cameraSpeed = static_cast<float>(2.5 * deltaTime);
+
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		cameraPos += cameraSpeed * cameraFront;
+		camera.ProcessKeyboard(FORWARD, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		cameraPos -= cameraSpeed * cameraFront;
+		camera.ProcessKeyboard(BACKWARD, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+		camera.ProcessKeyboard(LEFT, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+		camera.ProcessKeyboard(RIGHT, deltaTime);
 }
 /// <summary>鼠标输入</summary>
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
@@ -293,30 +284,12 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 	float sensitivity = 0.1f; //灵敏度
 	xoffset *= sensitivity;
 	yoffset *= sensitivity;
-
-	yaw += xoffset;
-	pitch += yoffset;
-
-	// make sure that when pitch is out of bounds, screen doesn't get flipped
-	if (pitch > 89.0f)
-		pitch = 89.0f;
-	if (pitch < -89.0f)
-		pitch = -89.0f;
-
-	glm::vec3 front;
-	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-	front.y = sin(glm::radians(pitch));
-	front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-	cameraFront = glm::normalize(front);
+	camera.ProcessMouseMovement(xoffset, yoffset);
 }
 //鼠标滚轮回调函数
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-	fov -= (float)yoffset;
-	if (fov < 1.0f)
-		fov = 1.0f;
-	if (fov > 45.0f)
-		fov = 45.0f;
+	camera.ProcessMouseScroll(static_cast<float>(yoffset));
 }
 // 窗口大小变化回调函数
 // ---------------------------------------------------------------------------------------------

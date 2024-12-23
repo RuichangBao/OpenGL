@@ -6,6 +6,7 @@ const unsigned int SCR_WIDTH = 800;//unsigned 无符号
 const unsigned int SCR_HEIGHT = 600;
 
 //相机
+//Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f); //相机位置
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);//相机目标
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);//相机坐标上方向
