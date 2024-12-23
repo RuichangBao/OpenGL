@@ -10,7 +10,6 @@
 
 
 using namespace std;
-using namespace glm;
 
 int main()
 {
@@ -213,9 +212,9 @@ int main()
 		//正交投影矩阵 fov,宽高比，近距离，远距离
 		//glm::mat4 proj = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 100.0f);
 
-		
+
 		//观察矩阵
-		glm::mat4 view = mat4(1);
+		glm::mat4 view = glm::mat4(1);
 		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));//OpenGL右手坐标系，z轴由屏幕内向外，所以向反方向移动
 
 		//投影矩阵
@@ -224,6 +223,7 @@ int main()
 
 		//渲染一个物体时要使用着色器程序
 		ourShader.use();
+		unsigned int modelLoc = glGetUniformLocation(ourShader.ID, "model");
 		unsigned int viewLoc = glGetUniformLocation(ourShader.ID, "view");
 		unsigned int projectionLoc = glGetUniformLocation(ourShader.ID, "projection");
 		
@@ -232,15 +232,14 @@ int main()
 		ourShader.setMat4("projection", projection);
 
 		glBindVertexArray(VAO);//绑定顶点数组
-		
+		//模型矩阵
+		glm::mat4 model;
 		for (size_t i = 0, length = 10; i < length; i++)
 		{
-			//模型矩阵
-			glm::mat4 model = mat4(1);
+			model = glm::mat4(1);
 			model = glm::translate(model, cubePositions[i]);
 			float angle = 20.0f * i;
 			model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
-			unsigned int modelLoc = glGetUniformLocation(ourShader.ID, "model");
 			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, value_ptr(model));
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
@@ -277,7 +276,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 }
 
 //自定义日志输出
-void Print(mat4 mat)
+void Print(glm::mat4 mat)
 {
 	Print(mat[0]);
 	Print(mat[1]);
@@ -285,7 +284,7 @@ void Print(mat4 mat)
 	Print(mat[3]);
 }
 
-void Print(vec4 vec)
+void Print(glm::vec4 vec)
 {
 	std::cout << " " << vec.x << " " << vec.y << " " << vec.z << " " << vec.w << endl;
 }
