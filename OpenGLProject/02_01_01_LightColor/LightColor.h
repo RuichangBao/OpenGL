@@ -6,12 +6,14 @@ const unsigned int SCR_WIDTH = 800;//unsigned 无符号
 const unsigned int SCR_HEIGHT = 600;
 
 
-float deltaTime = 0;//每帧的时长
-float lastFrame = 0;//最后一帧的时间
-
-bool firstMouse = true;
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
+bool firstMouse = true;
+
+float deltaTime = 0;//每帧的时长
+float lastFrame = 0;//最后一帧的时间
+// lighting
+glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);

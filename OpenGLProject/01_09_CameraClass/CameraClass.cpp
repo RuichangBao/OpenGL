@@ -34,7 +34,7 @@ int main()
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);//设置窗口大小变化的回调函数
 	glfwSetCursorPosCallback(window, mouse_callback);	//设置鼠标输入回调函数
 	glfwSetScrollCallback(window, scroll_callback);		//设置鼠标滚轮
-
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	// glad: 加载所有OpenGL函数指针
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{

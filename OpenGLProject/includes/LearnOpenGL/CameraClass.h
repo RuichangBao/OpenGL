@@ -30,7 +30,7 @@ public:
     glm::vec3 Front;
     glm::vec3 Up;
     glm::vec3 Right;
-    glm::vec3 WorldUp;
+    glm::vec3 WorldUp;//世界空间下向上方向
     //欧拉角
     float Yaw;  //偏航角
     float Pitch;//俯仰角度
@@ -114,13 +114,13 @@ private:
     // 更新相机的欧拉角
     void updateCameraVectors()
     {
-        // calculate the new Front vector
+        //计算相机的指向向量
         glm::vec3 front;
         front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
         front.y = sin(glm::radians(Pitch));
         front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
         Front = glm::normalize(front);
-        // also re-calculate the Right and Up vector
+        //重新计算相机的右向量和上向量
         Right = glm::normalize(glm::cross(Front, WorldUp));  // normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
         Up = glm::normalize(glm::cross(Right, Front));
     }
