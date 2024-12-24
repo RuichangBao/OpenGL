@@ -1,4 +1,4 @@
-/*灯光片段着色器**/
+/*默认正方体片段着色器**/
 #version 330 core
 
 out vec4 FragColor;

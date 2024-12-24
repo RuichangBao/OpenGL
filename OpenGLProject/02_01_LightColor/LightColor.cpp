@@ -42,8 +42,8 @@ int main()
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	// 构建并编译shader程序
-	Shader cubeShader("shader/CubeVertex.shader", "shader/CubeFragment.shader");
-	Shader lightShader("shader/LightVertex.shader", "shader/LightFragment.shader");
+	Shader lightCubeShader("shader/LightCubeVertex.shader", "shader/LightCubeFragment.shader");
+	Shader defaultCubeShader("shader/DefaultCubeVertex.shader", "shader/DefaultCubeFragment.shader");
 	// 设置顶点数据（和缓冲区）并配置顶点属性
 	float vertices[] = {
 		-0.5f, -0.5f, -0.5f,
@@ -89,8 +89,9 @@ int main()
 		-0.5f,  0.5f, -0.5f,
 	};
 
-	unsigned int VBO, cubeVAO;
-	glGenVertexArrays(1, &cubeVAO);//生成顶点数组对象。VAO 在 OpenGL 中用来存储顶点属性的配置，以便在后续绘制时快速访问这些属性。
+	unsigned int VBO, lightCubeVAO;
+	//光照正方体
+	glGenVertexArrays(1, &lightCubeVAO);//生成顶点数组对象。VAO 在 OpenGL 中用来存储顶点属性的配置，以便在后续绘制时快速访问这些属性。
 	glGenBuffers(1, &VBO);		//生成顶点缓存对象VBO(Vertex Buffer Object)对象
 
 	// 2. 把顶点数组复制到缓冲中供OpenGL使用
@@ -98,14 +99,17 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);//GL_ARRAY_BUFFER:顶点缓冲对象的绑定目标
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	glBindVertexArray(cubeVAO);//绑定顶点数组对象
+	glBindVertexArray(lightCubeVAO);//绑定顶点数组对象
 	// 位置属性
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);	//启用顶点属性
 
-	unsigned int lightCubeVAO;
-	glGenVertexArrays(1, &lightCubeVAO);
-	glBindVertexArray(lightCubeVAO);
+	
+	
+	//默认正方体
+	unsigned int defaultCubeVAO;
+	glGenVertexArrays(1, &defaultCubeVAO);
+	glBindVertexArray(defaultCubeVAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
@@ -127,44 +131,44 @@ int main()
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);//清空屏幕所用的颜色
 		//glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
-
-		cubeShader.use();
-		cubeShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
-		cubeShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
+		//颜色立方体
+		lightCubeShader.use();
+		lightCubeShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
+		lightCubeShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
 
 		//观察矩阵
 		glm::mat4 view = camera.GetViewMatrix();
-		cubeShader.setMat4("view", view);
+		lightCubeShader.setMat4("view", view);
 
 		//模型矩阵
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(45, 45, 0));	
-		cubeShader.setMat4("model", model);
+		lightCubeShader.setMat4("model", model);
 		//投影矩阵
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-		cubeShader.setMat4("projection", projection);
+		lightCubeShader.setMat4("projection", projection);
 
-		glBindVertexArray(cubeVAO);//绑定顶点数组
+		glBindVertexArray(lightCubeVAO);//绑定顶点数组
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
-		//光源
-		lightShader.use();
-		lightShader.setMat4("projection", projection);
-		lightShader.setMat4("view", view);
+		//默认立方体
+		defaultCubeShader.use();
+		defaultCubeShader.setMat4("projection", projection);
+		defaultCubeShader.setMat4("view", view);
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, lightPos);
-		model = glm::scale(model, glm::vec3(0.02f)); // 灯光
-		lightShader.setMat4("model", model);
+		model = glm::scale(model, glm::vec3(0.2f)); // 灯光
+		defaultCubeShader.setMat4("model", model);
 
-		glBindVertexArray(lightCubeVAO);
+		glBindVertexArray(defaultCubeVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glfwSwapBuffers(window);//交换颜色缓冲区
 		glfwPollEvents();		//检查触发事件，并调用回调函数
 	}
 	//终止，清除之前分配的所有glfw资源。
-	glDeleteVertexArrays(1, &cubeVAO);
 	glDeleteVertexArrays(1, &lightCubeVAO);
+	glDeleteVertexArrays(1, &defaultCubeVAO);
 	glDeleteBuffers(1, &VBO);
 
 	//终止，清除之前分配的所有glfw资源。
