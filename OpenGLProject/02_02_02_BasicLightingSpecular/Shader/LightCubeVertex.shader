@@ -7,15 +7,14 @@ uniform mat4 model;//模型矩阵
 uniform mat4 view;//观察矩阵
 uniform mat4 projection;//投影矩阵
 
+uniform vec3 viewPos;//观察者位置
+
 out vec3 worldPos;//世界空间下的坐标
-// out vec3 ModelPos;//模型空间坐标
 out vec3 Normal;
 
 void main()
 {
-    // ModelPos = aPos;
     worldPos = vec3(model * vec4(aPos, 1.0));
-    // Normal = aNormal;
     Normal = mat3(transpose(inverse(model))) * aNormal;
     gl_Position = projection * view * model * vec4(aPos, 1.0);
 }

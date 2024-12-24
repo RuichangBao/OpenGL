@@ -55,7 +55,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_01_LightColor", "02_01_L
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_02_01_BasicLightingDiffuse", "02_02_01_BasicLightingDiffuse\02_02_01_BasicLightingDiffuse.vcxproj", "{8F9A3DBA-80E8-4092-BE40-3471B2CD57D8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_02_01_BasicLightingSpecular", "02_02_01_BasicLightingSpecular\02_02_01_BasicLightingSpecular.vcxproj", "{B6ECEBF8-63CB-4D0E-B228-7DBAE7559D40}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_02_02_BasicLightingSpecular", "02_02_02_BasicLightingSpecular\02_02_02_BasicLightingSpecular.vcxproj", "{B6ECEBF8-63CB-4D0E-B228-7DBAE7559D40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

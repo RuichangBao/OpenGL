@@ -93,6 +93,7 @@ int main()
 		lightCubeShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
 		lightCubeShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
 		lightCubeShader.setVec3("lightPos", lightPos);
+		lightCubeShader.setVec3("viewPos", camera.Position);//设置观察者位置
 		//观察矩阵
 		glm::mat4 view = camera.GetViewMatrix();
 		lightCubeShader.setMat4("view", view);
