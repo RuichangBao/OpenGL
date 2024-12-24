@@ -1,12 +1,10 @@
 //https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/02%20Lighting/01%20Colors.md
-//摄像机自由移动
+//光照颜色
 #include "LightColor.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
-#include <stbimage/stb_image.h>
-#include <learnopengl/filesystem.h>
 #include <learnopengl/shader_s.h>
 #include <learnopengl/CameraClass.h>
 
@@ -44,8 +42,8 @@ int main()
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	// 构建并编译shader程序
-	Shader lightingShader("shader/ColorsVertex.shader", "shader/ColorsFragment.shader");
-	Shader lightCubeShader("shader/LightCubeVertex.shader", "shader/LightCubeFragment.shader");
+	Shader cubeShader("shader/CubeVertex.shader", "shader/CubeFragment.shader");
+	Shader lightShader("shader/LightVertex.shader", "shader/LightFragment.shader");
 	// 设置顶点数据（和缓冲区）并配置顶点属性
 	float vertices[] = {
 		-0.5f, -0.5f, -0.5f,
@@ -130,33 +128,33 @@ int main()
 		//glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
 
-		lightingShader.use();
-		lightingShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
-		lightingShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
+		cubeShader.use();
+		cubeShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
+		cubeShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
 
 		//观察矩阵
 		glm::mat4 view = camera.GetViewMatrix();
-		lightingShader.setMat4("view", view);
+		cubeShader.setMat4("view", view);
 
 		//模型矩阵
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(45, 45, 0));	
-		lightingShader.setMat4("model", model);
+		cubeShader.setMat4("model", model);
 		//投影矩阵
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-		lightingShader.setMat4("projection", projection);
+		cubeShader.setMat4("projection", projection);
 
 		glBindVertexArray(cubeVAO);//绑定顶点数组
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		//光源
-		lightCubeShader.use();
-		lightCubeShader.setMat4("projection", projection);
-		lightCubeShader.setMat4("view", view);
+		lightShader.use();
+		lightShader.setMat4("projection", projection);
+		lightShader.setMat4("view", view);
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, lightPos);
-		model = glm::scale(model, glm::vec3(0.02f)); // a smaller cube
-		lightCubeShader.setMat4("model", model);
+		model = glm::scale(model, glm::vec3(0.02f)); // 灯光
+		lightShader.setMat4("model", model);
 
 		glBindVertexArray(lightCubeVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
