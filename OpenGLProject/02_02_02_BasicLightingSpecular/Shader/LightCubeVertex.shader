@@ -7,8 +7,6 @@ uniform mat4 model;//模型矩阵
 uniform mat4 view;//观察矩阵
 uniform mat4 projection;//投影矩阵
 
-uniform vec3 viewPos;//观察者位置
-
 out vec3 worldPos;//世界空间下的坐标
 out vec3 Normal;
 
