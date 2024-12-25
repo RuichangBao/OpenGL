@@ -42,8 +42,8 @@ int main()
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	// 构建并编译shader程序
-	Shader lightCubeShader("shader/LightCubeVertex.shader", "shader/LightCubeFragment.shader");
-	Shader defaultCubeShader("shader/DefaultCubeVertex.shader", "shader/DefaultCubeFragment.shader");
+	Shader materialShader("shader/MaterialVertex.shader", "shader/MaterialFragment.shader");
+	Shader cubeShader("shader/Vertex.shader", "shader/Fragment.shader");
 
 	unsigned int VBO, cubeVAO;
 	glGenVertexArrays(1, &cubeVAO);//生成顶点数组对象。VAO 在 OpenGL 中用来存储顶点属性的配置，以便在后续绘制时快速访问这些属性。
@@ -88,45 +88,45 @@ int main()
 		//glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
 
-		lightCubeShader.use();
-		lightCubeShader.setVec3("light.position", lightPos);
-		lightCubeShader.setVec3("viewPos", camera.Position);
+		materialShader.use();
+		materialShader.setVec3("light.position", lightPos);
+		materialShader.setVec3("viewPos", camera.Position);
 		
 		// 光照强度设置
 		glm::vec3 intensity = glm::vec3(1.0);
-		lightCubeShader.setVec3("light.ambient", intensity); // note that all light colors are set at full intensity
-		lightCubeShader.setVec3("light.diffuse", intensity);
-		lightCubeShader.setVec3("light.specular", intensity);
+		materialShader.setVec3("light.ambient", intensity); // note that all light colors are set at full intensity
+		materialShader.setVec3("light.diffuse", intensity);
+		materialShader.setVec3("light.specular", intensity);
 
 		// material properties
-		lightCubeShader.setVec3("material.ambient", 0.0f, 0.1f, 0.06f);
-		lightCubeShader.setVec3("material.diffuse", 0.0f, 0.50980392f, 0.50980392f);
-		lightCubeShader.setVec3("material.specular", 0.50196078f, 0.50196078f, 0.50196078f);
-		lightCubeShader.setFloat("material.shininess", 32.0f);
+		materialShader.setVec3("material.ambient", 0.0f, 0.1f, 0.06f);
+		materialShader.setVec3("material.diffuse", 0.0f, 0.50980392f, 0.50980392f);
+		materialShader.setVec3("material.specular", 0.50196078f, 0.50196078f, 0.50196078f);
+		materialShader.setFloat("material.shininess", 32.0f);
 
 		//模型矩阵
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(45, 45, 0));
-		lightCubeShader.setMat4("model", model);
+		materialShader.setMat4("model", model);
 		//观察矩阵
 		glm::mat4 view = camera.GetViewMatrix();
-		lightCubeShader.setMat4("view", view);
+		materialShader.setMat4("view", view);
 
 		//投影矩阵
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-		lightCubeShader.setMat4("projection", projection);
+		materialShader.setMat4("projection", projection);
 
 		glBindVertexArray(cubeVAO);//绑定顶点数组
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		//光源
-		defaultCubeShader.use();
-		defaultCubeShader.setMat4("projection", projection);
-		defaultCubeShader.setMat4("view", view);
+		cubeShader.use();
+		cubeShader.setMat4("projection", projection);
+		cubeShader.setMat4("view", view);
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, lightPos);
 		model = glm::scale(model, glm::vec3(0.2f)); // 灯光
-		defaultCubeShader.setMat4("model", model);
+		cubeShader.setMat4("model", model);
 
 		glBindVertexArray(lightCubeVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);

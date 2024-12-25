@@ -1,5 +1,5 @@
-//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/02%20Lighting/03%20Materials.md
-#include "Materials.h"
+//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/02%20Lighting/04%20Lighting%20maps.md
+#include "LightingMapsDiffuse.h"
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -21,7 +21,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);//允许修改窗口大小
 #endif
 	// glfw 创建窗口对象
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "CoordinateSystemsDepth", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LightingMapsDiffuse", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "创建GLFW窗口失败" << std::endl;
@@ -90,25 +90,22 @@ int main()
 		materialShader.use();
 		materialShader.setVec3("light.position", lightPos);
 		materialShader.setVec3("viewPos", camera.Position);
-		glm::vec3 lightColor;
-		lightColor.x = static_cast<float>(sin(glfwGetTime() * 2.0));
-		lightColor.y = static_cast<float>(sin(glfwGetTime() * 0.7));
-		lightColor.z = static_cast<float>(sin(glfwGetTime() * 1.3));
-		glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f); // decrease the influence
-		glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f); // low influence
-		materialShader.setVec3("light.ambient", ambientColor);
-		materialShader.setVec3("light.diffuse", diffuseColor);
-		materialShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 
-		//设置material结构体数据
-		materialShader.setVec3("material.ambient", 1.0f, 0.5f, 0.31f);//环境光
-		materialShader.setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
-		materialShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
-		materialShader.setFloat("material.shininess", 32);
+		// 光照强度设置
+		glm::vec3 intensity = glm::vec3(1.0);
+		materialShader.setVec3("light.ambient", intensity); // note that all light colors are set at full intensity
+		materialShader.setVec3("light.diffuse", intensity);
+		materialShader.setVec3("light.specular", intensity);
+
+		// material properties
+		materialShader.setVec3("material.ambient", 0.0f, 0.1f, 0.06f);
+		materialShader.setVec3("material.diffuse", 0.0f, 0.50980392f, 0.50980392f);
+		materialShader.setVec3("material.specular", 0.50196078f, 0.50196078f, 0.50196078f);
+		materialShader.setFloat("material.shininess", 32.0f);
 
 		//模型矩阵
 		glm::mat4 model = glm::mat4(1.0f);
-		//model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(45, 45, 0));
+		model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(45, 45, 0));
 		materialShader.setMat4("model", model);
 		//观察矩阵
 		glm::mat4 view = camera.GetViewMatrix();
@@ -196,6 +193,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 }
 
 //自定义日志输出
+
+
 void Print(glm::mat4 mat)
 {
 	Print(mat[0]);
@@ -203,10 +202,11 @@ void Print(glm::mat4 mat)
 	Print(mat[2]);
 	Print(mat[3]);
 }
-
+void Print(glm::vec3 vec)
+{
+	std::cout << " " << vec.x << " " << vec.y << " " << vec.z << endl;
+}
 void Print(glm::vec4 vec)
 {
 	std::cout << " " << vec.x << " " << vec.y << " " << vec.z << " " << vec.w << endl;
 }
-
-
