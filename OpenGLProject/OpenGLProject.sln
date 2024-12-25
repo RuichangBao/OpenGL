@@ -61,7 +61,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_03_Materials_Exercise", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_03_Materials", "02_03_Materials_Exercise\02_03_Materials_Exercise.vcxproj", "{0A472A8E-AEFF-4C98-B2CC-2168384A7766}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_04_LightingMapsDiffuse", "02_04_LightingMapsDiffuseMap\02_04_LightingMapsDiffuseMap.vcxproj", "{AEF93CEC-BF0E-4FE8-A586-C8D71D3876C9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_04_01_LightingMapsDiffuse", "02_04_01_LightingMapsDiffuseMap\02_04_01_LightingMapsDiffuseMap.vcxproj", "{AEF93CEC-BF0E-4FE8-A586-C8D71D3876C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
