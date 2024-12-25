@@ -42,52 +42,9 @@ int main()
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	// 构建并编译shader程序
-	Shader lightCubeShader("shader/LightCubeVertex.shader", "shader/LightCubeFragment.shader");
-	Shader defaultCubeShader("shader/DefaultCubeVertex.shader", "shader/DefaultCubeFragment.shader");
+	Shader lightShader("shader/LightVertex.shader", "shader/LightFragment.shader");
+	Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
 	// 设置顶点数据（和缓冲区）并配置顶点属性
-	float vertices[] = {
-		-0.5f, -0.5f, -0.5f,
-		 0.5f, -0.5f, -0.5f,
-		 0.5f,  0.5f, -0.5f,
-		 0.5f,  0.5f, -0.5f,
-		-0.5f,  0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-
-		-0.5f, -0.5f,  0.5f,
-		 0.5f, -0.5f,  0.5f,
-		 0.5f,  0.5f,  0.5f,
-		 0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-		-0.5f, -0.5f,  0.5f,
-
-		-0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-		-0.5f, -0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-
-		 0.5f,  0.5f,  0.5f,
-		 0.5f,  0.5f, -0.5f,
-		 0.5f, -0.5f, -0.5f,
-		 0.5f, -0.5f, -0.5f,
-		 0.5f, -0.5f,  0.5f,
-		 0.5f,  0.5f,  0.5f,
-
-		-0.5f, -0.5f, -0.5f,
-		 0.5f, -0.5f, -0.5f,
-		 0.5f, -0.5f,  0.5f,
-		 0.5f, -0.5f,  0.5f,
-		-0.5f, -0.5f,  0.5f,
-		-0.5f, -0.5f, -0.5f,
-
-		-0.5f,  0.5f, -0.5f,
-		 0.5f,  0.5f, -0.5f,
-		 0.5f,  0.5f,  0.5f,
-		 0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f, -0.5f,
-	};
 
 	unsigned int VBO, lightCubeVAO;
 	//光照正方体
@@ -132,33 +89,33 @@ int main()
 		//glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
 		//颜色立方体
-		lightCubeShader.use();
-		lightCubeShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
-		lightCubeShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
+		lightShader.use();
+		lightShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
+		lightShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
 
 		//观察矩阵
 		glm::mat4 view = camera.GetViewMatrix();
-		lightCubeShader.setMat4("view", view);
+		lightShader.setMat4("view", view);
 
 		//模型矩阵
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(45, 45, 0));	
-		lightCubeShader.setMat4("model", model);
+		lightShader.setMat4("model", model);
 		//投影矩阵
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-		lightCubeShader.setMat4("projection", projection);
+		lightShader.setMat4("projection", projection);
 
 		glBindVertexArray(lightCubeVAO);//绑定顶点数组
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		//默认立方体
-		defaultCubeShader.use();
-		defaultCubeShader.setMat4("projection", projection);
-		defaultCubeShader.setMat4("view", view);
+		shader.use();
+		shader.setMat4("projection", projection);
+		shader.setMat4("view", view);
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, lightPos);
 		model = glm::scale(model, glm::vec3(0.2f)); // 灯光
-		defaultCubeShader.setMat4("model", model);
+		shader.setMat4("model", model);
 
 		glBindVertexArray(defaultCubeVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
