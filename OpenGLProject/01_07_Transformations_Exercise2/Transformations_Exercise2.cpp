@@ -2,13 +2,10 @@
 #include "Transformations_Exercise2.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-//#include <glm/glm.hpp>
-//#include <glm/gtc/matrix_transform.hpp>
-//#include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 #include <stbimage/stb_image.h>
 #include <learnopengl/filesystem.h>
-#include <learnopengl/shader_s.h>
+#include <learnopengl/shader_m.h>
 
 
 using namespace std;

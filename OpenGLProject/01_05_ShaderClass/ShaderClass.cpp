@@ -1,6 +1,6 @@
 //https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/01%20Getting%20started/05%20Shaders.md
 #include<iostream>
-#include<LearnOpenGL/Shader_s.h>
+#include<LearnOpenGL/Shader_m.h>
 #include"ShaderClass.h"
 
 

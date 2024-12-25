@@ -7,8 +7,8 @@
 #include <iostream>
 #include <stbimage/stb_image.h>
 #include <learnopengl/filesystem.h>
-#include <learnopengl/shader_s.h>
-#include <learnopengl/CameraClass.h>
+#include <learnopengl/shader_m.h>
+#include <learnopengl/Camera.h>
 
 using namespace std;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
