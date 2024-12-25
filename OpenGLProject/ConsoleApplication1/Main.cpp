@@ -4,6 +4,8 @@
 
 using namespace std;
 
+
+
 int main()
 {
 	/*MyClass* obj = new MyClass(1, 2);
@@ -33,8 +35,14 @@ int main()
 	//result = myFunc1(3, 4);
 	//std::cout << "Result: " << result << std::endl;  // Êä³ö£ºResult: 7
 	//std::cout << Add(5, 8) << std::endl;  // Êä³ö£º13
-	float nums[10] = {1,2,3,4,5,6,7,8,9,10};
+	/*float nums[10] = {1,2,3,4,5,6,7,8,9,10};
 	float* f = nums;
-	cout << f << endl;
+	cout << f << endl;*/
+	MyStruct myStruct;
+	myStruct.num1 = 100;
+	myStruct.num2 = 200;
+	myStruct.ToString();
+	TestFunc(myStruct);
 	return 0;
 }
+

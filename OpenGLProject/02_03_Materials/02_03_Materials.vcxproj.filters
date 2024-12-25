@@ -15,12 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Materials.h">
+    <ClInclude Include="MaterialsExercise.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Materials.cpp">
+    <ClCompile Include="MaterialsExercise.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\includes\glad\glad.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

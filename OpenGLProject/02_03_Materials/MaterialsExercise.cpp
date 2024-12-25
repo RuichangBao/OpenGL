@@ -1,16 +1,15 @@
-//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/02%20Lighting/02%20Basic%20Lighting.md
-//漫反射
-#include "BasicLightingDiffuse.h"
+//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/02%20Lighting/03%20Materials.md
+//得到青色塑料
+#include "MaterialsExercise.h"
+#include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <iostream>
+#include <learnopengl/filesystem.h>
 #include <learnopengl/shader_m.h>
-#include <learnopengl/camera.h>
 
 using namespace std;
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
-
 
 int main()
 {
@@ -90,18 +89,29 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
 
 		lightCubeShader.use();
-		lightCubeShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
-		lightCubeShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
-		lightCubeShader.setVec3("lightPos", lightPos);
-		lightCubeShader.setVec3("viewPos", camera.Position);//设置观察者位置
-		//观察矩阵
-		glm::mat4 view = camera.GetViewMatrix();
-		lightCubeShader.setMat4("view", view);
+		lightCubeShader.setVec3("light.position", lightPos);
+		lightCubeShader.setVec3("viewPos", camera.Position);
+		
+		// 光照强度设置
+		glm::vec3 intensity = glm::vec3(1.0);
+		lightCubeShader.setVec3("light.ambient", intensity); // note that all light colors are set at full intensity
+		lightCubeShader.setVec3("light.diffuse", intensity);
+		lightCubeShader.setVec3("light.specular", intensity);
+
+		// material properties
+		lightCubeShader.setVec3("material.ambient", 0.0f, 0.1f, 0.06f);
+		lightCubeShader.setVec3("material.diffuse", 0.0f, 0.50980392f, 0.50980392f);
+		lightCubeShader.setVec3("material.specular", 0.50196078f, 0.50196078f, 0.50196078f);
+		lightCubeShader.setFloat("material.shininess", 32.0f);
 
 		//模型矩阵
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(45, 45, 0));
 		lightCubeShader.setMat4("model", model);
+		//观察矩阵
+		glm::mat4 view = camera.GetViewMatrix();
+		lightCubeShader.setMat4("view", view);
+
 		//投影矩阵
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		lightCubeShader.setMat4("projection", projection);
@@ -184,6 +194,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 }
 
 //自定义日志输出
+
+
 void Print(glm::mat4 mat)
 {
 	Print(mat[0]);
@@ -191,8 +203,13 @@ void Print(glm::mat4 mat)
 	Print(mat[2]);
 	Print(mat[3]);
 }
-
+void Print(glm::vec3 vec)
+{
+	std::cout << " " << vec.x << " " << vec.y << " " << vec.z << endl;
+}
 void Print(glm::vec4 vec)
 {
 	std::cout << " " << vec.x << " " << vec.y << " " << vec.z << " " << vec.w << endl;
 }
+
+

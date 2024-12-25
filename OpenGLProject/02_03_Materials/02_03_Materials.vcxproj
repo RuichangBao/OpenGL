@@ -24,6 +24,7 @@
     <ProjectGuid>{cb2ba665-7e48-49a2-ad82-11a2500649d0}</ProjectGuid>
     <RootNamespace>My020301Materials</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>02_03_Materials_Exercise</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -132,10 +133,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Materials.h" />
+    <ClInclude Include="MaterialsExercise.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Materials.cpp" />
+    <ClCompile Include="..\includes\glad\glad.c" />
+    <ClCompile Include="MaterialsExercise.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

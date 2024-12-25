@@ -2,15 +2,18 @@
 
 using namespace std;
 
-typedef int (*FuncPtr)(int, int);
-#define Add add	//函数指针
-// 定义一个函数，该函数匹配 typedef 的签名
-int add(int a, int b) 
+struct MyStruct
 {
-	return a + b;
-}
-int sub(int a, int b)
+public:
+	int num1;
+	int num2;
+	void ToString()
+	{
+		cout << "num1:" << num1 << "	" << "num2:" << num2 << endl;
+	}
+};
+
+void TestFunc(const MyStruct& myStruct)
 {
-	return a - b;
+	cout << myStruct.num2 << endl;
 }
-#define funcPtr FuncPtr

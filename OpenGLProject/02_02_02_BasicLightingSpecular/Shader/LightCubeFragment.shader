@@ -14,7 +14,7 @@ uniform vec3 viewPos;   //观察者位置
 void main()
 {
     //环境光
-    float ambientStrength = 0.1f;
+    float ambientStrength = 0.1f;//环境光光照强度
     vec3 ambient = ambientStrength * lightColor;
     //漫反射
     vec3 norm = normalize(Normal);
