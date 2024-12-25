@@ -141,9 +141,6 @@
     <ClCompile Include="ShaderClass.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\includes\LearnOpenGL\Shader_s.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Shader\Fragment.shader" />
     <None Include="Shader\Vertex-exercise2.shader" />
     <None Include="Shader\Vertex-exercise1.shader" />

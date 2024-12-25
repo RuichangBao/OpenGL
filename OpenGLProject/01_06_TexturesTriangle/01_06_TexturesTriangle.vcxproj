@@ -141,7 +141,6 @@
     <ClCompile Include="TexturesTriangle.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\includes\LearnOpenGL\Shader_s.h" />
     <ClInclude Include="TexturesTriangle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
