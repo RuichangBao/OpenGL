@@ -109,7 +109,8 @@ int main()
 
 		//Ä£ÐÍ¾ØÕó
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(45, 45, 0));
+		/*model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(45, 45, 0));*/
+		//model = glm::rotate(model, glm::radians(45.0f), glm::vec3(1, 1, 0));
 		diffuseMapShader.setMat4("model", model);
 		//¹Û²ì¾ØÕó
 		glm::mat4 view = camera.GetViewMatrix();

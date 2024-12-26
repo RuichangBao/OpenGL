@@ -43,7 +43,8 @@ int main()
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	// 构建并编译shader程序
-	Shader specularMapShader("shader/SpecularMapVertex.shader", "shader/SpecularMapFragment.shader");
+	//Shader specularMapShader("shader/SpecularMapVertex.shader", "shader/SpecularMapFragment.shader");
+	Shader specularMapShader("shader/SpecularMapVertex.shader", "shader/SpecularMapFragment2.shader");
 	Shader cubeShader("shader/Vertex.shader", "shader/Fragment.shader");
 
 	unsigned int VBO, cubeVAO;
@@ -108,7 +109,7 @@ int main()
 
 		//模型矩阵
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(45, 45, 0));
+		//model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(45, 45, 0));
 		specularMapShader.setMat4("model", model);
 		//观察矩阵
 		glm::mat4 view = camera.GetViewMatrix();

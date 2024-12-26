@@ -1,4 +1,4 @@
-/*光照正方体顶点着色器**/
+/*漫反射光照贴图顶点着色器**/
 #version 330 core
 layout (location = 0)in vec3 aPos;
 layout (location = 1)in vec3 aNormal;//模型空间下的法向量
