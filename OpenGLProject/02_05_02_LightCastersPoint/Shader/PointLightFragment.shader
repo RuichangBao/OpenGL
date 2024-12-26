@@ -8,7 +8,7 @@ struct Material {
 }; 
 //光照强度
 struct Light {
-    vec3 direction;//光照方向，由光源指向物体
+    vec3 direction;//光源的方向向量，由光源指向物体
     vec3 ambient;//环境光强度
     vec3 diffuse;//漫反射强度
     vec3 specular;
