@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\includes\glad\glad.c">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\includes\StbImage\stb_image.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LightCastersSpotSoft.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\includes\StbImage\stb_image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LightCastersSpotSoft.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{ddc45da9-28d8-4710-8fc9-29bef967406f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{c5f95d55-12d2-4093-8b4d-d57d5115a915}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
