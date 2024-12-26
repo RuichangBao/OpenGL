@@ -1,6 +1,6 @@
 //https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/02%20Lighting/04%20Lighting%20maps.md
-//漫反射贴图
-#include "LightingMapsDiffuse.h"
+//高光反射贴图
+#include "LightingMapsSpecular.h"
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -43,7 +43,7 @@ int main()
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	// 构建并编译shader程序
-	Shader diffuseMapShader("shader/DiffuseMapVertex.shader", "shader/DiffuseMapFragment.shader");
+	Shader specularMapShader("shader/SpecularMapVertex.shader", "shader/SpecularMapFragment.shader");
 	Shader cubeShader("shader/Vertex.shader", "shader/Fragment.shader");
 
 	unsigned int VBO, cubeVAO;
@@ -77,9 +77,10 @@ int main()
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);	//启用顶点属性
 	unsigned int diffuseMap = loadTexture(FileSystem::getPath("Resources/Textures/container2.png").c_str());
-	diffuseMapShader.use();
-	diffuseMapShader.setInt("material.diffuse", 0);
-
+	unsigned int specularMap = loadTexture(FileSystem::getPath("Resources/Textures/container2_specular.png").c_str());
+	specularMapShader.use();
+	specularMapShader.setInt("material.diffuse", 0);
+	specularMapShader.setInt("material.specular", 1);
 	//循环渲染
 	while (!glfwWindowShouldClose(window))
 	{
@@ -95,31 +96,32 @@ int main()
 		//glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
 
-		diffuseMapShader.use();
-		diffuseMapShader.setVec3("light.position", lightPos);
-		diffuseMapShader.setVec3("viewPos", camera.Position);
+		specularMapShader.use();
+		specularMapShader.setVec3("light.position", lightPos);
+		specularMapShader.setVec3("viewPos", camera.Position);
 		// 光照强度设置
-		diffuseMapShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
-		diffuseMapShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
-		diffuseMapShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+		specularMapShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+		specularMapShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+		specularMapShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 		// material properties
-		diffuseMapShader.setVec3("material.ambient", 0.0f, 0.1f, 0.06f);
-		diffuseMapShader.setVec3("material.specular", 0.50196078f, 0.50196078f, 0.50196078f);
-		diffuseMapShader.setFloat("material.shininess", 32.0f);
+		specularMapShader.setFloat("material.shininess", 32.0f);
 
 		//模型矩阵
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(45, 45, 0));
-		diffuseMapShader.setMat4("model", model);
+		specularMapShader.setMat4("model", model);
 		//观察矩阵
 		glm::mat4 view = camera.GetViewMatrix();
-		diffuseMapShader.setMat4("view", view);
+		specularMapShader.setMat4("view", view);
 
 		//投影矩阵
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-		diffuseMapShader.setMat4("projection", projection);
+		specularMapShader.setMat4("projection", projection);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, diffuseMap);
+		// bind specular map
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, specularMap);
 		glBindVertexArray(cubeVAO);//绑定顶点数组
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 

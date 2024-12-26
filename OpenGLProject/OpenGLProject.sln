@@ -63,6 +63,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_03_Materials", "02_03_Ma
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_04_01_LightingMapsDiffuse", "02_04_01_LightingMapsDiffuseMap\02_04_01_LightingMapsDiffuseMap.vcxproj", "{AEF93CEC-BF0E-4FE8-A586-C8D71D3876C9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_04_02_LightingSpecularDiffuse", "02_04_02_LightingMapsSpecularMap\02_04_02_LightingMapsSpecularMap.vcxproj", "{C854CDDF-A094-451B-905D-817B205B4ABD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -311,6 +313,14 @@ Global
 		{AEF93CEC-BF0E-4FE8-A586-C8D71D3876C9}.Release|x64.Build.0 = Release|x64
 		{AEF93CEC-BF0E-4FE8-A586-C8D71D3876C9}.Release|x86.ActiveCfg = Release|Win32
 		{AEF93CEC-BF0E-4FE8-A586-C8D71D3876C9}.Release|x86.Build.0 = Release|Win32
+		{C854CDDF-A094-451B-905D-817B205B4ABD}.Debug|x64.ActiveCfg = Debug|x64
+		{C854CDDF-A094-451B-905D-817B205B4ABD}.Debug|x64.Build.0 = Debug|x64
+		{C854CDDF-A094-451B-905D-817B205B4ABD}.Debug|x86.ActiveCfg = Debug|Win32
+		{C854CDDF-A094-451B-905D-817B205B4ABD}.Debug|x86.Build.0 = Debug|Win32
+		{C854CDDF-A094-451B-905D-817B205B4ABD}.Release|x64.ActiveCfg = Release|x64
+		{C854CDDF-A094-451B-905D-817B205B4ABD}.Release|x64.Build.0 = Release|x64
+		{C854CDDF-A094-451B-905D-817B205B4ABD}.Release|x86.ActiveCfg = Release|Win32
+		{C854CDDF-A094-451B-905D-817B205B4ABD}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
