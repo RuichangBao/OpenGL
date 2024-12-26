@@ -1,10 +1,18 @@
 //https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/02%20Lighting/04%20Lighting%20maps.md
+//漫反射贴图
 #include "LightingMapsDiffuse.h"
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <learnopengl/filesystem.h>
+#include <learnopengl/shader_m.h>
+#include <stbimage/stb_image.h>
+
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include <stbimage/stb_image.h>
 #include <learnopengl/filesystem.h>
 #include <learnopengl/shader_m.h>
 
@@ -41,7 +49,7 @@ int main()
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	// 构建并编译shader程序
-	Shader materialShader("shader/MaterialVertex.shader", "shader/MaterialFragment.shader");
+	Shader diffuseMapShader("shader/DiffuseMapVertex.shader", "shader/DiffuseMapFragment.shader");
 	Shader cubeShader("shader/Vertex.shader", "shader/Fragment.shader");
 
 	unsigned int VBO, cubeVAO;
@@ -56,11 +64,14 @@ int main()
 
 	glBindVertexArray(cubeVAO);//绑定顶点数组对象
 	// 位置属性
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);	//启用顶点属性
 	// 法线属性
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);	//启用顶点属性
+	// 纹理坐标
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);	//启用顶点属性
 
 	//光照的正方体
 	unsigned int lightCubeVAO;
@@ -69,8 +80,11 @@ int main()
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);	//启用顶点属性
+	unsigned int diffuseMap = loadTexture(FileSystem::getPath("Resources/Textures/container2.png").c_str());
+	diffuseMapShader.use();
+	diffuseMapShader.setInt("material.diffuse", 0);
 
 	//循环渲染
 	while (!glfwWindowShouldClose(window))
@@ -87,33 +101,30 @@ int main()
 		//glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
 
-		materialShader.use();
-		materialShader.setVec3("light.position", lightPos);
-		materialShader.setVec3("viewPos", camera.Position);
-
+		diffuseMapShader.use();
+		diffuseMapShader.setVec3("light.position", lightPos);
+		diffuseMapShader.setVec3("viewPos", camera.Position);
+		diffuseMapShader.setInt("material.diffuse", 0);
 		// 光照强度设置
-		glm::vec3 intensity = glm::vec3(1.0);
-		materialShader.setVec3("light.ambient", intensity); // note that all light colors are set at full intensity
-		materialShader.setVec3("light.diffuse", intensity);
-		materialShader.setVec3("light.specular", intensity);
-
+		diffuseMapShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+		diffuseMapShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+		diffuseMapShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 		// material properties
-		materialShader.setVec3("material.ambient", 0.0f, 0.1f, 0.06f);
-		materialShader.setVec3("material.diffuse", 0.0f, 0.50980392f, 0.50980392f);
-		materialShader.setVec3("material.specular", 0.50196078f, 0.50196078f, 0.50196078f);
-		materialShader.setFloat("material.shininess", 32.0f);
+		diffuseMapShader.setVec3("material.ambient", 0.0f, 0.1f, 0.06f);
+		diffuseMapShader.setVec3("material.specular", 0.50196078f, 0.50196078f, 0.50196078f);
+		diffuseMapShader.setFloat("material.shininess", 32.0f);
 
 		//模型矩阵
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(45, 45, 0));
-		materialShader.setMat4("model", model);
+		diffuseMapShader.setMat4("model", model);
 		//观察矩阵
 		glm::mat4 view = camera.GetViewMatrix();
-		materialShader.setMat4("view", view);
+		diffuseMapShader.setMat4("view", view);
 
 		//投影矩阵
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-		materialShader.setMat4("projection", projection);
+		diffuseMapShader.setMat4("projection", projection);
 
 		glBindVertexArray(cubeVAO);//绑定顶点数组
 		glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -144,6 +155,82 @@ int main()
 	return 0;
 }
 
+
+unsigned int loadTexture(char const* path)
+{
+	// 加载创建一个纹理对象
+	unsigned int textureID;
+	glGenTextures(1, &textureID);//生成纹理对象
+
+	//设置纹理环绕
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);//重复平铺
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);//重复平铺
+	//设置缩小时候的过滤方式
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//加载图像，创建纹理生成贴图
+	int width, height, nrChannels;
+	unsigned char* data = stbi_load(path, &width, &height, &nrChannels, 0);
+
+	if (data)
+	{
+		GLenum format;
+		if (nrChannels == 1)
+			format = GL_RED;
+		else if (nrChannels == 3)
+			format = GL_RGB;
+		else if (nrChannels == 4)
+			format = GL_RGBA;
+		glBindTexture(GL_TEXTURE_2D, textureID);// 绑定纹理对象
+		//图像数据上传到 GPU 并定义纹理的格式和数据
+		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+		//生成 Mipmap 纹理层级
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		std::cout << "图片加载失败" << std::endl;
+	}
+	stbi_image_free(data);//释放函数分配的图像内存
+	return textureID;
+}
+
+//unsigned int loadTexture(char const* path)
+//{
+//	unsigned int textureID;
+//	glGenTextures(1, &textureID);
+//
+//	int width, height, nrComponents;
+//	unsigned char* data = stbi_load(path, &width, &height, &nrComponents, 0);
+//	if (data)
+//	{
+//		GLenum format;
+//		if (nrComponents == 1)
+//			format = GL_RED;
+//		else if (nrComponents == 3)
+//			format = GL_RGB;
+//		else if (nrComponents == 4)
+//			format = GL_RGBA;
+//
+//		glBindTexture(GL_TEXTURE_2D, textureID);
+//		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+//		glGenerateMipmap(GL_TEXTURE_2D);
+//
+//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//
+//		stbi_image_free(data);
+//	}
+//	else
+//	{
+//		std::cout << "Texture failed to load at path: " << path << std::endl;
+//		stbi_image_free(data);
+//	}
+//
+//	return textureID;
+//}
 
 //键盘输入
 void processInput(GLFWwindow* window)

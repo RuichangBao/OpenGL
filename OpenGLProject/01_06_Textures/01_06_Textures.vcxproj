@@ -144,10 +144,6 @@
     <ClInclude Include="..\includes\StbImage\stb_image.h" />
     <ClInclude Include="Textures.h" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Shader\Fragment.shader" />
-    <None Include="Shader\Vertex.shader" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

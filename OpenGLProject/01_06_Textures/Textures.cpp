@@ -77,11 +77,10 @@ int main()
 	glEnableVertexAttribArray(2);
 
 
-	// load and create a texture 
-	// -------------------------
-	unsigned int texture;
-	glGenTextures(1, &texture);//生成纹理对象
-	glBindTexture(GL_TEXTURE_2D, texture); // 绑定纹理对象
+	// 加载创建一个纹理对象
+	unsigned int textureID;
+	glGenTextures(1, &textureID);//生成纹理对象
+	glBindTexture(GL_TEXTURE_2D, textureID); // 绑定纹理对象
 	//设置纹理环绕
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);//重复平铺
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);//重复平铺
@@ -117,7 +116,7 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
 
 		// bind Texture
-		glBindTexture(GL_TEXTURE_2D, texture);
+		glBindTexture(GL_TEXTURE_2D, textureID);
 
 		//渲染一个物体时要使用着色器程序
 		ourShader.use();
