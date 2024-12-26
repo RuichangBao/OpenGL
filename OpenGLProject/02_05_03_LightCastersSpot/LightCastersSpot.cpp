@@ -1,6 +1,6 @@
-//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/02%20Lighting/04%20Lighting%20maps.md
-//高光反射贴图
-#include "LightingMapsSpecular.h"
+//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/02%20Lighting/05%20Light%20casters.md
+//聚光灯
+#include "LightCastersSpot.h"
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -43,9 +43,8 @@ int main()
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	// 构建并编译shader程序
-	//Shader specularMapShader("shader/SpecularMapVertex.shader", "shader/SpecularMapFragment.shader");
-	Shader specularMapShader("shader/SpecularMapVertex.shader", "shader/SpecularMapFragment2.shader");
-	Shader cubeShader("shader/Vertex.shader", "shader/Fragment.shader");
+	Shader spotLightShader("shader/SpotLightVertex.shader", "shader/SpotLightFragment.shader");
+	//Shader cubeShader("shader/Vertex.shader", "shader/Fragment.shader");
 
 	unsigned int VBO, cubeVAO;
 	glGenVertexArrays(1, &cubeVAO);//生成顶点数组对象。VAO 在 OpenGL 中用来存储顶点属性的配置，以便在后续绘制时快速访问这些属性。
@@ -68,20 +67,29 @@ int main()
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);	//启用顶点属性
 
-	//光照的正方体
-	unsigned int lightCubeVAO;
-	glGenVertexArrays(1, &lightCubeVAO);
-	glBindVertexArray(lightCubeVAO);
+	////光照的正方体
+	//unsigned int lightCubeVAO;
+	//glGenVertexArrays(1, &lightCubeVAO);
+	//glBindVertexArray(lightCubeVAO);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	//glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);	//启用顶点属性
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	//glEnableVertexAttribArray(0);	//启用顶点属性
 	unsigned int diffuseMap = loadTexture(FileSystem::getPath("Resources/Textures/container2.png").c_str());
-	unsigned int specularMap = loadTexture(FileSystem::getPath("Resources/Textures/container2_specular.png").c_str());
-	specularMapShader.use();
-	specularMapShader.setInt("material.diffuse", 0);
-	specularMapShader.setInt("material.specular", 1);
+	unsigned int specularMap = loadTexture(FileSystem::getPath("resources/textures/container2_specular.png").c_str());
+	spotLightShader.use();
+	spotLightShader.setInt("material.diffuse", 0);
+	spotLightShader.setInt("material.specular", 1);
+	//设置光照衰减
+	spotLightShader.setFloat("light.constant", 1.0f);
+	spotLightShader.setFloat("light.linear", 0.09f);
+	spotLightShader.setFloat("light.quadratic", 0.032f);
+	spotLightShader.setVec3("light.position", camera.Position);
+	//聚光灯
+	spotLightShader.setVec3("light.direction", camera.Front);
+	spotLightShader.setFloat("light.cutOff", glm::cos(glm::radians(12.5f)));
+	spotLightShader.setFloat("material.shininess", 32.0f);
 	//循环渲染
 	while (!glfwWindowShouldClose(window))
 	{
@@ -97,60 +105,65 @@ int main()
 		//glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
 
-		specularMapShader.use();
-		specularMapShader.setVec3("light.position", lightPos);
-		specularMapShader.setVec3("viewPos", camera.Position);
+		spotLightShader.use();
+		spotLightShader.setVec3("viewPos", camera.Position);
 		// 光照强度设置
-		specularMapShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
-		specularMapShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
-		specularMapShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+		spotLightShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+		spotLightShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+		spotLightShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 		// material properties
-		specularMapShader.setFloat("material.shininess", 32.0f);
 
+		spotLightShader.setVec3("light.direction", camera.Front);//光照方向，由光源指向物体
 		//模型矩阵
 		glm::mat4 model = glm::mat4(1.0f);
-		//model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(45, 45, 0));
-		specularMapShader.setMat4("model", model);
 		//观察矩阵
 		glm::mat4 view = camera.GetViewMatrix();
-		specularMapShader.setMat4("view", view);
+		spotLightShader.setMat4("view", view);
 
 		//投影矩阵
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-		specularMapShader.setMat4("projection", projection);
+		spotLightShader.setMat4("projection", projection);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, diffuseMap);
 		// bind specular map
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, specularMap);
 		glBindVertexArray(cubeVAO);//绑定顶点数组
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		for (unsigned int i = 0; i < 10; i++)
+		{
+			model = glm::mat4(1.0f);
+			model = glm::translate(model, cubePositions[i]);
+			float angle = 20.0f * i;
+			model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+			spotLightShader.setMat4("model", model);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+		}
+		//cubeShader.use();
+		//cubeShader.setMat4("projection", projection);
+		//cubeShader.setMat4("view", view);
+		//model = glm::mat4(1.0f);
+		//model = glm::translate(model, lightPos);
+		//model = glm::scale(model, glm::vec3(0.2f)); // 灯光
+		//cubeShader.setMat4("model", model);
 
-		//光源
-		cubeShader.use();
-		cubeShader.setMat4("projection", projection);
-		cubeShader.setMat4("view", view);
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, lightPos);
-		model = glm::scale(model, glm::vec3(0.002f)); // 灯光
-		cubeShader.setMat4("model", model);
+		//glBindVertexArray(lightCubeVAO);
+		//glDrawArrays(GL_TRIANGLES, 0, 36);
 
-		glBindVertexArray(lightCubeVAO);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-
-		glfwSwapBuffers(window);//交换颜色缓冲区
-		glfwPollEvents();		//检查触发事件，并调用回调函数
+		// glfw: 交换缓冲区和轮询IO事件（按键按/释放，鼠标移动等）
+		glfwSwapBuffers(window);
+		glfwPollEvents();
 	}
+
 	//终止，清除之前分配的所有glfw资源。
 	glDeleteVertexArrays(1, &cubeVAO);
-	glDeleteVertexArrays(1, &lightCubeVAO);
+	//glDeleteVertexArrays(1, &lightCubeVAO);
 	glDeleteBuffers(1, &VBO);
 
 	//终止，清除之前分配的所有glfw资源。
 	glfwTerminate();
-
 	return 0;
 }
+
 
 
 unsigned int loadTexture(char const* path)

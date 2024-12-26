@@ -66,11 +66,6 @@ int main()
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);	//启用顶点属性
 
-	//光照的正方体
-	unsigned int lightCubeVAO;
-	glGenVertexArrays(1, &lightCubeVAO);
-	glBindVertexArray(lightCubeVAO);
-
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
@@ -139,7 +134,6 @@ int main()
 
 	//终止，清除之前分配的所有glfw资源。
 	glDeleteVertexArrays(1, &cubeVAO);
-	glDeleteVertexArrays(1, &lightCubeVAO);
 	glDeleteBuffers(1, &VBO);
 
 	//终止，清除之前分配的所有glfw资源。

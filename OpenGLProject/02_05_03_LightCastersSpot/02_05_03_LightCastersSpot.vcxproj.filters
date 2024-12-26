@@ -4,15 +4,15 @@
     <ClCompile Include="..\includes\glad\glad.c">
       <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\includes\StbImage\stb_image.cpp">
+    <ClCompile Include="LightCastersSpot.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="LightCastersPoint.cpp">
+    <ClCompile Include="..\includes\StbImage\stb_image.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LightCastersPoint.h">
+    <ClInclude Include="LightCastersSpot.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\includes\StbImage\stb_image.h">
@@ -21,10 +21,10 @@
   </ItemGroup>
   <ItemGroup>
     <Filter Include="头文件">
-      <UniqueIdentifier>{08b9f248-1d2e-4540-a202-5adb1f16dca0}</UniqueIdentifier>
+      <UniqueIdentifier>{ddc45da9-28d8-4710-8fc9-29bef967406f}</UniqueIdentifier>
     </Filter>
     <Filter Include="源文件">
-      <UniqueIdentifier>{f885562a-d145-42dc-95a2-041527ac01a3}</UniqueIdentifier>
+      <UniqueIdentifier>{c5f95d55-12d2-4093-8b4d-d57d5115a915}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

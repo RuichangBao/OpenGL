@@ -44,6 +44,7 @@ int main()
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	// 构建并编译shader程序
 	Shader pointLightShader("shader/PointLightVertex.shader", "shader/PointLightFragment.shader");
+	Shader cubeShader("shader/Vertex.shader", "shader/Fragment.shader");
 
 	unsigned int VBO, cubeVAO;
 	glGenVertexArrays(1, &cubeVAO);//生成顶点数组对象。VAO 在 OpenGL 中用来存储顶点属性的配置，以便在后续绘制时快速访问这些属性。
@@ -80,6 +81,10 @@ int main()
 	pointLightShader.use();
 	pointLightShader.setInt("material.diffuse", 0);
 	pointLightShader.setInt("material.specular", 1);
+	//设置光照衰减
+	pointLightShader.setFloat("light.constant", 1.0f);
+	pointLightShader.setFloat("light.linear", 0.09f);
+	pointLightShader.setFloat("light.quadratic", 0.032f);
 	//循环渲染
 	while (!glfwWindowShouldClose(window))
 	{
@@ -102,6 +107,7 @@ int main()
 		pointLightShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
 		pointLightShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
 		pointLightShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+		pointLightShader.setVec3("light.position", lightPos);
 		// material properties
 		pointLightShader.setFloat("material.shininess", 32.0f);
 
@@ -131,6 +137,16 @@ int main()
 			pointLightShader.setMat4("model", model);
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
+		cubeShader.use();
+		cubeShader.setMat4("projection", projection);
+		cubeShader.setMat4("view", view);
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, lightPos);
+		model = glm::scale(model, glm::vec3(0.2f)); // 灯光
+		cubeShader.setMat4("model", model);
+
+		glBindVertexArray(lightCubeVAO);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		// glfw: 交换缓冲区和轮询IO事件（按键按/释放，鼠标移动等）
 		glfwSwapBuffers(window);
