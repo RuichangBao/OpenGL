@@ -30,7 +30,7 @@ void main()
     vec3 ambient = light.ambient * vec3(texture(material.diffuse, TexCoords));
     //漫反射
     vec3 norm = normalize(Normal);
-    vec3 lightDir = normalize(light.position - worldPos);
+    vec3 lightDir = normalize(light.position - worldPos);//光源方向，由物体指向光源
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, TexCoords));//通过漫反射贴图设置颜色
    
