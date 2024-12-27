@@ -1,14 +1,14 @@
-//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/02%20Lighting/05%20Light%20casters.md
-//多个灯光
+//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/03%20Model%20Loading/03%20Model.md
+//模型加载
 #include "ModelLoading.h"
 #include <iostream>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include <learnopengl/model.h>
 #include <learnopengl/filesystem.h>
 #include <learnopengl/shader_m.h>
-#include <stbimage/stb_image.h>
+
 
 using namespace std;
 
@@ -44,30 +44,7 @@ int main()
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	// 构建并编译shader程序
 	Shader ourShader("shader/Vertex.shader", "shader/Fragment.shader");
-
-	unsigned int VBO, cubeVAO;
-	glGenVertexArrays(1, &cubeVAO);//生成顶点数组对象。VAO 在 OpenGL 中用来存储顶点属性的配置，以便在后续绘制时快速访问这些属性。
-	glGenBuffers(1, &VBO);		//生成顶点缓存对象VBO(Vertex Buffer Object)对象
-
-	// 2. 把顶点数组复制到缓冲中供OpenGL使用
-	//绑定 VBO 并传输顶点数据
-	//光照模型正方体
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);//GL_ARRAY_BUFFER:顶点缓冲对象的绑定目标
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	glBindVertexArray(cubeVAO);//绑定顶点数组对象
-	// 位置属性
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);	//启用顶点属性
-	// 法线属性
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);	//启用顶点属性
-	// 纹理坐标
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-	glEnableVertexAttribArray(2);	//启用顶点属性
-
-
-
+	Model ourModel(FileSystem::getPath("resources/objects/backpack/backpack.obj"));
 
 	//循环渲染
 	while (!glfwWindowShouldClose(window))
@@ -88,7 +65,8 @@ int main()
 
 		//模型矩阵
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0,0,-3));
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
 		ourShader.setMat4("model", model);
 
 		//观察矩阵
@@ -98,19 +76,15 @@ int main()
 		//投影矩阵
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		ourShader.setMat4("projection", projection);
-		glBindVertexArray(cubeVAO);//绑定顶点数组
+		ourModel.Draw(ourShader);
 
-
-		glDrawArrays(GL_TRIANGLES, 0, 36);
 		// glfw: 交换缓冲区和轮询IO事件（按键按/释放，鼠标移动等）
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
 	//终止，清除之前分配的所有glfw资源。
-	glDeleteVertexArrays(1, &cubeVAO);
-	//glDeleteVertexArrays(1, &lightCubeVAO);
-	glDeleteBuffers(1, &VBO);
+
 
 	//终止，清除之前分配的所有glfw资源。
 	glfwTerminate();
