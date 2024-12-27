@@ -293,9 +293,9 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	glViewport(0, 0, width, height);//确保视口匹配新的窗口尺寸；
 }
 
+
+
 //自定义日志输出
-
-
 void Print(glm::mat4 mat)
 {
 	Print(mat[0]);
