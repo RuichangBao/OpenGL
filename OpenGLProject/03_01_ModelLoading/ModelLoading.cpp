@@ -43,7 +43,7 @@ int main()
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	// 构建并编译shader程序
-	Shader ourShader("shader/MultipleLightsVertex.shader", "shader/MultipleLightsFragment.shader");
+	Shader ourShader("shader/Vertex.shader", "shader/Fragment.shader");
 
 	unsigned int VBO, cubeVAO;
 	glGenVertexArrays(1, &cubeVAO);//生成顶点数组对象。VAO 在 OpenGL 中用来存储顶点属性的配置，以便在后续绘制时快速访问这些属性。
@@ -67,9 +67,6 @@ int main()
 	glEnableVertexAttribArray(2);	//启用顶点属性
 
 
-	unsigned int diffuseMap = loadTexture(FileSystem::getPath("Resources/Textures/container2.png").c_str());
-	unsigned int specularMap = loadTexture(FileSystem::getPath("resources/textures/container2_specular.png").c_str());
-
 
 
 	//循环渲染
@@ -88,11 +85,12 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
 
 		ourShader.use();
-		ourShader.setVec3("viewPos", camera.Position);
 
 		//模型矩阵
 		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0,0,-3));
 		ourShader.setMat4("model", model);
+
 		//观察矩阵
 		glm::mat4 view = camera.GetViewMatrix();
 		ourShader.setMat4("view", view);
@@ -100,11 +98,6 @@ int main()
 		//投影矩阵
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		ourShader.setMat4("projection", projection);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, diffuseMap);
-		// bind specular map
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, specularMap);
 		glBindVertexArray(cubeVAO);//绑定顶点数组
 
 
@@ -124,46 +117,6 @@ int main()
 	return 0;
 }
 
-
-
-unsigned int loadTexture(char const* path)
-{
-	// 加载创建一个纹理对象
-	unsigned int textureID;
-	glGenTextures(1, &textureID);//生成纹理对象
-
-	//设置纹理环绕
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);//重复平铺
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);//重复平铺
-	//设置缩小时候的过滤方式
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	//加载图像，创建纹理生成贴图
-	int width, height, nrChannels;
-	unsigned char* data = stbi_load(path, &width, &height, &nrChannels, 0);
-
-	if (data)
-	{
-		GLenum format;
-		if (nrChannels == 1)
-			format = GL_RED;
-		else if (nrChannels == 3)
-			format = GL_RGB;
-		else if (nrChannels == 4)
-			format = GL_RGBA;
-		glBindTexture(GL_TEXTURE_2D, textureID);// 绑定纹理对象
-		//图像数据上传到 GPU 并定义纹理的格式和数据
-		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
-		//生成 Mipmap 纹理层级
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
-	else
-	{
-		std::cout << "图片加载失败" << std::endl;
-	}
-	stbi_image_free(data);//释放函数分配的图像内存
-	return textureID;
-}
 
 //键盘输入
 void processInput(GLFWwindow* window)
