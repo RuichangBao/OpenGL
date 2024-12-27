@@ -1,4 +1,4 @@
-/*聚光灯片段着色器**/
+/*多个灯光片段着色器**/
 #version 330 core
 //材质颜色
 struct Material {
@@ -12,6 +12,7 @@ struct Light {
     vec3 direction; //灯光方向 由灯光指向物体
     float cutOff;   //内圆锥光圈一半的正弦值
     float outerCutOff;//外圆锥光圈一半的正弦值
+    //光照强度
     vec3 ambient;//环境光强度
     vec3 diffuse;//漫反射强度
     vec3 specular;//高光强度
@@ -53,18 +54,15 @@ void main()
     float theta = dot(lightDir, normalize(-light.direction));//内圆锥
     float epsilon = light.cutOff - light.outerCutOff;   //内圆锥
     float intensity = clamp((theta - light.outerCutOff) / epsilon, 0.0, 1.0);//渐变插值
-    // intensity = 1;
     diffuse *= intensity;
     specular *= intensity;
 
     //光照衰减
     float distance  = length(light.position - worldPos);//距离
-    float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance)); //衰减值
-    // attenuation = 1;
+    float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * distance * distance); //衰减值
     ambient *= attenuation;
     diffuse *= attenuation;
     specular *= attenuation;
-
  
     FragColor = vec4(ambient + diffuse + specular, 1.0);
   }

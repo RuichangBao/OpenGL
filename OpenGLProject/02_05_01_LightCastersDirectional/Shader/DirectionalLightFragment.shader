@@ -11,7 +11,7 @@ struct Light {
     vec3 direction;//光源的方向向量，由光源指向物体
     vec3 ambient;//环境光强度
     vec3 diffuse;//漫反射强度
-    vec3 specular;
+    vec3 specular;//高光反射强度
 };
 
 in vec3 worldPos;//世界坐标
