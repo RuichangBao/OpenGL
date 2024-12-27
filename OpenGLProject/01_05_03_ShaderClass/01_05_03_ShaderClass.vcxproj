@@ -21,10 +21,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{473313b1-7497-480f-ad7e-8f40538c1b48}</ProjectGuid>
-    <RootNamespace>My01ShaderUniform</RootNamespace>
+    <ProjectGuid>{01717B6D-D0CB-4716-A2C6-F3418FB1241E}</ProjectGuid>
+    <RootNamespace>My01ShaderClass</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>01_05_ShaderUniform</ProjectName>
+    <ProjectName>01_05_03_ShaderClass</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -138,10 +138,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\includes\glad\glad.c" />
-    <ClCompile Include="ShaderUniform.cpp" />
+    <ClCompile Include="ShaderClass.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ShaderUniform.h" />
+    <ClInclude Include="..\includes\LearnOpenGL\Shader_s.h" />
+    <ClInclude Include="ShaderClass.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

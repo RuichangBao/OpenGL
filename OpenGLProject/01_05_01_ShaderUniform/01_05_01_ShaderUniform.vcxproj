@@ -21,10 +21,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{81FAE511-768A-4F34-A3CD-2C5F7F70F4F9}</ProjectGuid>
+    <ProjectGuid>{473313b1-7497-480f-ad7e-8f40538c1b48}</ProjectGuid>
     <RootNamespace>My01ShaderUniform</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>01_05_ShaderInterpolation</ProjectName>
+    <ProjectName>01_05_01_ShaderUniform</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -138,13 +138,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\includes\glad\glad.c" />
-    <ClCompile Include="ShaderInterpolation.cpp" />
+    <ClCompile Include="ShaderUniform.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ShaderInterpolation.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ReadMe.md" />
+    <ClInclude Include="ShaderUniform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
