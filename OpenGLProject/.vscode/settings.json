@@ -6,7 +6,7 @@
         "**/*.lib": true,
         "**/*.h": true,
         "**/*.cpp": true,
-
+        "**/*.dll": true,
         
         "**/Debug":true,
         "**/x64":true,
