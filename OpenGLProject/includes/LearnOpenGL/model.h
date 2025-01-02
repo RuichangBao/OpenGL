@@ -32,7 +32,7 @@ public:
     string directory;
     bool gammaCorrection;
 
-    // constructor, expects a filepath to a 3D model.
+    // 构造函数，需要一个3D模型的文件路径。
     Model(string const &path, bool gamma = false) : gammaCorrection(gamma)
     {
         loadModel(path);
