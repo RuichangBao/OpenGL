@@ -1,6 +1,7 @@
 #include "Main.h"
 #include "MyClass.h"
 #include <iostream>
+#include<vector>
 
 using namespace std;
 
@@ -38,11 +39,17 @@ int main()
 	/*float nums[10] = {1,2,3,4,5,6,7,8,9,10};
 	float* f = nums;
 	cout << f << endl;*/
-	MyStruct myStruct;
-	myStruct.num1 = 100;
-	myStruct.num2 = 200;
-	myStruct.ToString();
-	TestFunc(myStruct);
+	vector<int> vec;
+	vec.push_back(1);
+	vec.push_back(2);
+	vec.push_back(2);
+	vec.push_back(3);
+	vector<int>::const_iterator it = vec.begin();
+	while (it != vec.end())
+	{
+		cout << *it << " ";
+		++it;
+	}
 	return 0;
 }
 
