@@ -1,4 +1,4 @@
-//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/02%20Lighting/05%20Light%20casters.md
+//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/03%20Model%20Loading/03%20Model.md
 //¶à¸öµÆ¹â
 #include "MultipleLights.h"
 #include <iostream>
