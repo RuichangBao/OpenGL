@@ -39,6 +39,9 @@ int main()
 	/*float nums[10] = {1,2,3,4,5,6,7,8,9,10};
 	float* f = nums;
 	cout << f << endl;*/
+
+
+
 	vector<int> vec;
 	vec.push_back(1);
 	vec.push_back(2);
