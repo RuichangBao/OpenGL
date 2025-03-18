@@ -1,6 +1,6 @@
 //https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/04%20Advanced%20OpenGL/01%20Depth%20testing.md
 //Í¸Ã÷¶È²âÊÔ
-#include "DepthTesting.h"
+#include "DepthTestingView.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stbimage/stb_image.h>
