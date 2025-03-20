@@ -85,6 +85,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_01_01_DepthTestingView",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_01_02_StencilTesting", "04_01_02_StencilTesting\04_01_02_StencilTesting.vcxproj", "{62F6E2ED-8E37-4ACE-8A3B-FC0BFC42D0A0}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_01_02_StencilTestingTest", "04_01_02_StencilTestingTest\04_01_02_StencilTestingTest.vcxproj", "{3D7C72CD-3C52-4E50-AEC2-513EF8C23D88}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_01_03_BlendingDiscard", "04_01_03_BlendingDiscard\04_01_03_BlendingDiscard.vcxproj", "{9711C38C-DEDC-4A17-8FDB-46D80FEF603E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -421,6 +425,22 @@ Global
 		{62F6E2ED-8E37-4ACE-8A3B-FC0BFC42D0A0}.Release|x64.Build.0 = Release|x64
 		{62F6E2ED-8E37-4ACE-8A3B-FC0BFC42D0A0}.Release|x86.ActiveCfg = Release|Win32
 		{62F6E2ED-8E37-4ACE-8A3B-FC0BFC42D0A0}.Release|x86.Build.0 = Release|Win32
+		{3D7C72CD-3C52-4E50-AEC2-513EF8C23D88}.Debug|x64.ActiveCfg = Debug|x64
+		{3D7C72CD-3C52-4E50-AEC2-513EF8C23D88}.Debug|x64.Build.0 = Debug|x64
+		{3D7C72CD-3C52-4E50-AEC2-513EF8C23D88}.Debug|x86.ActiveCfg = Debug|Win32
+		{3D7C72CD-3C52-4E50-AEC2-513EF8C23D88}.Debug|x86.Build.0 = Debug|Win32
+		{3D7C72CD-3C52-4E50-AEC2-513EF8C23D88}.Release|x64.ActiveCfg = Release|x64
+		{3D7C72CD-3C52-4E50-AEC2-513EF8C23D88}.Release|x64.Build.0 = Release|x64
+		{3D7C72CD-3C52-4E50-AEC2-513EF8C23D88}.Release|x86.ActiveCfg = Release|Win32
+		{3D7C72CD-3C52-4E50-AEC2-513EF8C23D88}.Release|x86.Build.0 = Release|Win32
+		{9711C38C-DEDC-4A17-8FDB-46D80FEF603E}.Debug|x64.ActiveCfg = Debug|x64
+		{9711C38C-DEDC-4A17-8FDB-46D80FEF603E}.Debug|x64.Build.0 = Debug|x64
+		{9711C38C-DEDC-4A17-8FDB-46D80FEF603E}.Debug|x86.ActiveCfg = Debug|Win32
+		{9711C38C-DEDC-4A17-8FDB-46D80FEF603E}.Debug|x86.Build.0 = Debug|Win32
+		{9711C38C-DEDC-4A17-8FDB-46D80FEF603E}.Release|x64.ActiveCfg = Release|x64
+		{9711C38C-DEDC-4A17-8FDB-46D80FEF603E}.Release|x64.Build.0 = Release|x64
+		{9711C38C-DEDC-4A17-8FDB-46D80FEF603E}.Release|x86.ActiveCfg = Release|Win32
+		{9711C38C-DEDC-4A17-8FDB-46D80FEF603E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

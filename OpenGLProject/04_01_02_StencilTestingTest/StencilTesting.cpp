@@ -1,4 +1,4 @@
-//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/04%20Advanced%20OpenGL/02%20Stencil%20testing.md
+//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/04%20Advanced%20OpenGL/01%20Depth%20testing.md
 //模板测试
 #include "StencilTesting.h"
 #include <glad/glad.h>
@@ -28,7 +28,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);//允许修改窗口大小
 #endif
 	// glfw 创建窗口对象
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "StencilTesting", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "模板测试", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "创建GLFW窗口失败" << std::endl;
@@ -47,29 +47,38 @@ int main()
 		cout << "初始化GLAD(OpenGL函数指针错误)失败" << endl;
 		return -1;
 	}
+
+	//当前模板缓冲中的值是0
 	glEnable(GL_STENCIL_TEST);//开启模板测试
-	//GL_NOTEQUAL:只有当前片段的模板值 不等于 模板缓冲区中对应位置的模板值时，该片段才会通过模板测试
-	glStencilFunc(GL_NOTEQUAL, 1, 0xFF);//所有的片段都应该更新模板缓冲 
-	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-	//模板测试未通过，什么也不做
-	//模板测试通过，什么也不做
-	//模板测试和深度测试同时通过，模板值替换为1
+	glfwWindowHint(GLFW_STENCIL_BITS, 8);
+	//GL_NEVER：永远不通过模板测试。参考值和掩码没用
+	//GL_ALWAYS：总是通过模板测试。参考值和掩码没用
+	//GL_LESS：当片段的模板值 < 参考值时通过。
+	//GL_LEQUAL：当片段的模板值 <= 参考值时通过。
+	//GL_EQUAL：当片段的模板值 == 参考值时通过。
+	//GL_NOTEQUAL：当片段的模板值 != 参考值时通过
+	//GL_GEQUAL：当片段的模板值 >= 参考值时通过。
+	//GL_GREATER：当片段的模板值 > 参考值时通过。
+	//glStencilFunc(GL_ALWAYS, 0, 0x00);//所有的片段都应该更新模板缓冲 
+	//glStencilFunc(GL_GEQUAL, 0, 0xFF);//
+	glStencilFunc(GL_GEQUAL, 0, 0xFF);//
+
+	//glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	glDepthFunc(GL_ALWAYS); //总是通过深度测试
-	glDepthFunc(GL_LESS);	//小于深度缓冲区中对应位置的深度值时才绘制
-
+	//glDepthFunc(GL_LESS);	//小于深度缓冲区中对应位置的深度值时才绘制
+	glStencilMask(0xFF);
 	// 构建并编译shader程序
 	Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
-	Shader shaderSingleColor("shader/Vertex.shader", "shader/StencilSingleFragment.shader");
 	// cube VAO
-	unsigned int cubeVAO, cubeVBO;
-	glGenVertexArrays(1, &cubeVAO);//生成顶点数组对象。VAO 在 OpenGL 中用来存储顶点属性的配置，以便在后续绘制时快速访问这些属性。
-	glGenBuffers(1, &cubeVBO);		//生成顶点缓存对象VBO(Vertex Buffer Object)对象
-	glBindVertexArray(cubeVAO);//绑定顶点数组对象
+	unsigned int VAO, VBO;
+	glGenVertexArrays(1, &VAO);//生成顶点数组对象。VAO 在 OpenGL 中用来存储顶点属性的配置，以便在后续绘制时快速访问这些属性。
+	glGenBuffers(1, &VBO);		//生成顶点缓存对象VBO(Vertex Buffer Object)对象
+	glBindVertexArray(VAO);//绑定顶点数组对象
 
 	// 2. 把顶点数组复制到缓冲中供OpenGL使用
 	//绑定 VBO 并传输顶点数据
-	glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);//GL_ARRAY_BUFFER:顶点缓冲对象的绑定目标
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);//GL_ARRAY_BUFFER:顶点缓冲对象的绑定目标
 	glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), cubeVertices, GL_STATIC_DRAW);
 
 	// 位置属性
@@ -81,19 +90,6 @@ int main()
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	glBindVertexArray(0);
 
-
-	// plane VAO
-	unsigned int planeVAO, planeVBO;
-	glGenVertexArrays(1, &planeVAO);
-	glGenBuffers(1, &planeVBO);
-	glBindVertexArray(planeVAO);
-	glBindBuffer(GL_ARRAY_BUFFER, planeVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(planeVertices), &planeVertices, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-	glBindVertexArray(0);
 
 	// 加载贴图
 	unsigned int cubeTexture = loadTexture(FileSystem::getPath("resources/textures/marble.jpg").c_str());
@@ -115,65 +111,28 @@ int main()
 
 		// 渲染
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);//清空屏幕所用的颜色
-		//glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
-		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);//GL_STENCIL_BUFFER_BIT 清除模板缓冲
 
-		shaderSingleColor.use();
+		shader.use();
 		glm::mat4 model = glm::mat4(1.0f);
 		glm::mat4 view = camera.GetViewMatrix();
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-		shaderSingleColor.setMat4("view", view);
-		shaderSingleColor.setMat4("projection", projection);
-		//绘制平面
-		shader.use();
 		shader.setMat4("view", view);
 		shader.setMat4("projection", projection);
-		
-		glStencilMask(0x00);//设置模板缓冲不可写
-		glBindVertexArray(planeVAO);
-		glBindTexture(GL_TEXTURE_2D, floorTexture);
-		shader.setMat4("model", glm::mat4(1.0f));
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-		glBindVertexArray(0);
-		//1.渲染通过，正常绘制对象，写入模板缓冲区
-		glStencilFunc(GL_ALWAYS, 1, 0xFF);//总是通过模板测试
-		glStencilMask(0xFF);//设置模板缓冲可写
-		//绘制正方体
-		glBindVertexArray(cubeVAO);
+
+		// cubes
+		glBindVertexArray(VAO);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, cubeTexture);
-		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
+		model = glm::translate(model, glm::vec3(-0.0f, 0.0f, -0.0f));//平移
+		model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 1.0f));//旋转
 		shader.setMat4("model", model);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
-		shader.setMat4("model", model);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		//第二。渲染通道：现在绘制物体的稍微缩放版本，这次禁用模板书写。
-		//因为模板缓冲区现在被几个1填充。缓冲区中为1的部分没有绘制，因此只绘制对象的大小差异，使其看起来像边界。
-		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);//模板值不等于1的时候 通过模板测试(将正方体的模板值设置为1)
-		glStencilMask(0x00);//关闭模板写入
-		glDisable(GL_DEPTH_TEST);//关闭深度测试
-		//绘制正方体描边
-		shaderSingleColor.use();
-		float scale = 1.1f; 
-		glBindVertexArray(cubeVAO);
-		glBindTexture(GL_TEXTURE_2D, cubeTexture);
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
-		model = glm::scale(model, glm::vec3(scale, scale, scale));
-		shaderSingleColor.setMat4("model", model);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(scale, scale, scale));
-		shaderSingleColor.setMat4("model", model);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		glBindVertexArray(0);
-		glStencilMask(0xFF);//模板写入开启
-		glStencilFunc(GL_ALWAYS, 0, 0xFF);
-		glEnable(GL_DEPTH_TEST);
+
+		//glBindVertexArray(0);
+		//glStencilMask(0xFF);
+		//glStencilFunc(GL_ALWAYS, 0, 0xFF);
+		//glEnable(GL_DEPTH_TEST);
 
 		// glfw: 交换缓冲区和轮询IO事件（按键按/释放，鼠标移动等）
 		glfwSwapBuffers(window);
@@ -181,10 +140,8 @@ int main()
 	}
 
 	//终止，清除之前分配的所有glfw资源。
-	glDeleteVertexArrays(1, &cubeVAO);
-	glDeleteVertexArrays(1, &planeVAO);
-	glDeleteBuffers(1, &cubeVBO);
-	glDeleteBuffers(1, &planeVBO);
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
 
 	//终止，清除之前分配的所有glfw资源。
 	glfwTerminate();

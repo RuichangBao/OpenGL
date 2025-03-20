@@ -1,6 +1,6 @@
-//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/04%20Advanced%20OpenGL/02%20Stencil%20testing.md
-//模板测试
-#include "StencilTesting.h"
+//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/04%20Advanced%20OpenGL/03%20Blending.md
+//透明度混合
+#include "BlendingDiscard.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stbimage/stb_image.h>
@@ -28,7 +28,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);//允许修改窗口大小
 #endif
 	// glfw 创建窗口对象
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "StencilTesting", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LightingMapsDiffuse", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "创建GLFW窗口失败" << std::endl;
@@ -47,20 +47,11 @@ int main()
 		cout << "初始化GLAD(OpenGL函数指针错误)失败" << endl;
 		return -1;
 	}
-	glEnable(GL_STENCIL_TEST);//开启模板测试
-	//GL_NOTEQUAL:只有当前片段的模板值 不等于 模板缓冲区中对应位置的模板值时，该片段才会通过模板测试
-	glStencilFunc(GL_NOTEQUAL, 1, 0xFF);//所有的片段都应该更新模板缓冲 
-	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-	//模板测试未通过，什么也不做
-	//模板测试通过，什么也不做
-	//模板测试和深度测试同时通过，模板值替换为1
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
-	glDepthFunc(GL_ALWAYS); //总是通过深度测试
-	glDepthFunc(GL_LESS);	//小于深度缓冲区中对应位置的深度值时才绘制
-
+	//glDepthFunc(GL_ALWAYS); //总是通过深度测试
 	// 构建并编译shader程序
 	Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
-	Shader shaderSingleColor("shader/Vertex.shader", "shader/StencilSingleFragment.shader");
+
 	// cube VAO
 	unsigned int cubeVAO, cubeVBO;
 	glGenVertexArrays(1, &cubeVAO);//生成顶点数组对象。VAO 在 OpenGL 中用来存储顶点属性的配置，以便在后续绘制时快速访问这些属性。
@@ -116,30 +107,15 @@ int main()
 		// 渲染
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);//清空屏幕所用的颜色
 		//glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
-		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);//GL_STENCIL_BUFFER_BIT 清除模板缓冲
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
 
-		shaderSingleColor.use();
+		shader.use();
 		glm::mat4 model = glm::mat4(1.0f);
 		glm::mat4 view = camera.GetViewMatrix();
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-		shaderSingleColor.setMat4("view", view);
-		shaderSingleColor.setMat4("projection", projection);
-		//绘制平面
-		shader.use();
 		shader.setMat4("view", view);
 		shader.setMat4("projection", projection);
-		
-		glStencilMask(0x00);//设置模板缓冲不可写
-		glBindVertexArray(planeVAO);
-		glBindTexture(GL_TEXTURE_2D, floorTexture);
-		shader.setMat4("model", glm::mat4(1.0f));
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-		glBindVertexArray(0);
-		//1.渲染通过，正常绘制对象，写入模板缓冲区
-		glStencilFunc(GL_ALWAYS, 1, 0xFF);//总是通过模板测试
-		glStencilMask(0xFF);//设置模板缓冲可写
-		//绘制正方体
+		// cubes
 		glBindVertexArray(cubeVAO);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, cubeTexture);
@@ -150,30 +126,12 @@ int main()
 		model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
 		shader.setMat4("model", model);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-		//第二。渲染通道：现在绘制物体的稍微缩放版本，这次禁用模板书写。
-		//因为模板缓冲区现在被几个1填充。缓冲区中为1的部分没有绘制，因此只绘制对象的大小差异，使其看起来像边界。
-		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);//模板值不等于1的时候 通过模板测试(将正方体的模板值设置为1)
-		glStencilMask(0x00);//关闭模板写入
-		glDisable(GL_DEPTH_TEST);//关闭深度测试
-		//绘制正方体描边
-		shaderSingleColor.use();
-		float scale = 1.1f; 
-		glBindVertexArray(cubeVAO);
-		glBindTexture(GL_TEXTURE_2D, cubeTexture);
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
-		model = glm::scale(model, glm::vec3(scale, scale, scale));
-		shaderSingleColor.setMat4("model", model);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(scale, scale, scale));
-		shaderSingleColor.setMat4("model", model);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		// floor
+		glBindVertexArray(planeVAO);
+		glBindTexture(GL_TEXTURE_2D, floorTexture);
+		shader.setMat4("model", glm::mat4(1.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindVertexArray(0);
-		glStencilMask(0xFF);//模板写入开启
-		glStencilFunc(GL_ALWAYS, 0, 0xFF);
-		glEnable(GL_DEPTH_TEST);
 
 		// glfw: 交换缓冲区和轮询IO事件（按键按/释放，鼠标移动等）
 		glfwSwapBuffers(window);
