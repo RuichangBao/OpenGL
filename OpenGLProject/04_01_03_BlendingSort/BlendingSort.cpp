@@ -49,6 +49,8 @@ int main()
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	//glDepthFunc(GL_ALWAYS); //总是通过深度测试
+	glEnable(GL_BLEND);	//开启透明度混合
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	// 构建并编译shader程序
 	Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
 
@@ -103,9 +105,9 @@ int main()
 	// 加载贴图
 	unsigned int cubeTexture = loadTexture(FileSystem::getPath("resources/textures/marble.jpg").c_str());
 	unsigned int floorTexture = loadTexture(FileSystem::getPath("resources/textures/metal.png").c_str());
-	unsigned int grassTexture = loadTexture(FileSystem::getPath("resources/textures/grass.png").c_str());//草的贴图
+	unsigned int transparentTexture = loadTexture(FileSystem::getPath("resources/textures/window.png").c_str());//草的贴图
 
-	vector<glm::vec3> vegetation = {
+	vector<glm::vec3> windows = {
 		glm::vec3(-1.5f, 0.0f, -0.48f),
 		glm::vec3(1.5f, 0.0f, 0.51f),
 		glm::vec3(0.0f, 0.0f, 0.7f),
@@ -117,10 +119,16 @@ int main()
 	// 配置着色器
 	shader.use();
 	shader.setInt("texture1", 0);
-
+	std::map<float, glm::vec3> sorted;
+	for (unsigned int i = 0; i < windows.size(); i++)
+	{
+		float distance = glm::length(camera.Position - windows[i]);
+		sorted[distance] = windows[i];
+	}
 	//循环渲染
 	while (!glfwWindowShouldClose(window))
 	{
+		
 		float currentFrame = static_cast<float>(glfwGetTime());
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
@@ -158,11 +166,18 @@ int main()
 		glBindVertexArray(0);
 
 		glBindVertexArray(transparentVAO);
-		glBindTexture(GL_TEXTURE_2D, grassTexture);
-		for (unsigned int i = 0; i < vegetation.size(); i++)
+		glBindTexture(GL_TEXTURE_2D, transparentTexture);
+		/*for (unsigned int i = 0; i < windows.size(); i++)
 		{
 			model = glm::mat4(1.0f);
-			model = glm::translate(model, vegetation[i]);
+			model = glm::translate(model, windows[i]);
+			shader.setMat4("model", model);
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+		}*/
+		for (std::map<float, glm::vec3>::reverse_iterator it = sorted.rbegin(); it != sorted.rend(); ++it)
+		{
+			model = glm::mat4(1.0f);
+			model = glm::translate(model, it->second);
 			shader.setMat4("model", model);
 			glDrawArrays(GL_TRIANGLES, 0, 6);
 		}

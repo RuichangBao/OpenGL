@@ -50,7 +50,6 @@ int main()
 
 	//当前模板缓冲中的值是0
 	glEnable(GL_STENCIL_TEST);//开启模板测试
-	glfwWindowHint(GLFW_STENCIL_BITS, 8);
 	//GL_NEVER：永远不通过模板测试。参考值和掩码没用
 	//GL_ALWAYS：总是通过模板测试。参考值和掩码没用
 	//GL_LESS：当片段的模板值 < 参考值时通过。

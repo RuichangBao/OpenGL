@@ -48,7 +48,10 @@ int main()
 		return -1;
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
-	//glDepthFunc(GL_ALWAYS); //总是通过深度测试
+	glEnable(GL_BLEND);	//开启透明度混合
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	// 构建并编译shader程序
 	Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
 
@@ -66,16 +69,12 @@ int main()
 	glBindVertexArray(0);
 
 	// 加载贴图
-	unsigned int cubeTexture = loadTexture(FileSystem::getPath("resources/textures/marble.jpg").c_str());
-	unsigned int floorTexture = loadTexture(FileSystem::getPath("resources/textures/metal.png").c_str());
-	unsigned int grassTexture = loadTexture(FileSystem::getPath("resources/textures/grass.png").c_str());//草的贴图
+	unsigned int colorRTexture = loadTexture(FileSystem::getPath("resources/textures/colorR.png").c_str());//
+	unsigned int colorGTexture = loadTexture(FileSystem::getPath("resources/textures/colorG.png").c_str());//
 
 	vector<glm::vec3> vegetation = {
-		glm::vec3(-1.5f, 0.0f, -0.48f),
-		glm::vec3(1.5f, 0.0f, 0.51f),
-		glm::vec3(0.0f, 0.0f, 0.7f),
-		glm::vec3(-0.3f, 0.0f, -2.3f),
-		glm::vec3(0.5f, 0.0f, -0.6f)
+		glm::vec3(0.0f, 0.0f, -0.0001f),
+		glm::vec3(0.5f, 0.0f, 0.0f),
 	};
 	
 
@@ -106,14 +105,18 @@ int main()
 		shader.setMat4("projection", projection);
 
 		glBindVertexArray(transparentVAO);
-		glBindTexture(GL_TEXTURE_2D, grassTexture);
-		for (unsigned int i = 0; i < vegetation.size(); i++)
-		{
-			model = glm::mat4(1.0f);
-			model = glm::translate(model, vegetation[i]);
-			shader.setMat4("model", model);
-			glDrawArrays(GL_TRIANGLES, 0, 6);
-		}
+		glBindTexture(GL_TEXTURE_2D, colorRTexture);
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, vegetation[0]);
+		shader.setMat4("model", model);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		model = glm::mat4(1.0f);
+		glBindTexture(GL_TEXTURE_2D, colorGTexture);
+		model = glm::translate(model, vegetation[1]);
+		shader.setMat4("model", model);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+		
 
 		// glfw: 交换缓冲区和轮询IO事件（按键按/释放，鼠标移动等）
 		glfwSwapBuffers(window);
