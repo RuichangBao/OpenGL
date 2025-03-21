@@ -116,7 +116,7 @@ int main()
 		//渲染一个物体时要使用着色器程序
 		glUseProgram(shaderProgram);
 		//绘制三角形
-		glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+		glBindVertexArray(VAO); // 因为我们只有一个VAO，所以没有必要每次都绑定它，但是我们这样做是为了让事情更有条理
 		glDrawArrays(GL_TRIANGLES, 0, 3);//绘制顶点数组 初始索引 长度
 
 		// -------------------------------------------------------------------------------
