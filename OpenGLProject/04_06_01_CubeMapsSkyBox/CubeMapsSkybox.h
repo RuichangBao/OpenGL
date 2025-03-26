@@ -21,6 +21,7 @@ float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
 unsigned int loadTexture(char const* path);//加载纹理
+unsigned int loadCubemap(vector<std::string> faces);//加载立方体纹理
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
