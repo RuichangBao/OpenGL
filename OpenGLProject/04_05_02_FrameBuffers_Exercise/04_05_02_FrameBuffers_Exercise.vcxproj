@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{CC205D7D-279B-4572-A6BF-6A1B25D76ABE}</ProjectGuid>
+    <ProjectGuid>{5A25D2FF-24C5-4EAD-928F-2F4E29839F62}</ProjectGuid>
     <RootNamespace>My040101DepthTesting02</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
