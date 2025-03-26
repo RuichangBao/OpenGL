@@ -1,6 +1,6 @@
-//https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/05%20Framebuffers/
-//帧缓冲区练习，后视镜效果
-#include "FrameBuffers.h"
+//https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/06%20Cubemaps/
+//立方体贴图
+#include "CubeMapsSkybox.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stbimage/stb_image.h>
