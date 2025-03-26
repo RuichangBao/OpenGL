@@ -1,4 +1,5 @@
 //https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/04%20Advanced%20OpenGL/03%20Blending.md
+//https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/03%20Blending/
 //Í¸Ã÷¶È»ìºÏ
 #include "BlendingSort.h"
 #include <glad/glad.h>

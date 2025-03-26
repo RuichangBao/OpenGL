@@ -9,7 +9,8 @@ const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
 //相机
-Camera camera(glm::vec3(1.0f, 1.0f, 3.0f));
+//Camera camera(glm::vec3(1.0f, 1.0f, 3.0f));
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 //Camera camera(glm::vec3(2.0f, 0.0f, 0.0f));//立方体内部
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
@@ -26,10 +27,70 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 
-//自定义日志输出
-void Print(glm::mat4 mat);
-void Print(glm::vec3 vec);
-void Print(glm::vec4 vec);
+//float cubeVertices[] = {
+//    // positions          // texture Coords
+//    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+//     0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+//     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+//     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+//    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+//    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+//
+//    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+//     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+//     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+//     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+//    -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+//    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+//
+//    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+//    -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+//    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+//    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+//    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+//    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+//
+//     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+//     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+//     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+//     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+//     0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+//     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+//
+//    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+//     0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+//     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+//     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+//    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+//    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+//
+//    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+//     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+//     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+//     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+//    -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+//    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+//};
+//float planeVertices[] = {
+//    // positions          // texture Coords 
+//     5.0f, -0.5f,  5.0f,  2.0f, 0.0f,
+//    -5.0f, -0.5f,  5.0f,  0.0f, 0.0f,
+//    -5.0f, -0.5f, -5.0f,  0.0f, 2.0f,
+//
+//     5.0f, -0.5f,  5.0f,  2.0f, 0.0f,
+//    -5.0f, -0.5f, -5.0f,  0.0f, 2.0f,
+//     5.0f, -0.5f, -5.0f,  2.0f, 2.0f
+//};
+//
+////透明物体坐标
+//float quadVertices[] = {
+//    0.0f,  0.5f,  0.0f,  0.0f,  0.0f,
+//    0.0f, -0.5f,  0.0f,  0.0f,  1.0f,
+//    1.0f, -0.5f,  0.0f,  1.0f,  1.0f,
+//    0.0f,  0.5f,  0.0f,  0.0f,  0.0f,
+//    1.0f, -0.5f,  0.0f,  1.0f,  1.0f,
+//    1.0f,  0.5f,  0.0f,  1.0f,  0.0f
+//};
 
 float cubeVertices[] = {
     // positions          // texture Coords

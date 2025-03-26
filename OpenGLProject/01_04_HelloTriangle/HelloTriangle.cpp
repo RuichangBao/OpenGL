@@ -1,4 +1,4 @@
-//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/01%20Getting%20started/04%20Hello%20Triangle.md
+//https://learnopengl-cn.github.io/01%20Getting%20started/04%20Hello%20Triangle/
 #include "HelloTriangle.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
