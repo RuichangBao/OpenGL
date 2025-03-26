@@ -1,5 +1,5 @@
 //https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/05%20Framebuffers/
-//帧缓冲区
+//帧缓冲区练习，后视镜效果
 #include "FrameBuffers.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -51,7 +51,7 @@ int main()
 	// 构建并编译shader程序
 	Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
 	Shader screenShader("shader/FrameBuffersScreenVertex.shader", "shader/FrameBuffersScreenFragment.shader");
-	
+
 	//正方体
 	unsigned int cubeVAO, cubeVBO;
 	glGenVertexArrays(1, &cubeVAO);//生成顶点数组对象。VAO 在 OpenGL 中用来存储顶点属性的配置，以便在后续绘制时快速访问这些属性。
@@ -96,12 +96,12 @@ int main()
 	// 加载贴图
 	unsigned int cubeTexture = loadTexture(FileSystem::getPath("resources/textures/container.jpg").c_str());
 	unsigned int floorTexture = loadTexture(FileSystem::getPath("resources/textures/metal.png").c_str());
-	
+
 
 	// 配置着色器
 	shader.use();
 	shader.setInt("texture1", 0);
-	
+
 	screenShader.use();
 	screenShader.setInt("screenTexture", 0);
 
@@ -109,7 +109,7 @@ int main()
 	unsigned int framebuffer;
 	glGenFramebuffers(1, &framebuffer);//创建帧缓冲
 	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);//绑定帧缓冲
-	
+
 	//创建一个贴图附件(纹理附件)
 	unsigned int textureColorbuffer;
 	glGenTextures(1, &textureColorbuffer);
@@ -118,7 +118,7 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);	//纹理缩小过滤方式 双线性插值
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);	//纹理放大过滤方式 双线性插值
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);	//将纹理附加到帧缓冲上
-	
+
 	//创建一个渲染缓冲对象
 	unsigned int rbo;
 	glGenRenderbuffers(1, &rbo);
@@ -186,7 +186,7 @@ int main()
 		//清除所有缓冲区
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f); //将透明色设置为白色（实际上没有必要，因为我们无论如何都无法看到平面后面）
 		glClear(GL_COLOR_BUFFER_BIT);
-		
+
 		//帧缓冲是先把缓冲做成一张纹理 然后显示到屏幕上
 		screenShader.use();
 		glBindVertexArray(frameBufferVAO);

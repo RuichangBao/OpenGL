@@ -146,8 +146,9 @@ float planeVertices[] = {
     -5.0f, -0.5f, -5.0f,  0.0f, 2.0f,
      5.0f, -0.5f, -5.0f,  2.0f, 2.0f
 };
-float quadVertices[] = { // vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates.
-    // positions   // texCoords
+//在标准化设备坐标中填充整个屏幕的四边形的顶点属性。帧渲染坐标
+float frameBufferVertices[] = { 
+    // 坐标        //贴图 
     -1.0f,  1.0f,  0.0f, 1.0f,
     -1.0f, -1.0f,  0.0f, 0.0f,
      1.0f, -1.0f,  1.0f, 0.0f,
@@ -156,3 +157,14 @@ float quadVertices[] = { // vertex attributes for a quad that fills the entire s
      1.0f, -1.0f,  1.0f, 0.0f,
      1.0f,  1.0f,  1.0f, 1.0f
 };
+
+//float frameBufferVertices[] = {
+//    // 坐标        //贴图 
+//    -0.9f,  0.9f,  0.0f, 1.0f,
+//    -0.9f, -0.9f,  0.0f, 0.0f,
+//     0.9f, -0.9f,  1.0f, 0.0f,
+//
+//    -0.9f,  0.9f,  0.0f, 1.0f,
+//     0.9f, -0.9f,  1.0f, 0.0f,
+//     0.9f,  0.9f,  1.0f, 1.0f
+//};

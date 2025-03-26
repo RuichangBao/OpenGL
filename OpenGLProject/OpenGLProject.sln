@@ -97,6 +97,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_01_04_FaceCulling", "04_
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_01_05_FrameBuffers", "04_01_05_FrameBuffers\04_01_05_FrameBuffers.vcxproj", "{E75A8897-2019-4349-8A45-D03ECD23D2EE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_01_05_FrameBuffers_Exercise", "04_01_05_FrameBuffers_Exercise\04_01_05_FrameBuffers_Exercise.vcxproj", "{CC205D7D-279B-4572-A6BF-6A1B25D76ABE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -481,6 +483,14 @@ Global
 		{E75A8897-2019-4349-8A45-D03ECD23D2EE}.Release|x64.Build.0 = Release|x64
 		{E75A8897-2019-4349-8A45-D03ECD23D2EE}.Release|x86.ActiveCfg = Release|Win32
 		{E75A8897-2019-4349-8A45-D03ECD23D2EE}.Release|x86.Build.0 = Release|Win32
+		{CC205D7D-279B-4572-A6BF-6A1B25D76ABE}.Debug|x64.ActiveCfg = Debug|x64
+		{CC205D7D-279B-4572-A6BF-6A1B25D76ABE}.Debug|x64.Build.0 = Debug|x64
+		{CC205D7D-279B-4572-A6BF-6A1B25D76ABE}.Debug|x86.ActiveCfg = Debug|Win32
+		{CC205D7D-279B-4572-A6BF-6A1B25D76ABE}.Debug|x86.Build.0 = Debug|Win32
+		{CC205D7D-279B-4572-A6BF-6A1B25D76ABE}.Release|x64.ActiveCfg = Release|x64
+		{CC205D7D-279B-4572-A6BF-6A1B25D76ABE}.Release|x64.Build.0 = Release|x64
+		{CC205D7D-279B-4572-A6BF-6A1B25D76ABE}.Release|x86.ActiveCfg = Release|Win32
+		{CC205D7D-279B-4572-A6BF-6A1B25D76ABE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
