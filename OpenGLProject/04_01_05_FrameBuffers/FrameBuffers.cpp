@@ -147,6 +147,7 @@ int main()
 		processInput(window);
 
 		// 渲染
+		// 第一处理阶段
 		// 绘制绑定到帧缓冲的纹理
 		glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 		glEnable(GL_DEPTH_TEST); // 启用深度测试（渲染屏幕空间四边形时禁用）
@@ -178,13 +179,15 @@ int main()
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindVertexArray(0);
 
-		// 现在绑定回默认帧缓冲并绘制一个带有附加帧缓冲颜色纹理的四边形平面
+		//第二处理阶段
+		//现在绑定回默认帧缓冲并绘制一个带有附加帧缓冲颜色纹理的四边形平面
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glDisable(GL_DEPTH_TEST); //禁用深度测试，使屏幕空间四边形不会因为深度测试而被丢弃。
 		//清除所有缓冲区
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f); //将透明色设置为白色（实际上没有必要，因为我们无论如何都无法看到平面后面）
 		glClear(GL_COLOR_BUFFER_BIT);
-
+		
+		//帧缓冲是先把缓冲做成一张纹理 然后显示到屏幕上
 		screenShader.use();
 		glBindVertexArray(quadVAO);
 		glBindTexture(GL_TEXTURE_2D, textureColorbuffer);	//使用颜色附件纹理作为四边形平面的纹理
