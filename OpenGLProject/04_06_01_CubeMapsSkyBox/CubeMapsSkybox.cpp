@@ -50,7 +50,7 @@ int main()
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	// 构建并编译shader程序
 	Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
-	Shader screenShader("shader/FrameBuffersScreenVertex.shader", "shader/FrameBuffersScreenFragment.shader");
+	Shader skyboxShader("shader/SkyboxVertex.shader", "shader/SkyboxFragment.shader");
 
 	//正方体
 	unsigned int cubeVAO, cubeVBO;
@@ -69,6 +69,15 @@ int main()
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 
 	//-----------天空盒子 Start----------------------------
+	unsigned int skyboxVAO, skyboxVBO;
+	glGenVertexArrays(1, &skyboxVAO);
+	glGenBuffers(1, &skyboxVBO);
+	glBindVertexArray(skyboxVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+
 	unsigned int cubeTexture = loadTexture(FileSystem::getPath("resources/textures/container.jpg").c_str());
 	vector<string>faces
 	{
@@ -82,33 +91,8 @@ int main()
 	unsigned int cubemapTexture = loadCubemap(faces);
 	//-----------天空盒子 End----------------------------
 
-	// 地平面
-	unsigned int planeVAO, planeVBO;
-	glGenVertexArrays(1, &planeVAO);
-	glGenBuffers(1, &planeVBO);
-	glBindVertexArray(planeVAO);
-	glBindBuffer(GL_ARRAY_BUFFER, planeVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(planeVertices), &planeVertices, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-
-	// 透明物体
-	unsigned int frameBufferVAO, frameBufferVBO;
-	glGenVertexArrays(1, &frameBufferVAO);
-	glGenBuffers(1, &frameBufferVBO);
-	glBindVertexArray(frameBufferVAO);
-	glBindBuffer(GL_ARRAY_BUFFER, frameBufferVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(frameBufferVertices), frameBufferVertices, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
-
 
 	// 加载贴图
-	unsigned int cubeTexture = loadTexture(FileSystem::getPath("resources/textures/container.jpg").c_str());
 	unsigned int floorTexture = loadTexture(FileSystem::getPath("resources/textures/metal.png").c_str());
 
 
@@ -116,39 +100,9 @@ int main()
 	shader.use();
 	shader.setInt("texture1", 0);
 
-	screenShader.use();
-	screenShader.setInt("screenTexture", 0);
+	skyboxShader.use();
+	skyboxShader.setInt("screenTexture", 0);
 
-	//帧缓冲配置
-	unsigned int framebuffer;
-	glGenFramebuffers(1, &framebuffer);//创建帧缓冲
-	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);//绑定帧缓冲
-
-	//创建一个贴图附件(纹理附件)
-	unsigned int textureColorbuffer;
-	glGenTextures(1, &textureColorbuffer);
-	glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCR_WIDTH, SCR_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);	//纹理缩小过滤方式 双线性插值
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);	//纹理放大过滤方式 双线性插值
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);	//将纹理附加到帧缓冲上
-
-	//创建一个渲染缓冲对象
-	unsigned int rbo;
-	glGenRenderbuffers(1, &rbo);
-	glBindRenderbuffer(GL_RENDERBUFFER, rbo);	//绑定这个渲染缓冲对象
-	//从帧缓冲中创建深度和模板缓冲对象（glRenderbufferStorage 专门设计被作为帧缓冲对象使用的）
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, SCR_WIDTH, SCR_HEIGHT);		// 深度缓冲和模板缓冲使用的是帧缓冲
-	//附加到帧缓冲
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo); //将深度信息和模板缓冲信息附加到帧缓冲
-
-	//总结：不需要从帧缓冲中采样，使用渲染缓冲作为帧缓冲的附件，如果需要从缓冲中采样颜色或深度值等数据，那么你应该选择纹理附件
-	// 创建帧缓冲并且添加了附件，检查
-	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-		cout << "错误::帧缓冲:: 帧缓冲不完整!" << endl;
-	else
-		cout << "完整的帧缓冲" << endl;
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	//循环渲染
 	while (!glfwWindowShouldClose(window))
@@ -161,77 +115,38 @@ int main()
 		processInput(window);
 
 		// 渲染
-		// 第一处理阶段
-		// 绘制绑定到帧缓冲的纹理
-		glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-		glEnable(GL_DEPTH_TEST); // 启用深度测试（渲染屏幕空间四边形时禁用）
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);//清空屏幕所用的颜色
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
 
+		//正常的绘制场景
 		shader.use();
 		glm::mat4 model = glm::mat4(1.0f);
-		camera.Yaw += 180.0f; //相机旋转180度
-		camera.ProcessMouseMovement(0, 0, false); //更新相机
+		model = glm::rotate(model, glm::radians(30.0f), glm::vec3(1.0f,2.0f,0.0f));
+		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
 		glm::mat4 view = camera.GetViewMatrix();
-		camera.Yaw -= 180.0f; // 将相机还原
-		camera.ProcessMouseMovement(0, 0, true);
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+		shader.setMat4("model", model);
 		shader.setMat4("view", view);
 		shader.setMat4("projection", projection);
 		// 正方体
 		glBindVertexArray(cubeVAO);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, cubeTexture);
-		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
-		shader.setMat4("model", model);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
-		shader.setMat4("model", model);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		// 地板
-		glBindVertexArray(planeVAO);
-		glBindTexture(GL_TEXTURE_2D, floorTexture);
-		shader.setMat4("model", glm::mat4(1.0f));
-		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindVertexArray(0);
-
-		//第二处理阶段
-		//现在绑定回默认帧缓冲并绘制一个带有附加帧缓冲颜色纹理的四边形平面
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		//glDisable(GL_DEPTH_TEST); //禁用深度测试，使屏幕空间四边形不会因为深度测试而被丢弃。
-		//清除所有缓冲区
-		//glClearColor(1.0f, 1.0f, 1.0f, 1.0f); //将透明色设置为白色（实际上没有必要，因为我们无论如何都无法看到平面后面）
-		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		model = glm::mat4(1.0f);
-		view = camera.GetViewMatrix();
-		shader.setMat4("view", view);
-		
-		 // cubes
-		glBindVertexArray(cubeVAO);
+		// 最后绘制skybox
+		glDepthFunc(GL_LEQUAL);  //改变depth函数，当depth值等于depth buffer的内容时，depth测试通过
+		skyboxShader.use();
+		view = glm::mat4(glm::mat3(camera.GetViewMatrix())); // 从视图矩阵中删除平移
+		skyboxShader.setMat4("view", view);
+		skyboxShader.setMat4("projection", projection);
+		// 天空盒子
+		glBindVertexArray(skyboxVAO);
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, cubeTexture);
-		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
-		shader.setMat4("model", model);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
-		shader.setMat4("model", model);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		// floor
-		glBindVertexArray(planeVAO);
-		glBindTexture(GL_TEXTURE_2D, floorTexture);
-		shader.setMat4("model", glm::mat4(1.0f));
-		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindVertexArray(0);
-
-		//帧缓冲是先把缓冲做成一张纹理 然后显示到屏幕上
-		screenShader.use();
-		glBindVertexArray(frameBufferVAO);
-		glBindTexture(GL_TEXTURE_2D, textureColorbuffer);	//使用颜色附件纹理作为四边形平面的纹理
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glDepthFunc(GL_LESS); // set depth function back to default
 
 		// glfw: 交换缓冲区和轮询IO事件（按键按/释放，鼠标移动等）
 		glfwSwapBuffers(window);
@@ -240,13 +155,9 @@ int main()
 
 	//终止，清除之前分配的所有glfw资源。
 	glDeleteVertexArrays(1, &cubeVAO);
-	glDeleteVertexArrays(1, &planeVAO);
-	glDeleteVertexArrays(1, &frameBufferVAO);
+	glDeleteVertexArrays(1, &skyboxVAO);
 	glDeleteBuffers(1, &cubeVBO);
-	glDeleteBuffers(1, &planeVBO);
-	glDeleteBuffers(1, &frameBufferVBO);
-	glDeleteRenderbuffers(1, &rbo);
-	glDeleteFramebuffers(1, &framebuffer);
+	glDeleteBuffers(1, &skyboxVBO);
 
 	//终止，清除之前分配的所有glfw资源。
 	glfwTerminate();
@@ -294,14 +205,17 @@ unsigned int loadTexture(char const* path)
 
 unsigned int loadCubemap(vector<std::string> faces)
 {
+	//创建一个纹理对象
 	unsigned int textureID;
 	glGenTextures(1, &textureID);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
 	int width, height, nrChannels;
 	for (unsigned int i = 0; i < faces.size(); i++)
 	{
-		unsigned char *data = (faces[i], &width, &height, &nrChannels, 0);
+		unsigned char *data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
 		if (data)
 		{
+			//图像数据上传到 GPU 并定义纹理的格式和数据
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 		}
@@ -310,15 +224,15 @@ unsigned int loadCubemap(vector<std::string> faces)
 			std::cout << "立方体纹理加载失败，路径: " << faces[i] << std::endl;
 			stbi_image_free(data);
 		}
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);//缩小的过滤方式 最近邻采样，选择最近的纹理像素
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);//放大的过滤方式 最近邻采样，选择最近的纹理像素
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-
-		return textureID;
 	}
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);//缩小的过滤方式 最近邻采样，选择最近的纹理像素
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);//放大的过滤方式 最近邻采样，选择最近的纹理像素
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	return textureID;
 }
+
 
 //键盘输入
 void processInput(GLFWwindow* window)
