@@ -80,7 +80,7 @@ int main()
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 
-	// Í¸Ã÷ÎïÌå
+	// Ö¡»º³å
 	unsigned int frameBufferVAO, frameBufferVBO;
 	glGenVertexArrays(1, &frameBufferVAO);
 	glGenBuffers(1, &frameBufferVBO);
