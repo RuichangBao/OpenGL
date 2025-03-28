@@ -147,6 +147,7 @@ int main()
 		//输入检查
 		processInput(window);
 
+		//------------------------写入帧缓冲区的内容 Start------------------------
 		// 渲染
 		// 第一处理阶段
 		// 绘制绑定到帧缓冲的纹理
@@ -169,27 +170,17 @@ int main()
 		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
 		shader.setMat4("model", model);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-		
+
 		// 地板
 		glBindVertexArray(planeVAO);
 		glBindTexture(GL_TEXTURE_2D, floorTexture);
 		shader.setMat4("model", glm::mat4(1.0f));
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindVertexArray(0);
-
-		//第二处理阶段
-		//现在绑定回默认帧缓冲并绘制一个带有附加帧缓冲颜色纹理的四边形平面
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glDisable(GL_DEPTH_TEST); //禁用深度测试，使屏幕空间四边形不会因为深度测试而被丢弃。
-		//清除所有缓冲区
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f); //将透明色设置为白色（实际上没有必要，因为我们无论如何都无法看到平面后面）
-		glClear(GL_COLOR_BUFFER_BIT);
+		//------------------------写入帧缓冲区的内容 End------------------------
 
-		//帧缓冲是先把缓冲做成一张纹理 然后显示到屏幕上
-		screenShader.use();
-		glBindVertexArray(frameBufferVAO);
-		glBindTexture(GL_TEXTURE_2D, textureColorbuffer);	//使用颜色附件纹理作为四边形平面的纹理
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+
 		
 		//帧缓冲后 绘制不受帧缓冲影响的立方体
 		shader.use();
@@ -200,6 +191,9 @@ int main()
 		shader.setMat4("projection", projection);
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_STENCIL_TEST);//开启模板测试
+		glStencilFunc(GL_ALWAYS, 1, 0xFF);//总是通过模板测试,
+		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);//并把正方体的模板值设置为1
+		glStencilMask(0xFF);//设置模板缓冲可写
 		glDepthFunc(GL_LESS);	//小于深度缓冲区中对应位置的深度值时才绘制
 		//glEnable(GL_BLEND);	//开启透明度混合
 		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -211,6 +205,25 @@ int main()
 		shader.setMat4("model", model);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glDisable(GL_DEPTH_TEST);
+
+		//第二处理阶段
+		//现在绑定回默认帧缓冲并绘制一个带有附加帧缓冲颜色纹理的四边形平面
+		
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);//模板值不等于1的时候通过模板测试(绘制正方体的边缘)
+		glStencilMask(0x00);//关闭模板写入(绘制正方体边缘不需要改变模板缓冲模板值)
+
+		glDisable(GL_DEPTH_TEST); //禁用深度测试，使屏幕空间四边形不会因为深度测试而被丢弃。
+		//清除所有缓冲区
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f); //将透明色设置为白色（实际上没有必要，因为我们无论如何都无法看到平面后面）
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		//帧缓冲是先把缓冲做成一张纹理 然后显示到屏幕上
+		screenShader.use();
+		glBindVertexArray(frameBufferVAO);
+		glBindTexture(GL_TEXTURE_2D, textureColorbuffer);	//使用颜色附件纹理作为四边形平面的纹理
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glEnable(GL_DEPTH_TEST);
+
 		// glfw: 交换缓冲区和轮询IO事件（按键按/释放，鼠标移动等）
 		glfwSwapBuffers(window);
 		glfwPollEvents();

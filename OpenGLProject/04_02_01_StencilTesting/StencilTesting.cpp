@@ -47,6 +47,8 @@ int main()
 		cout << "初始化GLAD(OpenGL函数指针错误)失败" << endl;
 		return -1;
 	}
+
+
 	glEnable(GL_STENCIL_TEST);//开启模板测试
 	//GL_NOTEQUAL:只有当前片段的模板值 不等于 模板缓冲区中对应位置的模板值时，该片段才会通过模板测试
 	//glStencilFunc(GL_NOTEQUAL, 1, 0xFF);//所有的片段都应该更新模板缓冲 
@@ -117,8 +119,6 @@ int main()
 
 		// 渲染
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);//清空屏幕所用的颜色
-		//glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
-		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);//GL_STENCIL_BUFFER_BIT 清除模板缓冲
 
 		shaderSingleColor.use();
@@ -140,8 +140,6 @@ int main()
 		glBindVertexArray(0);
 		//绘制正方体
 		//1.渲染通过，正常绘制对象，写入模板缓冲区
-
-		
 		glStencilFunc(GL_ALWAYS, 1, 0xFF);//总是通过模板测试,
 		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);//并把正方体的模板值设置为1
 		glStencilMask(0xFF);//设置模板缓冲可写
@@ -151,12 +149,15 @@ int main()
 		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
 		shader.setMat4("model", model);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
+		
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
 		shader.setMat4("model", model);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
+		
+		
 		//绘制正方体描边
-		//第二。渲染通道：现在绘制物体的稍微缩放版本，这次禁用模板书写。
+		//2.渲染通道：现在绘制物体的稍微缩放版本，这次禁用模板书写。
 		//因为模板缓冲区现在被几个1填充。缓冲区中为1的部分没有绘制，因此只绘制对象的大小差异，使其看起来像边界。
 		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);//模板值不等于1的时候通过模板测试(绘制正方体的边缘)
 		glStencilMask(0x00);//关闭模板写入(绘制正方体边缘不需要改变模板缓冲模板值)
