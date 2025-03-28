@@ -25,11 +25,6 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 
-//自定义日志输出
-void Print(glm::mat4 mat);
-void Print(glm::vec3 vec);
-void Print(glm::vec4 vec);
-
 float cubeVertices[] = {
     // 位置          // 纹理坐标
     -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,

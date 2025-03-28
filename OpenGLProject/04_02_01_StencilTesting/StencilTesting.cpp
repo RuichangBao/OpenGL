@@ -50,10 +50,12 @@ int main()
 	glEnable(GL_STENCIL_TEST);//开启模板测试
 	//GL_NOTEQUAL:只有当前片段的模板值 不等于 模板缓冲区中对应位置的模板值时，该片段才会通过模板测试
 	//glStencilFunc(GL_NOTEQUAL, 1, 0xFF);//所有的片段都应该更新模板缓冲 
+	
 	//glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 	//模板测试未通过，什么也不做
 	//模板测试通过，什么也不做
 	//模板测试和深度测试同时通过，模板值替换为1
+	
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	glDepthFunc(GL_ALWAYS); //总是通过深度测试
 	glDepthFunc(GL_LESS);	//小于深度缓冲区中对应位置的深度值时才绘制
@@ -282,21 +284,3 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	glViewport(0, 0, width, height);//确保视口匹配新的窗口尺寸；
 }
 
-//自定义日志输出
-
-
-void Print(glm::mat4 mat)
-{
-	Print(mat[0]);
-	Print(mat[1]);
-	Print(mat[2]);
-	Print(mat[3]);
-}
-void Print(glm::vec3 vec)
-{
-	std::cout << " " << vec.x << " " << vec.y << " " << vec.z << endl;
-}
-void Print(glm::vec4 vec)
-{
-	std::cout << " " << vec.x << " " << vec.y << " " << vec.z << " " << vec.w << endl;
-}

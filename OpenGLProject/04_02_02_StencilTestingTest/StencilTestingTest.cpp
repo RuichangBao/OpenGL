@@ -1,6 +1,6 @@
 //https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/04%20Advanced%20OpenGL/01%20Depth%20testing.md
 //模板测试
-#include "StencilTesting.h"
+#include "StencilTestingTest.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stbimage/stb_image.h>
@@ -233,23 +233,4 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	//cout << "窗口大小改变" << width << "  " << height << endl;
 	glViewport(0, 0, width, height);//确保视口匹配新的窗口尺寸；
-}
-
-//自定义日志输出
-
-
-void Print(glm::mat4 mat)
-{
-	Print(mat[0]);
-	Print(mat[1]);
-	Print(mat[2]);
-	Print(mat[3]);
-}
-void Print(glm::vec3 vec)
-{
-	std::cout << " " << vec.x << " " << vec.y << " " << vec.z << endl;
-}
-void Print(glm::vec4 vec)
-{
-	std::cout << " " << vec.x << " " << vec.y << " " << vec.z << " " << vec.w << endl;
 }
