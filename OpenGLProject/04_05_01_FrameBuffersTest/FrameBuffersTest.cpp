@@ -1,5 +1,6 @@
 //https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/05%20Framebuffers/
 //帧缓冲区
+//想要实现一个效果，绘制两个正方体，一个金星帧缓冲区渲染，一个正常渲染，正常渲染的正方体显示正常
 #include "FrameBuffersTest.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -190,7 +191,7 @@ int main()
 		glBindTexture(GL_TEXTURE_2D, textureColorbuffer);	//使用颜色附件纹理作为四边形平面的纹理
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		
-		//帧缓冲后 进行正常绘制物体
+		//帧缓冲后 绘制不受帧缓冲影响的立方体
 		shader.use();
 		model = glm::mat4(1.0f);
 		view = camera.GetViewMatrix();
@@ -198,8 +199,10 @@ int main()
 		shader.setMat4("view", view);
 		shader.setMat4("projection", projection);
 		glEnable(GL_DEPTH_TEST);
-		glEnable(GL_BLEND);	//开启透明度混合
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_STENCIL_TEST);//开启模板测试
+		glDepthFunc(GL_LESS);	//小于深度缓冲区中对应位置的深度值时才绘制
+		//glEnable(GL_BLEND);	//开启透明度混合
+		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glBindVertexArray(cubeVAO);
 		glBindTexture(GL_TEXTURE_2D, cubeTexture);
 		glActiveTexture(GL_TEXTURE0);
@@ -207,7 +210,7 @@ int main()
 		model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
 		shader.setMat4("model", model);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-
+		glDisable(GL_DEPTH_TEST);
 		// glfw: 交换缓冲区和轮询IO事件（按键按/释放，鼠标移动等）
 		glfwSwapBuffers(window);
 		glfwPollEvents();
