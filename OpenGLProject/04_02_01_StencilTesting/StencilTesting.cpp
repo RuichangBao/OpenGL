@@ -127,11 +127,11 @@ int main()
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		shaderSingleColor.setMat4("view", view);
 		shaderSingleColor.setMat4("projection", projection);
-		//绘制平面
+		
 		shader.use();
 		shader.setMat4("view", view);
 		shader.setMat4("projection", projection);
-		
+		//绘制平面
 		glStencilMask(0x00);//设置模板缓冲不可写
 		glBindVertexArray(planeVAO);
 		glBindTexture(GL_TEXTURE_2D, floorTexture);

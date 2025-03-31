@@ -1,6 +1,6 @@
 //https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/05%20Framebuffers/
 //帧缓冲区
-//想要实现一个效果，绘制两个正方体，一个金星帧缓冲区渲染，一个正常渲染，正常渲染的正方体显示正常
+//想要实现一个效果，绘制两个正方体，一个进行帧缓冲区渲染，一个正常渲染，正常渲染的正方体显示正常
 #include "FrameBuffersTest.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -153,11 +153,12 @@ int main()
 		// 绘制绑定到帧缓冲的纹理
 		glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 		glEnable(GL_DEPTH_TEST); // 启用深度测试（渲染屏幕空间四边形时禁用）
+
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);//清空屏幕所用的颜色
-		//glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); // 清除颜色缓冲和深度缓冲
 
 		shader.use();
+		glDisable(GL_STENCIL_TEST);//模板测试关闭
 		glm::mat4 model = glm::mat4(1.0f);
 		glm::mat4 view = camera.GetViewMatrix();
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
@@ -181,22 +182,21 @@ int main()
 		//------------------------写入帧缓冲区的内容 End------------------------
 
 
-		
+
 		//帧缓冲后 绘制不受帧缓冲影响的立方体
-		shader.use();
+		glEnable(GL_DEPTH_TEST); // 启用深度测试（渲染屏幕空间四边形时禁用）
+		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);//清空屏幕所用的颜色
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); // 清除颜色缓冲、深度缓冲、模板缓冲
 		model = glm::mat4(1.0f);
 		view = camera.GetViewMatrix();
 		projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		shader.setMat4("view", view);
 		shader.setMat4("projection", projection);
-		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_STENCIL_TEST);//开启模板测试
 		glStencilFunc(GL_ALWAYS, 1, 0xFF);//总是通过模板测试,
 		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);//并把正方体的模板值设置为1
 		glStencilMask(0xFF);//设置模板缓冲可写
 		glDepthFunc(GL_LESS);	//小于深度缓冲区中对应位置的深度值时才绘制
-		//glEnable(GL_BLEND);	//开启透明度混合
-		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glBindVertexArray(cubeVAO);
 		glBindTexture(GL_TEXTURE_2D, cubeTexture);
 		glActiveTexture(GL_TEXTURE0);
@@ -204,26 +204,16 @@ int main()
 		model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
 		shader.setMat4("model", model);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-		glDisable(GL_DEPTH_TEST);
 
-		//第二处理阶段
-		//现在绑定回默认帧缓冲并绘制一个带有附加帧缓冲颜色纹理的四边形平面
-		
-		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);//模板值不等于1的时候通过模板测试(绘制正方体的边缘)
-		glStencilMask(0x00);//关闭模板写入(绘制正方体边缘不需要改变模板缓冲模板值)
-
-		glDisable(GL_DEPTH_TEST); //禁用深度测试，使屏幕空间四边形不会因为深度测试而被丢弃。
-		//清除所有缓冲区
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f); //将透明色设置为白色（实际上没有必要，因为我们无论如何都无法看到平面后面）
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		//帧缓冲是先把缓冲做成一张纹理 然后显示到屏幕上
 		screenShader.use();
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);//并把正方体的模板值设置为1
+		glStencilMask(0x00);//设置模板写入关闭
+		glDepthFunc(GL_LEQUAL);	//小于深度缓冲区中对应位置的深度值时才绘制
 		glBindVertexArray(frameBufferVAO);
 		glBindTexture(GL_TEXTURE_2D, textureColorbuffer);	//使用颜色附件纹理作为四边形平面的纹理
 		glDrawArrays(GL_TRIANGLES, 0, 6);
-		glEnable(GL_DEPTH_TEST);
-
+		glStencilMask(0xFF);//模板写入开启
 		// glfw: 交换缓冲区和轮询IO事件（按键按/释放，鼠标移动等）
 		glfwSwapBuffers(window);
 		glfwPollEvents();
