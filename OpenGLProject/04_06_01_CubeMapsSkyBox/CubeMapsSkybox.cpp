@@ -97,20 +97,20 @@ int main()
 
 
 	// 配置着色器
+	skyboxShader.use();
+	skyboxShader.setInt("screenTexture", 0);
+	
 	shader.use();
 	shader.setInt("texture1", 0);
 
-	skyboxShader.use();
-	skyboxShader.setInt("screenTexture", 0);
-
-
+	glfwFocusWindow(window);//强制获取焦点
 	//循环渲染
 	while (!glfwWindowShouldClose(window))
 	{
 		float currentFrame = static_cast<float>(glfwGetTime());
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
-		glfwFocusWindow(window);//强制获取焦点
+
 		//输入检查
 		processInput(window);
 
@@ -121,12 +121,13 @@ int main()
 		//正常的绘制场景
 		shader.use();
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::rotate(model, glm::radians(30.0f), glm::vec3(1.0f,2.0f,0.0f));
+		model = glm::rotate(model, glm::radians(30.0f), glm::vec3(1.0f, 2.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
 		glm::mat4 view = camera.GetViewMatrix();
-		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+
 		shader.setMat4("model", model);
 		shader.setMat4("view", view);
+		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		shader.setMat4("projection", projection);
 		// 正方体
 		glBindVertexArray(cubeVAO);
@@ -134,9 +135,13 @@ int main()
 		glBindTexture(GL_TEXTURE_2D, cubeTexture);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
+
+
+
 		// 最后绘制skybox
-		glDepthFunc(GL_LEQUAL);  //改变depth函数，当depth值等于depth buffer的内容时，depth测试通过
+		glDepthFunc(GL_LEQUAL);  //改变depth函数，当depth值等于depth buffer的内容时，depth测试通过(当深度值等于1的时候，就是没有绘制其他场景的时候才会绘制)
 		skyboxShader.use();
+		skyboxShader.setMat4("model", model);
 		view = glm::mat4(glm::mat3(camera.GetViewMatrix())); // 从视图矩阵中删除平移
 		skyboxShader.setMat4("view", view);
 		skyboxShader.setMat4("projection", projection);
@@ -146,7 +151,7 @@ int main()
 		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
-		glDepthFunc(GL_LESS); // set depth function back to default
+		glDepthFunc(GL_LESS); //当深度值小于当前深度缓冲中的值时候，才会绘制
 
 		// glfw: 交换缓冲区和轮询IO事件（按键按/释放，鼠标移动等）
 		glfwSwapBuffers(window);
@@ -241,7 +246,9 @@ void processInput(GLFWwindow* window)
 		glfwSetWindowShouldClose(window, true);	//关闭窗口
 
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+	{
 		camera.ProcessKeyboard(FORWARD, deltaTime);
+	}
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 		camera.ProcessKeyboard(BACKWARD, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)

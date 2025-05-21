@@ -1,4 +1,4 @@
-//https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/04%20Advanced%20OpenGL/01%20Depth%20testing.md
+//https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/01%20Depth%20testing/
 //Í¸Ã÷¶È²âÊÔ
 #include "DepthTestingView.h"
 #include <glad/glad.h>

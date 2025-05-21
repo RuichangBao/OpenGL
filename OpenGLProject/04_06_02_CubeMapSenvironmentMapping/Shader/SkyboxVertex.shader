@@ -10,5 +10,5 @@ void main()
 {
     TexCoords = aPos;    
     vec4 pos = projection * view * vec4(aPos, 1.0);
-    gl_Position = pos.xyww;
+    gl_Position = pos.xyww;//深度是根据z/w 得到的  把z设置为w 得到的深度始终为1
 }
