@@ -1,5 +1,5 @@
-//https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/06%20Cubemaps/
-//环境映射
+////https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/06%20Cubemaps/
+////环境映射
 #include "CubeMapSenvironmentMapping.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -63,10 +63,11 @@ int main()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), cubeVertices, GL_STATIC_DRAW);
 	// 位置属性
 	glEnableVertexAttribArray(0);//启用顶点属性
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-	// 纹理属性
-	glEnableVertexAttribArray(1);	//启用纹理属性
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+
+
 
 	//-----------天空盒子 Start----------------------------
 	unsigned int skyboxVAO, skyboxVBO;
@@ -78,7 +79,6 @@ int main()
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
-	unsigned int cubeTexture = loadTexture(FileSystem::getPath("resources/textures/container.jpg").c_str());
 	vector<string>faces
 	{
 		FileSystem::getPath("resources/textures/skybox/right.jpg"),
@@ -97,11 +97,10 @@ int main()
 
 
 	// 配置着色器
-	skyboxShader.use();
-	skyboxShader.setInt("screenTexture", 0);
-	
 	shader.use();
-	shader.setInt("texture1", 0);
+	shader.setInt("skybox", 0);
+	skyboxShader.use();
+	skyboxShader.setInt("skybox", 0);
 
 	glfwFocusWindow(window);//强制获取焦点
 	//循环渲染
@@ -121,18 +120,17 @@ int main()
 		//正常的绘制场景
 		shader.use();
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::rotate(model, glm::radians(30.0f), glm::vec3(1.0f, 2.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
 		glm::mat4 view = camera.GetViewMatrix();
 
 		shader.setMat4("model", model);
 		shader.setMat4("view", view);
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		shader.setMat4("projection", projection);
+		shader.setVec3("cameraPos", camera.Position);
 		// 正方体
 		glBindVertexArray(cubeVAO);
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, cubeTexture);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
 

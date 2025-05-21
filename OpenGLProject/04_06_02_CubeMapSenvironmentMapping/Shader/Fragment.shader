@@ -1,11 +1,15 @@
 #version 330 core
 out vec4 FragColor;
 
-in vec2 TexCoords;
+in vec3 Normal;     //法线
+in vec3 Position;   //世界位置
 
-uniform sampler2D texture1;
+uniform vec3 cameraPos;
+uniform samplerCube skybox;
 
 void main()
 {    
-    FragColor = texture(texture1, TexCoords);
+    vec3 I = normalize(Position - cameraPos);   //观察方向
+    vec3 R = reflect(I, normalize(Normal));     //反射方向
+    FragColor = vec4(texture(skybox, R).rgb, 1.0);//输出颜色
 }
