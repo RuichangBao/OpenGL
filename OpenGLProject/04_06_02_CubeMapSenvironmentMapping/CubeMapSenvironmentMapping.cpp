@@ -1,5 +1,5 @@
-////https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/06%20Cubemaps/
-////环境映射
+//https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/06%20Cubemaps/
+//环境映射
 #include "CubeMapSenvironmentMapping.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
