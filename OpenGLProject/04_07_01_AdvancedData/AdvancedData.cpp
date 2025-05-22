@@ -1,6 +1,6 @@
-//https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/06%20Cubemaps/
-//环境映射
-#include "CubeMapSenvironmentMapping.h"
+//https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/07%20Advanced%20Data/
+//高级数据
+#include "AdvancedData.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stbimage/stb_image.h>
@@ -61,7 +61,18 @@ int main()
 	//绑定 VBO 并传输顶点数据
 	glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);//GL_ARRAY_BUFFER:顶点缓冲对象的绑定目标
 	//第一种方法
-	glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), cubeVertices, GL_STATIC_DRAW);	//在GPU上分配内存并且填充数据
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), cubeVertices, GL_STATIC_DRAW);	//在GPU上分配内存并且填充数据
+	//第二种方法
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), NULL, GL_STATIC_DRAW);	//在GPU上分配内存，并不填充数据
+	//glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(cubeVertices), &cubeVertices);	//在GPU分配内存上填充数据
+	//第三种方法
+	glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), NULL, GL_STATIC_DRAW);	//在GPU上分配内存，并不填充数据
+	// 获取指针
+	void* ptr = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+	// 复制数据到内存
+	memcpy(ptr, cubeVertices, sizeof(cubeVertices));
+	// 记得告诉OpenGL我们不再需要这个指针了
+	glUnmapBuffer(GL_ARRAY_BUFFER);
 	// 位置属性
 	glEnableVertexAttribArray(0);//启用顶点属性
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
@@ -76,7 +87,19 @@ int main()
 	glGenBuffers(1, &skyboxVBO);
 	glBindVertexArray(skyboxVAO);
 	glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);	//在GPU上分配内存并且填充数据
+	//第一种方法
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);	//在GPU上分配内存并且填充数据
+	//第二种方法
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), NULL, GL_STATIC_DRAW);	//在GPU上分配内存，并不填充数据
+	//glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(skyboxVertices), &skyboxVertices);	//在GPU分配内存上填充数据
+	//第三种方法
+	glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), NULL, GL_STATIC_DRAW);	//在GPU上分配内存，并不填充数据
+	// 获取指针
+	ptr = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+	// 复制数据到内存
+	memcpy(ptr, skyboxVertices, sizeof(skyboxVertices));
+	// 记得告诉OpenGL我们不再需要这个指针了
+	glUnmapBuffer(GL_ARRAY_BUFFER);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
