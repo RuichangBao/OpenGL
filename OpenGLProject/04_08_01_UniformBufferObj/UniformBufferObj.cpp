@@ -1,6 +1,6 @@
 //https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/07%20Advanced%20Data/
-//高级数据复制缓冲
-#include "AdvancedDataCopyBuffer.h"
+//高级数据Uniform缓冲对象
+#include "UniformBufferObj.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stbimage/stb_image.h>
@@ -48,8 +48,10 @@ int main()
 		return -1;
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
+	glEnable(GL_PROGRAM_POINT_SIZE);//图元大小
 	// 构建并编译shader程序
 	Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
+	Shader skyboxShader("shader/SkyboxVertex.shader", "shader/SkyboxFragment.shader");
 
 	//正方体
 	unsigned int cubeVAO, cubeVBO;
@@ -69,25 +71,39 @@ int main()
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(sizeof(cubeVertices) / 2));
 
-	//复制出来的正方体
-	unsigned int copyCubeVAO, copyCubeVBO;
-	glGenVertexArrays(1, &copyCubeVAO);//生成顶点数组对象。VAO 在 OpenGL 中用来存储顶点属性的配置，以便在后续绘制时快速访问这些属性。
-	glGenBuffers(1, &copyCubeVBO);		//生成顶点缓存对象VBO(Vertex Buffer Object)对象
-	glBindVertexArray(copyCubeVAO);//绑定顶点数组对象
+	//-----------天空盒子 Start----------------------------
+	unsigned int skyboxVAO, skyboxVBO;
+	glGenVertexArrays(1, &skyboxVAO);
+	glGenBuffers(1, &skyboxVBO);
+	glBindVertexArray(skyboxVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
+	//第一种方法
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);	//在GPU上分配内存并且填充数据
+	//第二种方法
+	glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), NULL, GL_STATIC_DRAW);	//在GPU上分配内存，并不填充数据
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(skyboxVertices), &skyboxVertices);	//在GPU分配内存上填充数据
+	//第三种方法
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), NULL, GL_STATIC_DRAW);	//在GPU上分配内存，并不填充数据
+	//// 获取指针
+	//ptr = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+	//// 复制数据到内存
+	//memcpy(ptr, skyboxVertices, sizeof(skyboxVertices));
+	//// 记得告诉OpenGL我们不再需要这个指针了
+	//glUnmapBuffer(GL_ARRAY_BUFFER);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
-	// 2. 把顶点数组复制到缓冲中供OpenGL使用
-	//绑定 VBO 并传输顶点数据
-	glBindBuffer(GL_ARRAY_BUFFER, copyCubeVBO);//GL_ARRAY_BUFFER:顶点缓冲对象的绑定目标
-	glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), NULL, GL_STATIC_DRAW);	//在GPU上分配内存，并不填充数据
-	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(cubeVertices), &cubeVertices);
-
-	glEnableVertexAttribArray(0);//启用顶点属性
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
-
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(sizeof(cubeVertices) / 2));
-	
-
+	vector<string>faces
+	{
+		FileSystem::getPath("resources/textures/skybox/right.jpg"),
+		FileSystem::getPath("resources/textures/skybox/left.jpg"),
+		FileSystem::getPath("resources/textures/skybox/top.jpg"),
+		FileSystem::getPath("resources/textures/skybox/bottom.jpg"),
+		FileSystem::getPath("resources/textures/skybox/front.jpg"),
+		FileSystem::getPath("resources/textures/skybox/back.jpg")
+	};
+	unsigned int cubemapTexture = loadCubemap(faces);
+	//-----------天空盒子 End----------------------------
 
 
 	// 加载贴图
@@ -97,6 +113,8 @@ int main()
 	// 配置着色器
 	shader.use();
 	shader.setInt("skybox", 0);
+	skyboxShader.use();
+	skyboxShader.setInt("skybox", 0);
 
 	glfwFocusWindow(window);//强制获取焦点
 	//循环渲染
@@ -129,13 +147,20 @@ int main()
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
 
-		//复制出来的正方体
-		model = glm::translate(model, glm::vec3(1, 1, 0.5f));
-		shader.setMat4("model", model);
-		glBindVertexArray(copyCubeVAO);
+		// 最后绘制skybox
+		glDepthFunc(GL_LEQUAL);  //改变depth函数，当depth值等于depth buffer的内容时，depth测试通过(当深度值等于1的时候，就是没有绘制其他场景的时候才会绘制)
+		skyboxShader.use();
+		skyboxShader.setMat4("model", model);
+		view = glm::mat4(glm::mat3(camera.GetViewMatrix())); // 从视图矩阵中删除平移
+		skyboxShader.setMat4("view", view);
+		skyboxShader.setMat4("projection", projection);
+		// 天空盒子
+		glBindVertexArray(skyboxVAO);
 		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
+		glDepthFunc(GL_LESS); //当深度值小于当前深度缓冲中的值时候，才会绘制
 
 		// glfw: 交换缓冲区和轮询IO事件（按键按/释放，鼠标移动等）
 		glfwSwapBuffers(window);
@@ -144,9 +169,9 @@ int main()
 
 	//终止，清除之前分配的所有glfw资源。
 	glDeleteVertexArrays(1, &cubeVAO);
-	glDeleteVertexArrays(1, &copyCubeVAO);
+	glDeleteVertexArrays(1, &skyboxVAO);
 	glDeleteBuffers(1, &cubeVBO);
-	glDeleteBuffers(1, &copyCubeVBO);
+	glDeleteBuffers(1, &skyboxVBO);
 
 	//终止，清除之前分配的所有glfw资源。
 	glfwTerminate();
