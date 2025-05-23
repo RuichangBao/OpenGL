@@ -1,6 +1,6 @@
 //https://github.com/LearnOpenGL-CN/LearnOpenGL-CN/blob/new-theme/docs/04%20Advanced%20OpenGL/03%20Blending.md
 //透明度混合
-#include "BlendingDiscard.h"
+#include "UniformBufferObj_gl_FrontFacing.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stbimage/stb_image.h>
@@ -49,7 +49,7 @@ int main()
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	//glDepthFunc(GL_ALWAYS); //总是通过深度测试
-	glEnable(GL_CULL_FACE); //面剔除
+	//glEnable(GL_CULL_FACE); //面剔除
 	// 构建并编译shader程序
 	Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
 
@@ -102,7 +102,8 @@ int main()
 	//glBindVertexArray(0);
 
 	// 加载贴图
-	unsigned int cubeTexture = loadTexture(FileSystem::getPath("resources/textures/marble.jpg").c_str());
+	unsigned int cubeFontTexture = loadTexture(FileSystem::getPath("resources/textures/marble.jpg").c_str());
+	unsigned int cubeBackTexture = loadTexture(FileSystem::getPath("resources/textures/wall.jpg").c_str());
 	unsigned int floorTexture = loadTexture(FileSystem::getPath("resources/textures/metal.png").c_str());
 	unsigned int grassTexture = loadTexture(FileSystem::getPath("resources/textures/grass.png").c_str());//草的贴图
 
@@ -113,7 +114,7 @@ int main()
 		glm::vec3(-0.3f, 0.0f, -2.3f),
 		glm::vec3(0.5f, 0.0f, -0.6f)
 	};
-	
+
 
 	// 配置着色器
 	shader.use();
@@ -143,7 +144,9 @@ int main()
 		// cubes
 		glBindVertexArray(cubeVAO);
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, cubeTexture);
+		glBindTexture(GL_TEXTURE_2D, cubeFontTexture);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, cubeBackTexture);
 		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
 		shader.setMat4("model", model);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -153,12 +156,14 @@ int main()
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		// 地板
 		glBindVertexArray(planeVAO);
+		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, floorTexture);
 		shader.setMat4("model", glm::mat4(1.0f));
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		//glBindVertexArray(0);
 
 		glBindVertexArray(transparentVAO);
+		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, grassTexture);
 		for (unsigned int i = 0; i < vegetation.size(); i++)
 		{

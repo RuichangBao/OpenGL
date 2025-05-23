@@ -1,5 +1,5 @@
 //https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/07%20Advanced%20Data/
-//高级数据Uniform缓冲对象
+//高级GLSL gl_VertexID
 #include "UniformBufferObj_gl_VertexID.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
