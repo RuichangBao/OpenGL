@@ -11,12 +11,12 @@ void main()
     if(gl_FrontFacing) 
     {
         FragColor = texture(frontTexture, TexCoords);
-        // FragColor = vec4(1,0,0,1);
+        // FragColor = vec4(0.5,0.5,0,1);
     }
     else
     {
         FragColor = texture(backTexture, TexCoords);
-        // FragColor = vec4(0,1,0,1);
+        // FragColor = vec4(0,0.5,0.5,1);
     }
     if(FragColor.a < 0.1)
         discard;
