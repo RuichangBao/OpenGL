@@ -129,11 +129,11 @@ int main()
 		//Æ½Ãæ
 		planShader.use();
 		model = glm::mat4(1.0f);
-		shader.setMat4("view", view);
-		shader.setMat4("projection", projection);
+		planShader.setMat4("view", view);
+		planShader.setMat4("projection", projection);
 		glBindVertexArray(planeVAO);
 		glBindTexture(GL_TEXTURE_2D, floorTexture);
-		shader.setMat4("model", model);
+		planShader.setMat4("model", model);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindVertexArray(0);
 
