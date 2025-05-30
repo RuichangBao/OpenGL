@@ -131,6 +131,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_08_05_UniformBufferObj_I
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_08_06_UniformBufferObj_Uniform", "04_08_06_UniformBufferObj_Uniform\04_08_06_UniformBufferObj_Uniform.vcxproj", "{8D9DE9C4-108D-4649-A0CA-6F4B90F49D13}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_09_01_GeometryShaderHouses", "04_09_01_GeometryShaderHouses\04_09_01_GeometryShaderHouses.vcxproj", "{0FD44E0E-8A2A-4723-9EE1-4595720EC3F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -619,6 +621,14 @@ Global
 		{8D9DE9C4-108D-4649-A0CA-6F4B90F49D13}.Release|x64.Build.0 = Release|x64
 		{8D9DE9C4-108D-4649-A0CA-6F4B90F49D13}.Release|x86.ActiveCfg = Release|Win32
 		{8D9DE9C4-108D-4649-A0CA-6F4B90F49D13}.Release|x86.Build.0 = Release|Win32
+		{0FD44E0E-8A2A-4723-9EE1-4595720EC3F9}.Debug|x64.ActiveCfg = Debug|x64
+		{0FD44E0E-8A2A-4723-9EE1-4595720EC3F9}.Debug|x64.Build.0 = Debug|x64
+		{0FD44E0E-8A2A-4723-9EE1-4595720EC3F9}.Debug|x86.ActiveCfg = Debug|Win32
+		{0FD44E0E-8A2A-4723-9EE1-4595720EC3F9}.Debug|x86.Build.0 = Debug|Win32
+		{0FD44E0E-8A2A-4723-9EE1-4595720EC3F9}.Release|x64.ActiveCfg = Release|x64
+		{0FD44E0E-8A2A-4723-9EE1-4595720EC3F9}.Release|x64.Build.0 = Release|x64
+		{0FD44E0E-8A2A-4723-9EE1-4595720EC3F9}.Release|x86.ActiveCfg = Release|Win32
+		{0FD44E0E-8A2A-4723-9EE1-4595720EC3F9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -683,6 +693,7 @@ Global
 		{5F25FA7E-BF01-4B0D-962E-B8AE01952898} = {4272ABA9-C48F-4F67-8E64-519BA7FF0222}
 		{37BD1E6C-309A-40A1-B8E1-06EC2AC555FB} = {4272ABA9-C48F-4F67-8E64-519BA7FF0222}
 		{8D9DE9C4-108D-4649-A0CA-6F4B90F49D13} = {4272ABA9-C48F-4F67-8E64-519BA7FF0222}
+		{0FD44E0E-8A2A-4723-9EE1-4595720EC3F9} = {4272ABA9-C48F-4F67-8E64-519BA7FF0222}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {157ED797-3273-476F-B4CA-7CB538F722B1}
