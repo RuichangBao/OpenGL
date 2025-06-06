@@ -41,19 +41,20 @@ int main()
     // 构建并编译shader程序
     //              顶点着色器            片段着色器                  几何着色器
     Shader shader("Shader/Vertex.shader", "Shader/Fragment.shader", "Shader/Geometry.shader");
-
+    
 
     unsigned int VBO, VAO;
     glGenBuffers(1, &VBO);
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(points), &points, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float)));
     glBindVertexArray(0);
+
 
 
     //循环渲染
@@ -66,7 +67,7 @@ int main()
         // 绘制顶点
         shader.use();
         glBindVertexArray(VAO);
-        glDrawArrays(GL_POINTS, 0, 4);
+        glDrawArrays(GL_LINES, 0, 2);//绘制线段
 
         // glfw: 交换缓冲区和轮询IO事件（按键按/释放，鼠标移动等）
         glfwSwapBuffers(window);

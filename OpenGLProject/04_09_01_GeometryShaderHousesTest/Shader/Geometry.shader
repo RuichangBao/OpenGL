@@ -1,30 +1,21 @@
 #version 330 core
-layout (points) in;
-layout (triangle_strip, max_vertices = 4) out;
-// in vec3 color;
-in VS_OUT {
-    vec3 color;
-} gs_in[];
+layout (lines) in;//输入是线段
+layout (line_strip, max_vertices = 2) out;
 
-out vec3 fColor;
+in vec3[] color;
+out vec3 gColor;
 
-void build_house(vec4 position)
-{   
-    gl_Position = position + vec4(-0.2, 0.0, 0.0, 0.0); //左    
-    fColor = gs_in[0].color; //
-    EmitVertex(); 
-    gl_Position = position + vec4(0.0, sqrt(0.12), 0.0, 0.0); //上
-    fColor = vec3(1, 1, 1);
-    EmitVertex();   
-    gl_Position = position + vec4(0.0, -sqrt(0.12), 0.0, 0.0);//下
-    fColor = gs_in[0].color; //
+void build_house(vec4 position1, vec4 position2)
+{ 
+    gl_Position = position1;
+    gColor = color[0];
     EmitVertex();
-    gl_Position = position + vec4(0.2, 0.0, 0.0, 0.0);//右
-    fColor = gs_in[0].color; //
+    gl_Position = position2; 
+    gColor = color[1];
     EmitVertex();
     EndPrimitive();
 }
 
 void main() {    
-    build_house(gl_in[0].gl_Position);
+    build_house(gl_in[0].gl_Position, gl_in[1].gl_Position);
 }
