@@ -1,6 +1,6 @@
 //https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/09%20Geometry%20Shader/
 //几何着色器
-#include "GeometryShaderHouses.h"
+#include "GeometryShaderHousesTest.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <learnopengl/shader.h>
@@ -21,7 +21,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);//允许修改窗口大小
 #endif
 	// glfw 创建窗口对象
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "GeometryShaderHouses", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "GeometryShaderHousesTest", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "创建GLFW窗口失败" << std::endl;
