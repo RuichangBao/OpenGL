@@ -5,8 +5,8 @@ layout (triangle_strip, max_vertices = 3) out;
 
 uniform float time;
 
-in vec2[] texCoords;
-out vec2 TexCoords;
+in vec2[] vTexCoords;
+out vec2 gTexCoords;
 
 vec3 GetNormal()
 {
@@ -25,13 +25,13 @@ vec4 explode(vec4 position, vec3 normal)
 void main() 
 {
     vec3 normal = GetNormal();
-    TexCoords = texCoords[0];
+    gTexCoords = vTexCoords[0];
     gl_Position = explode(gl_in[0].gl_Position, normal);
     EmitVertex();
-    TexCoords = texCoords[1];
+    gTexCoords = vTexCoords[1];
     gl_Position = explode(gl_in[1].gl_Position, normal); 
     EmitVertex();
-    TexCoords = texCoords[2];
+    gTexCoords = vTexCoords[2];
     gl_Position = explode(gl_in[2].gl_Position, normal); 
     EmitVertex();
     EndPrimitive();
