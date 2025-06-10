@@ -10,16 +10,17 @@
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
     <Filter Include="资源文件">
-      <UniqueIdentifier>{cb0e91e7-208d-4348-94bd-4f5863f27255}</UniqueIdentifier>
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ModelLoading.h">
+    <ClInclude Include="GeometryShaderExploding.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ModelLoading.cpp">
+    <ClCompile Include="GeometryShaderExploding.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\includes\glad\glad.c">

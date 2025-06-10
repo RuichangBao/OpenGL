@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 #include <learnopengl/shader.h>
 #include <learnopengl/filesystem.h>
+#include <learnopengl/model.h>
 
 #include <iostream>
 
