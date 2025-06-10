@@ -1,15 +1,23 @@
 #include <GLFW/glfw3.h>
-
+#include <learnopengl/camera.h>
 // 屏幕宽高
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+//相机
+Camera camera(glm::vec3(0.0f, 0.0f, 4.5f));
+float lastX = SCR_WIDTH / 2.0f;
+float lastY = SCR_HEIGHT / 2.0f;
+bool firstMouse = true;
 
-float points[] = {
-	//位置		  //颜色
-	-0.5f,  0.5f, 1.0f, 0.0f, 0.0f, // top-left
-	 0.5f,  0.5f, 0.0f, 1.0f, 0.0f, // top-right
-	 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, // bottom-right
-	-0.5f, -0.5f, 1.0f, 1.0f, 0.0f  // bottom-left
-};
+
+// timing
+float deltaTime = 0.0f;
+float lastFrame = 0.0f;
+
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);//窗口大小回调函数
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+void processInput(GLFWwindow* window);
+
