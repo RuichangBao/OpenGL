@@ -43,7 +43,9 @@ int main()
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	// 构建并编译shader程序
-	Shader ourShader("shader/Vertex.shader", "shader/Fragment.shader");
+	//Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
+	Shader shader("shader/Vertex.shader", "shader/Fragment.shader","shader/Geometry.shader");
+	
 	Model nanosuit(FileSystem::getPath("resources/objects/nanosuit/nanosuit.obj"));
 	//循环渲染
 	while (!glfwWindowShouldClose(window))
@@ -51,7 +53,7 @@ int main()
 		float currentFrame = static_cast<float>(glfwGetTime());
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
-		glfwFocusWindow(window);//强制获取焦点
+		//glfwFocusWindow(window);//强制获取焦点
 		//输入检查
 		processInput(window);
 
@@ -60,22 +62,25 @@ int main()
 		//glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
 
-		ourShader.use();
+		shader.use();
 
 		//模型矩阵
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, -5.0f, -15.0f)); // translate it down so it's at the center of the scene
 		model = glm::scale(model, glm::vec3(0.8f, 0.8f, 0.8f));	// it's a bit too big for our scene, so scale it down
-		ourShader.setMat4("model", model);
+		shader.setMat4("model", model);
 
 		//观察矩阵
 		glm::mat4 view = camera.GetViewMatrix();
-		ourShader.setMat4("view", view);
+		shader.setMat4("view", view);
 
 		//投影矩阵
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-		ourShader.setMat4("projection", projection);
-		nanosuit.Draw(ourShader);
+		shader.setMat4("projection", projection);
+
+		shader.setFloat("time", static_cast<float>(glfwGetTime()));
+
+		nanosuit.Draw(shader);
 
 		// glfw: 交换缓冲区和轮询IO事件（按键按/释放，鼠标移动等）
 		glfwSwapBuffers(window);
