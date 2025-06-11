@@ -1,5 +1,5 @@
 //https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/09%20Geometry%20Shader/
-//爆炸物体
+//爆炸效果
 #include "GeometryShaderExploding.h"
 #include <iostream>
 
