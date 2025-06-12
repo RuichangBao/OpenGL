@@ -1,14 +1,12 @@
-//https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/09%20Geometry%20Shader/
-//爆炸效果
-#include "GeometryShaderExploding.h"
+//https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/10%20Instancing/
+//实例化
+#include "InstancingQuads.h"
 #include <iostream>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <learnopengl/model.h>
 #include <learnopengl/filesystem.h>
-#include <learnopengl/shader_m.h>
-
+#include <learnopengl/shader.h>
 
 using namespace std;
 
@@ -23,7 +21,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);//允许修改窗口大小
 #endif
 	// glfw 创建窗口对象
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "GeometryShaderExploding", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "InstancingQuads", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "创建GLFW窗口失败" << std::endl;
@@ -43,10 +41,57 @@ int main()
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	// 构建并编译shader程序
-	//Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
-	Shader shader("shader/Vertex.shader", "shader/Fragment.shader","shader/Geometry.shader");
+	Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
+	shader.use();
+
+
+	unsigned int VBO, quadVAO;//顶点缓冲对象
+	// 0. 复制顶点数组到缓冲中供OpenGL使用
+	glGenVertexArrays(1, &quadVAO);
+	glGenBuffers(1, &VBO);//生成顶点缓存对象VBO(Vertex Buffer Object)对象
+	// 1. 绑定VAO
+	glBindVertexArray(quadVAO);
+	// 2. 把顶点数组复制到缓冲中供OpenGL使用
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), quadVertices, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float)));
 	
-	Model nanosuit(FileSystem::getPath("resources/objects/nanosuit/nanosuit.obj"));
+
+	//偏移信息
+	glm::vec2 translations[100];
+	int index = 0;
+	float offset = 0.1f;
+	for (int y = -10; y < 10; y += 2)
+	{
+		for (int x = -10; x < 10; x += 2)
+		{
+			glm::vec2 translation;
+			translation.x = (float)x / 10.0f + offset;
+			translation.y = (float)y / 10.0f + offset;
+			translations[index++] = translation;
+		}
+	}
+
+	for (unsigned int i = 0; i < 100; i++)
+	{
+		shader.setVec2(("offsets[" + std::to_string(i) + "]"), translations[i]);
+	}
+	// store instance data in an array buffer
+	//unsigned int instanceVBO;
+	//glGenBuffers(1, &instanceVBO);
+	//glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec2) * 100, &translations[0], GL_STATIC_DRAW);
+	//glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	//glEnableVertexAttribArray(2);
+	//glBindBuffer(GL_ARRAY_BUFFER, instanceVBO); // this attribute comes from a different vertex buffer
+	//glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+	//glBindBuffer(GL_ARRAY_BUFFER, 0);
+	//glVertexAttribDivisor(2, 1); // tell OpenGL this is an instanced vertex attribute.
+
 	//循环渲染
 	while (!glfwWindowShouldClose(window))
 	{
@@ -62,12 +107,11 @@ int main()
 		//glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
 
-		shader.use();
 
 		//模型矩阵
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, -5.0f, -15.0f)); // translate it down so it's at the center of the scene
-		model = glm::scale(model, glm::vec3(0.8f, 0.8f, 0.8f));	// it's a bit too big for our scene, so scale it down
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -5.0f)); // translate it down so it's at the center of the scene
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
 		shader.setMat4("model", model);
 
 		//观察矩阵
@@ -78,9 +122,13 @@ int main()
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		shader.setMat4("projection", projection);
 
-		shader.setFloat("time", static_cast<float>(glfwGetTime()));
+	/*	glBindVertexArray(quadVAO);
+		glDrawArrays(GL_TRIANGLES, 0, 6);*/
 
-		nanosuit.Draw(shader);
+		glBindVertexArray(quadVAO);
+		glDrawArraysInstanced(GL_TRIANGLES, 0, 6, 100);
+
+		glBindVertexArray(0);
 
 		// glfw: 交换缓冲区和轮询IO事件（按键按/释放，鼠标移动等）
 		glfwSwapBuffers(window);
@@ -88,7 +136,8 @@ int main()
 	}
 
 	//终止，清除之前分配的所有glfw资源。
-
+	glDeleteVertexArrays(1, &quadVAO);
+	glDeleteBuffers(1, &VBO);
 
 	//终止，清除之前分配的所有glfw资源。
 	glfwTerminate();

@@ -21,7 +21,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);//允许修改窗口大小
 #endif
 	// glfw 创建窗口对象
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "ModelLoading", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "GeometryShaderExplodingCube", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "创建GLFW窗口失败" << std::endl;
@@ -40,8 +40,8 @@ int main()
 		return -1;
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
-	glEnable(GL_CULL_FACE);	//启用剔除功能
-	glCullFace(GL_BACK);	//剔除背面
+	//glEnable(GL_CULL_FACE);	//启用剔除功能
+	//glCullFace(GL_BACK);	//剔除背面
 	// 构建并编译shader程序
 	//Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
 	Shader shader("shader/Vertex.shader", "shader/Fragment.shader","shader/Geometry.shader");
