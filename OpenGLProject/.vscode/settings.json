@@ -10,5 +10,6 @@
         
         "**/Debug":true,
         "**/x64":true,
-    }
+    },
+    "cmake.ignoreCMakeListsMissing": true
 }
