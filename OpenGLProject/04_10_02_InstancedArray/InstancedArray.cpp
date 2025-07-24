@@ -43,23 +43,47 @@ int main()
 	// 构建并编译shader程序
 	Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
 	shader.use();
+	
+	//偏移信息
+	glm::vec2 translations[100];
+	int index = 0;
+	float offset = 0.1f;
+	for (int y = -10; y < 10; y += 2)
+	{
+		for (int x = -10; x < 10; x += 2)
+		{
+			glm::vec2 translation;
+			translation.x = (float)x / 10.0f + offset;
+			translation.y = (float)y / 10.0f + offset;
+			translations[index++] = translation;
+		}
+	}
+	unsigned int instanceVBO;
+	glGenBuffers(1, &instanceVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec2) * 100, &translations[0], GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 
-	unsigned int VBO, quadVAO;//顶点缓冲对象
+	unsigned int VBO, VAO;//顶点缓冲对象
 	// 0. 复制顶点数组到缓冲中供OpenGL使用
-	glGenVertexArrays(1, &quadVAO);
+	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);//生成顶点缓存对象VBO(Vertex Buffer Object)对象
 	// 1. 绑定VAO
-	glBindVertexArray(quadVAO);
+	glBindVertexArray(VAO);
 	// 2. 把顶点数组复制到缓冲中供OpenGL使用
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), quadVertices, GL_STATIC_DRAW);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(2 * sizeof(float)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float)));
+	//设置实例数据
 	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(5 * sizeof(float)));
+	glBindBuffer(GL_ARRAY_BUFFER, instanceVBO); // 这个属性来自不同的顶点缓冲区
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glVertexAttribDivisor(2, 1); // 告诉了OpenGL该什么时候更新顶点属性的内容至新一组数据
 	//循环渲染
 	while (!glfwWindowShouldClose(window))
 	{
@@ -93,7 +117,7 @@ int main()
 	/*	glBindVertexArray(quadVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 6);*/
 
-		glBindVertexArray(quadVAO);
+		glBindVertexArray(VAO);
 		glDrawArraysInstanced(GL_TRIANGLES, 0, 6, 100);
 		//glDrawArrays(GL_TRIANGLES, 0, 6);
 
@@ -105,7 +129,7 @@ int main()
 	}
 
 	//终止，清除之前分配的所有glfw资源。
-	glDeleteVertexArrays(1, &quadVAO);
+	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 
 	//终止，清除之前分配的所有glfw资源。

@@ -7,7 +7,7 @@ layout(location = 2) in vec2 offset;    //偏移量
 uniform mat4 model;//模型矩阵	
 uniform mat4 view;//观察矩阵
 uniform mat4 projection;//投影矩阵
-uniform vec2 offsets[100];
+// uniform vec2 offsets[100];
 out vec3 fColor;
 
 void main()
