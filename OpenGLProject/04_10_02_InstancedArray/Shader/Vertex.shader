@@ -12,7 +12,7 @@ out vec3 fColor;
 
 void main()
 {
-    fColor = aColor;
+    // fColor = aColor;
     fColor = vec3(gl_InstanceID/100.0f, gl_InstanceID/100.0f, 1.0f);
     // fColor = vec3(gl_InstanceID/100.0f, 0, 0);
     // vec2 offset = offsets[gl_InstanceID];

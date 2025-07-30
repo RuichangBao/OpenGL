@@ -5,7 +5,7 @@ const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
 //相机
-Camera camera(glm::vec3(0.0f, 0.0f, 4.5f));
+Camera camera(glm::vec3(0.0f, 0.0f, 55.0f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
@@ -21,13 +21,13 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 
-float quadVertices[] = {
-    // 位置          // 颜色
-    -0.05f,  0.05f,  1.0f, 0.0f, 0.0f,
-     0.05f, -0.05f,  0.0f, 1.0f, 0.0f,
-    -0.05f, -0.05f,  0.0f, 0.0f, 1.0f,
-
-    -0.05f,  0.05f,  1.0f, 0.0f, 0.0f,
-     0.05f, -0.05f,  0.0f, 1.0f, 0.0f,
-     0.05f,  0.05f,  0.0f, 1.0f, 1.0f
-};
+//float quadVertices[] = {
+//    // 位置          // 颜色
+//    -0.05f,  0.05f,  1.0f, 0.0f, 0.0f,
+//     0.05f, -0.05f,  0.0f, 1.0f, 0.0f,
+//    -0.05f, -0.05f,  0.0f, 0.0f, 1.0f,
+//
+//    -0.05f,  0.05f,  1.0f, 0.0f, 0.0f,
+//     0.05f, -0.05f,  0.0f, 1.0f, 0.0f,
+//     0.05f,  0.05f,  0.0f, 1.0f, 1.0f
+//};

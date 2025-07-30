@@ -83,6 +83,7 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, instanceVBO); // 这个属性来自不同的顶点缓冲区
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	//(GLuint index 顶点属性位置, GLuint divisor 每渲染多少个实例侯更新)
 	glVertexAttribDivisor(2, 1); // 告诉了OpenGL该什么时候更新顶点属性的内容至新一组数据
 	//循环渲染
 	while (!glfwWindowShouldClose(window))

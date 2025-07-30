@@ -1,3 +1,5 @@
+//https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/10%20Instancing/
+//星云带
 #include "Asteroids.h"
 #include <iostream>
 #include <glad/glad.h>
@@ -49,46 +51,42 @@ int main()
 	Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
 	shader.use();
 
-	//偏移信息
-	glm::vec2 translations[100];
-	int index = 0;
-	float offset = 0.1f;
-	for (int y = -10; y < 10; y += 2)
+	//加载模型
+	Model rock(FileSystem::getPath("resources/objects/rock/rock.obj"));
+	Model planet(FileSystem::getPath("resources/objects/planet/planet.obj"));
+	
+	//生成一个大的半随机模型转换矩阵列表
+	unsigned int amount = 1000;
+	glm::mat4* modelMatrices;
+	modelMatrices = new glm::mat4[amount];
+	srand(static_cast<unsigned int>(glfwGetTime())); //初始化随机种子
+	float radius = 50.0;	//半径
+	float offset = 2.5f;
+	for (unsigned int i = 0; i < amount; i++)
 	{
-		for (int x = -10; x < 10; x += 2)
-		{
-			glm::vec2 translation;
-			translation.x = (float)x / 10.0f + offset;
-			translation.y = (float)y / 10.0f + offset;
-			translations[index++] = translation;
-		}
+		glm::mat4 model = glm::mat4(1.0f);
+		//在半径内移动 位置
+		float angle = (float)i / (float)amount * 360.0f; //按角度平分
+		float displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;//[-2.5,2.5]
+		float x = sin(angle) * radius + displacement;
+		displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;
+		float y = displacement * 0.4f;	//保持小行星场的高度小于x和z的宽度
+		displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;
+		float z = cos(angle) * radius + displacement;
+		model = glm::translate(model, glm::vec3(x, y, z));
+
+		// 2. 缩放[0.05,0.25]
+		float scale = static_cast<float>((rand() % 20) / 100.0 + 0.05);
+		model = glm::scale(model, glm::vec3(scale));
+
+		// 3. rotation: add random rotation around a (semi)randomly picked rotation axis vector
+		float rotAngle = static_cast<float>((rand() % 360));
+		model = glm::rotate(model, rotAngle, glm::vec3(0.4f, 0.6f, 0.8f));
+
+		// 4. now add to list of matrices
+		modelMatrices[i] = model;
 	}
-	unsigned int instanceVBO;
-	glGenBuffers(1, &instanceVBO);
-	glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec2) * 100, &translations[0], GL_STATIC_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-
-	unsigned int VBO, VAO;//顶点缓冲对象
-	// 0. 复制顶点数组到缓冲中供OpenGL使用
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);//生成顶点缓存对象VBO(Vertex Buffer Object)对象
-	// 1. 绑定VAO
-	glBindVertexArray(VAO);
-	// 2. 把顶点数组复制到缓冲中供OpenGL使用
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), quadVertices, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float)));
-	//设置实例数据
-	glEnableVertexAttribArray(2);
-	glBindBuffer(GL_ARRAY_BUFFER, instanceVBO); // 这个属性来自不同的顶点缓冲区
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glVertexAttribDivisor(2, 1); // 告诉了OpenGL该什么时候更新顶点属性的内容至新一组数据
 	//循环渲染
 	while (!glfwWindowShouldClose(window))
 	{
@@ -103,40 +101,31 @@ int main()
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);//清空屏幕所用的颜色
 		//glClear(GL_COLOR_BUFFER_BIT);//清空颜色缓冲区
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
-
-
-		//模型矩阵
-		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -5.0f)); // translate it down so it's at the center of the scene
-		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
-		shader.setMat4("model", model);
-
+		
+		//投影矩阵
+		glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 1000.0f);
 		//观察矩阵
-		glm::mat4 view = camera.GetViewMatrix();
+		glm::mat4 view = camera.GetViewMatrix();;
+		shader.use();
+		shader.setMat4("projection", projection);
 		shader.setMat4("view", view);
 
-		//投影矩阵
-		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-		shader.setMat4("projection", projection);
+		//绘制地球
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, -3.0f, 0.0f)); // translate it down so it's at the center of the scene
+		model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));	// it's a bit too big for our scene, so scale it down
+		shader.setMat4("model", model);
+		planet.Draw(shader);
 
-		/*	glBindVertexArray(quadVAO);
-			glDrawArrays(GL_TRIANGLES, 0, 6);*/
-
-		glBindVertexArray(VAO);
-		glDrawArraysInstanced(GL_TRIANGLES, 0, 6, 100);
-		//glDrawArrays(GL_TRIANGLES, 0, 6);
-
-		glBindVertexArray(0);
-
+		for (unsigned int i = 0; i < amount; i++)
+		{
+			shader.setMat4("model", modelMatrices[i]);
+			rock.Draw(shader);
+		}
 		// glfw: 交换缓冲区和轮询IO事件（按键按/释放，鼠标移动等）
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-
-	//终止，清除之前分配的所有glfw资源。
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
-
 	//终止，清除之前分配的所有glfw资源。
 	glfwTerminate();
 	return 0;

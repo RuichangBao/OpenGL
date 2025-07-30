@@ -1,12 +1,12 @@
 /*片段着色器**/
 #version 330 core
 
-uniform vec2 offsets[100];
-in vec3 fColor;
+in vec2 TexCoords;
+uniform sampler2D texture_diffuse1;
 
 out vec4 FragColor;
 
 void main()
 {
-   FragColor = vec4(fColor, 1);
+   FragColor = texture(texture_diffuse1, TexCoords);
 }
