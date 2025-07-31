@@ -56,7 +56,7 @@ int main()
 	Model planet(FileSystem::getPath("resources/objects/planet/planet.obj"));
 	
 	//生成一个大的半随机模型转换矩阵列表
-	unsigned int amount = 1000;
+	unsigned int amount = 100000;
 	glm::mat4* modelMatrices;
 	modelMatrices = new glm::mat4[amount];
 	srand(static_cast<unsigned int>(glfwGetTime())); //初始化随机种子
@@ -69,9 +69,9 @@ int main()
 		float angle = (float)i / (float)amount * 360.0f; //按角度平分
 		float displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;//[-2.5,2.5]
 		float x = sin(angle) * radius + displacement;
-		displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;
+		displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;//[-2.5,2.5]
 		float y = displacement * 0.4f;	//保持小行星场的高度小于x和z的宽度
-		displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;
+		displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;//[-2.5,2.5]
 		float z = cos(angle) * radius + displacement;
 		model = glm::translate(model, glm::vec3(x, y, z));
 
