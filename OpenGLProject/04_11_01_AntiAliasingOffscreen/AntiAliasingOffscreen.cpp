@@ -72,6 +72,14 @@ int main()
 	glGenFramebuffers(1, &framebuffer);//创建帧缓冲
 	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);//绑定帧缓冲
 
+	//unsigned int textureColorBufferMultiSampled;
+	//glGenTextures(1, &textureColorBufferMultiSampled);
+	//glBindTexture(GL_TEXTURE_2D, textureColorBufferMultiSampled);
+	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCR_WIDTH, SCR_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);	//纹理缩小过滤方式 双线性插值
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);	//纹理放大过滤方式 双线性插值
+	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorBufferMultiSampled, 0);	//将纹理附加到帧缓冲上
+	
 	//创建一个多重采样抗锯齿纹理附件(纹理附件)
 	unsigned int textureColorBufferMultiSampled;
 	glGenTextures(1, &textureColorBufferMultiSampled);
@@ -84,10 +92,10 @@ int main()
 	unsigned int rbo;
 	glGenRenderbuffers(1, &rbo);
 	glBindRenderbuffer(GL_RENDERBUFFER, rbo);
-	glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH24_STENCIL8, SCR_WIDTH, SCR_HEIGHT);
+	//glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, SCR_WIDTH, SCR_HEIGHT);		// 深度缓冲和模板缓冲使用的是帧缓冲(普通帧渲染)
+	glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH24_STENCIL8, SCR_WIDTH, SCR_HEIGHT);//绑定多重采样渲染对象
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
-	//总结：不需要从帧缓冲中采样，使用渲染缓冲作为帧缓冲的附件，如果需要从缓冲中采样颜色或深度值等数据，那么你应该选择纹理附件
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo); //将深度信息和模板缓冲信息附加到帧缓冲
 	// 创建帧缓冲并且添加了附件，检查
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		cout << "错误::帧缓冲:: 帧缓冲不完整!" << endl;
@@ -95,7 +103,7 @@ int main()
 		cout << "完整的帧缓冲" << endl;
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-	// 配置第二个后处理帧缓冲区
+	//配置第二个后处理帧缓冲区
 	unsigned int intermediateFBO;
 	glGenFramebuffers(1, &intermediateFBO);
 	glBindFramebuffer(GL_FRAMEBUFFER, intermediateFBO);
