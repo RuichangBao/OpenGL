@@ -56,7 +56,7 @@ int main()
 	Model planet(FileSystem::getPath("resources/objects/planet/planet.obj"));
 	
 	//生成一个大的半随机模型转换矩阵列表
-	unsigned int amount = 100000;
+	unsigned int amount = 1000;
 	glm::mat4* modelMatrices;
 	modelMatrices = new glm::mat4[amount];
 	srand(static_cast<unsigned int>(glfwGetTime())); //初始化随机种子

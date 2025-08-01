@@ -151,6 +151,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_10_04_AsteroidsInstanced
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_11_01_AntiAliasingMsaa", "04_11_01_AntiAliasingMsaa\04_11_01_AntiAliasingMsaa.vcxproj", "{15B88980-670F-42C5-9D08-8123F037A919}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_11_01_AntiAliasingOffscreen", "04_11_01_AntiAliasingOffscreen\04_11_01_AntiAliasingOffscreen.vcxproj", "{80A79F03-A862-48FC-B4AC-53BCA02F2D2E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -719,6 +721,14 @@ Global
 		{15B88980-670F-42C5-9D08-8123F037A919}.Release|x64.Build.0 = Release|x64
 		{15B88980-670F-42C5-9D08-8123F037A919}.Release|x86.ActiveCfg = Release|Win32
 		{15B88980-670F-42C5-9D08-8123F037A919}.Release|x86.Build.0 = Release|Win32
+		{80A79F03-A862-48FC-B4AC-53BCA02F2D2E}.Debug|x64.ActiveCfg = Debug|x64
+		{80A79F03-A862-48FC-B4AC-53BCA02F2D2E}.Debug|x64.Build.0 = Debug|x64
+		{80A79F03-A862-48FC-B4AC-53BCA02F2D2E}.Debug|x86.ActiveCfg = Debug|Win32
+		{80A79F03-A862-48FC-B4AC-53BCA02F2D2E}.Debug|x86.Build.0 = Debug|Win32
+		{80A79F03-A862-48FC-B4AC-53BCA02F2D2E}.Release|x64.ActiveCfg = Release|x64
+		{80A79F03-A862-48FC-B4AC-53BCA02F2D2E}.Release|x64.Build.0 = Release|x64
+		{80A79F03-A862-48FC-B4AC-53BCA02F2D2E}.Release|x86.ActiveCfg = Release|Win32
+		{80A79F03-A862-48FC-B4AC-53BCA02F2D2E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -793,6 +803,7 @@ Global
 		{9439071A-A857-42CA-BC0F-B5EF63C33D63} = {4272ABA9-C48F-4F67-8E64-519BA7FF0222}
 		{25420861-DDC3-4F9B-9083-35703EFD23C2} = {4272ABA9-C48F-4F67-8E64-519BA7FF0222}
 		{15B88980-670F-42C5-9D08-8123F037A919} = {4272ABA9-C48F-4F67-8E64-519BA7FF0222}
+		{80A79F03-A862-48FC-B4AC-53BCA02F2D2E} = {4272ABA9-C48F-4F67-8E64-519BA7FF0222}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {157ED797-3273-476F-B4CA-7CB538F722B1}

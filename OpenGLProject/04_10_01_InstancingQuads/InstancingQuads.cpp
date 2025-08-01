@@ -110,12 +110,10 @@ int main()
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		shader.setMat4("projection", projection);
 
-	/*	glBindVertexArray(quadVAO);
-		glDrawArrays(GL_TRIANGLES, 0, 6);*/
-
 		glBindVertexArray(quadVAO);
-		glDrawArraysInstanced(GL_TRIANGLES, 0, 6, 100);
 		//glDrawArrays(GL_TRIANGLES, 0, 6);
+		glDrawArraysInstanced(GL_TRIANGLES, 0, 6, 100);
+		
 
 		glBindVertexArray(0);
 
