@@ -1,3 +1,5 @@
+//https://learnopengl-cn.github.io/04%20Advanced%20OpenGL/11%20Anti%20Aliasing/
+//¿¹¾â³Ý
 #include "AntiAliasingMsaa.h"
 #include<iostream>
 #include <learnopengl/shader.h>
