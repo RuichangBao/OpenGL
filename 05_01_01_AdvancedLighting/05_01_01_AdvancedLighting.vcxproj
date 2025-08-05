@@ -132,10 +132,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\includes\StbImage\stb_image.h" />
     <ClInclude Include="AdvancedLighting.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\includes\glad\glad.c" />
+    <ClCompile Include="..\includes\StbImage\stb_image.cpp" />
     <ClCompile Include="AdvancedLighting.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

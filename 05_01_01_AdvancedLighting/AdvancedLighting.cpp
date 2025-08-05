@@ -2,7 +2,8 @@
 #include "AdvancedLighting.h"
 #include<iostream>
 #include <learnopengl/shader.h>
-
+#include <stbimage/stb_image.h>
+#include <learnopengl/filesystem.h>
 using namespace std;
 
 int main()
@@ -52,10 +53,16 @@ int main()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(planeVertices), planeVertices, GL_STATIC_DRAW);
 	// 位置属性
 	glEnableVertexAttribArray(0);	//启用顶点属性
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-
-
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(1);	
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)3);
+	glEnableVertexAttribArray(2);	
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)6);
+	glBindVertexArray(0);
+	unsigned int floorTexture = loadTexture(FileSystem::getPath("resources/textures/wood.png").c_str());
 	shader.use();
+	shader.setInt("texture1", 0);
+	glm::vec3 lightPos(0.0f, 0.0f, 0.0f);
 	//循环渲染
 	while (!glfwWindowShouldClose(window))
 	{
@@ -84,6 +91,11 @@ int main()
 		shader.setMat4("view", view);
 		shader.setMat4("model", model);
 		shader.setMat4("projection", projection);
+
+		// set light uniforms
+		shader.setVec3("viewPos", camera.Position);
+		shader.setVec3("lightPos", lightPos);
+		shader.setInt("blinn", blinn);
 
 		glBindVertexArray(planeVAO);//绑定顶点数组
 		glDrawArrays(GL_TRIANGLES, 0, 6);
@@ -115,6 +127,15 @@ void processInput(GLFWwindow* window)
 		camera.ProcessKeyboard(LEFT, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera.ProcessKeyboard(RIGHT, deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS && !blinnKeyPressed)
+	{
+		blinn = !blinn;
+		blinnKeyPressed = true;
+	}
+	if (glfwGetKey(window, GLFW_KEY_B) == GLFW_RELEASE)
+	{
+		blinnKeyPressed = false;
+	}
 }
 
 /// <summary>鼠标输入</summary>
@@ -147,4 +168,42 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	//cout << "窗口大小改变" << width << "  " << height << endl;
 	glViewport(0, 0, width, height);//确保视口匹配新的窗口尺寸；
+}
+unsigned int loadTexture(char const* path)
+{
+	// 加载创建一个纹理对象
+	unsigned int textureID;
+	glGenTextures(1, &textureID);//生成纹理对象
+
+	//设置纹理环绕
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);//重复平铺
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);//重复平铺
+	//设置缩小时候的过滤方式
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//加载图像，创建纹理生成贴图
+	int width, height, nrChannels;
+	unsigned char* data = stbi_load(path, &width, &height, &nrChannels, 0);
+
+	if (data)
+	{
+		GLenum format;
+		if (nrChannels == 1)
+			format = GL_RED;
+		else if (nrChannels == 3)
+			format = GL_RGB;
+		else if (nrChannels == 4)
+			format = GL_RGBA;
+		glBindTexture(GL_TEXTURE_2D, textureID);// 绑定纹理对象
+		//图像数据上传到 GPU 并定义纹理的格式和数据
+		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+		//生成 Mipmap 纹理层级
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		std::cout << "图片加载失败" << std::endl;
+	}
+	stbi_image_free(data);//释放函数分配的图像内存
+	return textureID;
 }
