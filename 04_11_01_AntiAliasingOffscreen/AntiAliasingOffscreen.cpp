@@ -74,14 +74,6 @@ int main()
 	glGenFramebuffers(1, &framebuffer);//创建帧缓冲
 	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);//绑定帧缓冲
 
-	//unsigned int textureColorBufferMultiSampled;
-	//glGenTextures(1, &textureColorBufferMultiSampled);
-	//glBindTexture(GL_TEXTURE_2D, textureColorBufferMultiSampled);
-	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCR_WIDTH, SCR_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);	//纹理缩小过滤方式 双线性插值
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);	//纹理放大过滤方式 双线性插值
-	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorBufferMultiSampled, 0);	//将纹理附加到帧缓冲上
-	
 	//创建一个多重采样抗锯齿纹理附件(纹理附件)
 	unsigned int textureColorBufferMultiSampled;
 	glGenTextures(1, &textureColorBufferMultiSampled);

@@ -1,5 +1,6 @@
-//https://learnopengl-cn.github.io/05%20Advanced%20Lighting/01%20Advanced%20Lighting
-#include "AdvancedLighting.h"
+//https://learnopengl-cn.github.io/05%20Advanced%20Lighting/02%20Gamma%20Correction/
+//伽马校正
+#include "GammaCorrection.h"
 #include<iostream>
 #include <learnopengl/shader.h>
 #include <stbimage/stb_image.h>
@@ -18,7 +19,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);//允许修改窗口大小
 #endif
 	// glfw 创建窗口对象
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "AntiAliasingOffscreen", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "GammaCorrection", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "创建GLFW窗口失败" << std::endl;
@@ -42,27 +43,30 @@ int main()
 	//glEnable(GL_MULTISAMPLE); //（多重采样抗锯齿）在某些驱动程序上默认启用，但并非全部启用，因此始终启用以确保
 	// 构建并编译shader程序
 	Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
-	unsigned int planVBO, planeVAO;
+	unsigned int planeVBO, planeVAO;
 	glGenVertexArrays(1, &planeVAO);//生成顶点数组对象。VAO 在 OpenGL 中用来存储顶点属性的配置，以便在后续绘制时快速访问这些属性。
-	glGenBuffers(1, &planVBO);		//生成顶点缓存对象VBO(Vertex Buffer Object)对象
+	glGenBuffers(1, &planeVBO);		//生成顶点缓存对象VBO(Vertex Buffer Object)对象
 
 	glBindVertexArray(planeVAO);//绑定顶点数组对象
 	// 2. 把顶点数组复制到缓冲中供OpenGL使用
 	//绑定 VBO 并传输顶点数据
-	glBindBuffer(GL_ARRAY_BUFFER, planVBO);//GL_ARRAY_BUFFER:顶点缓冲对象的绑定目标
+	glBindBuffer(GL_ARRAY_BUFFER, planeVBO);//GL_ARRAY_BUFFER:顶点缓冲对象的绑定目标
 	glBufferData(GL_ARRAY_BUFFER, sizeof(planeVertices), planeVertices, GL_STATIC_DRAW);
 	// 位置属性
 	glEnableVertexAttribArray(0);	//启用顶点属性
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(1);	
+	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(2);	
+	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 	glBindVertexArray(0);
-	unsigned int floorTexture = loadTexture(FileSystem::getPath("resources/textures/wood.png").c_str());
+
+	unsigned int floorTexture = loadTexture(FileSystem::getPath("resources/textures/wood.png").c_str(), false);
+	unsigned int floorTextureGammaCorrected = loadTexture(FileSystem::getPath("resources/textures/wood.png").c_str(), true);
+
 	shader.use();
-	shader.setInt("texture1", 0);
-	glm::vec3 lightPos(0.0f, 0.0f, 0.0f);
+	shader.setInt("floorTexture", 0);
+
 	//循环渲染
 	while (!glfwWindowShouldClose(window))
 	{
@@ -72,10 +76,8 @@ int main()
 		//输入检查
 		processInput(window);
 		// 渲染
-		glEnable(GL_DEPTH_TEST); // 启用深度测试（渲染屏幕空间四边形时禁用）
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);//清空屏幕所用的颜色
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
-		glEnable(GL_DEPTH_TEST);
 
 		//渲染一个物体时要使用着色器程序
 		shader.use();
@@ -93,11 +95,14 @@ int main()
 		shader.setMat4("projection", projection);
 
 		// set light uniforms
+		glUniform3fv(glGetUniformLocation(shader.ID, "lightPositions"), 4, &lightPositions[0][0]);
+		glUniform3fv(glGetUniformLocation(shader.ID, "lightColors"), 4, &lightColors[0][0]);
 		shader.setVec3("viewPos", camera.Position);
-		shader.setVec3("lightPos", lightPos);
-		shader.setInt("blinn", blinn);
+		shader.setInt("gamma", gammaEnabled);
 
 		glBindVertexArray(planeVAO);//绑定顶点数组
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, gammaEnabled ? floorTextureGammaCorrected : floorTexture);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		glfwSwapBuffers(window);//交换颜色缓冲区
@@ -106,13 +111,12 @@ int main()
 
 	//终止，清除之前分配的所有glfw资源。
 	glDeleteVertexArrays(1, &planeVAO);
-	glDeleteBuffers(1, &planVBO);
+	glDeleteBuffers(1, &planeVBO);
 	//终止，清除之前分配的所有glfw资源。
 	glfwTerminate();
 
 	return 0;
 }
-
 
 void processInput(GLFWwindow* window)
 {
@@ -132,9 +136,14 @@ void processInput(GLFWwindow* window)
 		blinn = !blinn;
 		blinnKeyPressed = true;
 	}
-	if (glfwGetKey(window, GLFW_KEY_B) == GLFW_RELEASE)
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && !gammaKeyPressed)
 	{
-		blinnKeyPressed = false;
+		gammaEnabled = !gammaEnabled;
+		gammaKeyPressed = true;
+	}
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_RELEASE)
+	{
+		gammaKeyPressed = false;
 	}
 }
 
@@ -169,36 +178,44 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	//cout << "窗口大小改变" << width << "  " << height << endl;
 	glViewport(0, 0, width, height);//确保视口匹配新的窗口尺寸；
 }
-unsigned int loadTexture(char const* path)
+unsigned int loadTexture(char const* path, bool gammaCorrection)
 {
 	// 加载创建一个纹理对象
 	unsigned int textureID;
 	glGenTextures(1, &textureID);//生成纹理对象
 
-	//设置纹理环绕
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);//重复平铺
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);//重复平铺
-	//设置缩小时候的过滤方式
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	//加载图像，创建纹理生成贴图
 	int width, height, nrChannels;
 	unsigned char* data = stbi_load(path, &width, &height, &nrChannels, 0);
 
 	if (data)
 	{
-		GLenum format;
+		GLenum internalFormat;
+		GLenum dataFormat;
 		if (nrChannels == 1)
-			format = GL_RED;
+			dataFormat = GL_RED;
 		else if (nrChannels == 3)
-			format = GL_RGB;
+		{
+			internalFormat = gammaCorrection ? GL_SRGB : GL_RGB;
+			dataFormat = GL_RGB;
+		}
 		else if (nrChannels == 4)
-			format = GL_RGBA;
+		{
+			internalFormat = gammaCorrection ? GL_SRGB_ALPHA : GL_RGBA;
+			dataFormat = GL_RGBA;
+		}
 		glBindTexture(GL_TEXTURE_2D, textureID);// 绑定纹理对象
 		//图像数据上传到 GPU 并定义纹理的格式和数据
-		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, dataFormat, GL_UNSIGNED_BYTE, data);
 		//生成 Mipmap 纹理层级
-		glGenerateMipmap(GL_TEXTURE_2D);
+		glGenerateMipmap(GL_TEXTURE_2D); 
+
+		//设置纹理环绕
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);//重复平铺
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);//重复平铺
+		//设置缩小时候的过滤方式
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}
 	else
 	{
