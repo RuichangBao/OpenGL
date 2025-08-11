@@ -61,7 +61,9 @@ int main()
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 	glBindVertexArray(0);
 
+	//伽马校正前的纹理（上拱过的纹理）
 	unsigned int floorTexture = loadTexture(FileSystem::getPath("resources/textures/wood.png").c_str(), false);
+	//伽马校正后的纹理（线性纹理）
 	unsigned int floorTextureGammaCorrected = loadTexture(FileSystem::getPath("resources/textures/wood.png").c_str(), true);
 
 	shader.use();
@@ -178,6 +180,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	//cout << "窗口大小改变" << width << "  " << height << endl;
 	glViewport(0, 0, width, height);//确保视口匹配新的窗口尺寸；
 }
+//gammaCorrection 自动进行伽马校正
 unsigned int loadTexture(char const* path, bool gammaCorrection)
 {
 	// 加载创建一个纹理对象
