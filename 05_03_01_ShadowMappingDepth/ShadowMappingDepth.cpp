@@ -80,8 +80,8 @@ int main()
 	//附加深度纹理作为FBO的深度缓冲
 	glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
-	glDrawBuffer(GL_NONE);
-	glReadBuffer(GL_NONE);
+	glDrawBuffer(GL_NONE);//不需要写帧缓冲
+	glReadBuffer(GL_NONE);//不需要读帧缓冲
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	debugDepthQuad.use();
@@ -101,8 +101,9 @@ int main()
 		//1. 渲染场景到纹理的深度（从光的角度）
 		glm::mat4 lightProjection, lightView;
 		glm::mat4 lightSpaceMatrix;
+		//光源使用正交投影矩阵
 		float near_plane = 1.0f, far_plane = 7.5f;
-		lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
+		lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);//创建正交投影矩阵
 		lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
 		lightSpaceMatrix = lightProjection * lightView;
 		//从光的角度渲染场景

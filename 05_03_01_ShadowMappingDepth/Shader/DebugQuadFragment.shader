@@ -6,8 +6,8 @@ out vec4 FragColor;
 in vec2 TexCoords;
 
 uniform sampler2D depthMap;
-uniform float near_plane;
-uniform float far_plane;
+uniform float near_plane;   //近平面
+uniform float far_plane;    //远平面
 
 // 使用透视投影矩阵时需要
 float LinearizeDepth(float depth)
@@ -19,6 +19,6 @@ float LinearizeDepth(float depth)
 void main()
 {             
     float depthValue = texture(depthMap, TexCoords).r;
-    //FragColor = vec4(vec3(LinearizeDepth(depthValue) / far_plane), 1.0); // 角度来看
-     FragColor = vec4(vec3(depthValue), 1.0); // orthographic
+    FragColor = vec4(vec3(LinearizeDepth(depthValue) / far_plane), 1.0); // 角度来看
+    //FragColor = vec4(vec3(depthValue), 1.0); // orthographic
 }
