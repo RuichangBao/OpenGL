@@ -27,25 +27,15 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 unsigned int loadTexture(char const* path, bool gammaCorrection);//加载纹理
 //模型空间坐标系 右手定则
-//      Y
-//      ^
-//      |
-//      |
-//      |------->x
+//       Y
+//       ^
+//       |
+//       |
+//       |------->x
 //      /
 //     /
 //    z
-//float planeVertices[] = {
-//    // 位置               // 法线              // 纹理
-//      25.0f, -0.5f,  25.0f,  0.0f, 1.0f, 0.0f,  25.0f,  0.0f,
-//      -25.0f, -0.5f,  25.0f,  0.0f, 1.0f, 0.0f,   0.0f,  0.0f,
-//      -25.0f, -0.5f, -25.0f,  0.0f, 1.0f, 0.0f,   0.0f, 25.0f,
-//
-//      25.0f, -0.5f,  25.0f,  0.0f, 1.0f, 0.0f,  25.0f,  0.0f,
-//      -25.0f, -0.5f, -25.0f,  0.0f, 1.0f, 0.0f,   0.0f, 25.0f,
-//      25.0f, -0.5f, -25.0f,  0.0f, 1.0f, 0.0f,  25.0f, 25.0f
-//};
-
+//一个平行于xz平面的平面
 float planeVertices[] = {
     // 位置               // 法线              // 纹理
       25.0f, -0.5f,  25.0f,  0.0f, 1.0f, 0.0f,  25.0f,  0.0f,
@@ -56,6 +46,7 @@ float planeVertices[] = {
       -25.0f, -0.5f, -25.0f,  0.0f, 1.0f, 0.0f,   0.0f, 25.0f,
       25.0f, -0.5f, -25.0f,  0.0f, 1.0f, 0.0f,  25.0f, 25.0f
 };
+
 
 float vertices[] = {
     // back face
