@@ -133,12 +133,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\includes\StbImage\stb_image.h" />
-    <ClInclude Include="ShadowMappingDepth.h" />
+    <ClInclude Include="ShadowMappingBase.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\includes\glad\glad.c" />
     <ClCompile Include="..\includes\StbImage\stb_image.cpp" />
-    <ClCompile Include="ShadowMappingDepth.cpp" />
+    <ClCompile Include="ShadowMappingBase.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

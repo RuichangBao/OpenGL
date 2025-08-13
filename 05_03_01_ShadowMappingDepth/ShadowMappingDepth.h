@@ -26,15 +26,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 unsigned int loadTexture(char const* path, bool gammaCorrection);//加载纹理
-//模型空间坐标系 右手定则
-//      Y
-//      ^
-//      |
-//      |
-//      |------->x
-//      /
-//     /
-//    z
+
 float planeVertices[] = {
     // 位置               // 法线              // 纹理
       25.0f, -0.5f,  25.0f,  0.0f, 1.0f, 0.0f,  25.0f,  0.0f,
@@ -90,16 +82,6 @@ float vertices[] = {
      -1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 1.0f, // top-left
      -1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 0.0f  // bottom-left        
 };
-//在标准化设备坐标中填充整个屏幕的四边形的顶点属性。帧渲染坐标
-//  (-1.1)----------------(1.1)
-//     |                    |
-//     |                    |
-//     |                    |
-//     |                    |
-//     |                    |
-//     |                    |
-//     |                    |
-//  (-1.-1)----------------(1.-1)
 
 float quadVertices[] = {
     // positions        // texture Coords

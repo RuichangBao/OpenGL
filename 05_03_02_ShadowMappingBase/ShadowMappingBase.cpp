@@ -1,6 +1,6 @@
 //https://learnopengl-cn.github.io/05%20Advanced%20Lighting/03%20Shadows/01%20Shadow%20Mapping/
 //深度贴图
-#include "ShadowMappingDepth.h"
+#include "ShadowMappingBase.h"
 #include<iostream>
 #include <stbimage/stb_image.h>
 #include <learnopengl/filesystem.h>
@@ -40,6 +40,7 @@ int main()
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	// 构建并编译shader程序
+	Shader shader("shader/ShadowMappingVertex.shader", "shader/ShadowMappingFragment.shader");
 	Shader simpleDepthShader("shader/ShadowMappingDepthVertex.shader", "shader/ShadowMappingDepthFragment.shader");
 	Shader debugDepthQuad("shader/DebugQuadVertex.shader", "shader/DebugQuadFragment.shader");
 	
@@ -84,6 +85,9 @@ int main()
 	glReadBuffer(GL_NONE);//不需要读帧缓冲
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
+	shader.use();
+	shader.setInt("diffuseTexture", 0);
+	shader.setInt("shadowMap", 1);
 	debugDepthQuad.use();
 	debugDepthQuad.setInt("depthMap", 0);
 
@@ -122,13 +126,28 @@ int main()
 		glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
+		shader.use();
+		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+		glm::mat4 view = camera.GetViewMatrix();
+		shader.setMat4("projection", projection);
+		shader.setMat4("view", view);
+		// set light uniforms
+		shader.setVec3("viewPos", camera.Position);
+		shader.setVec3("lightPos", lightPos);
+		shader.setMat4("lightSpaceMatrix", lightSpaceMatrix);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, woodTexture);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, depthMap);
+		renderScene(shader);
+
 		//渲染深度图到quad进行可视化调试
 		debugDepthQuad.use();
 		debugDepthQuad.setFloat("near_plane", near_plane);
 		debugDepthQuad.setFloat("far_plane", far_plane);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, depthMap);
-		renderQuad();
+		//renderQuad();
 
 		glfwSwapBuffers(window);//交换颜色缓冲区
 		glfwPollEvents();		//检查触发事件，并调用回调函数
