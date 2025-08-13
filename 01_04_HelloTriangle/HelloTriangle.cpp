@@ -82,12 +82,6 @@ int main()
 	//---------------着色器程序对象 End-------------------
 #pragma endregion
 
-	float vertices[] = {
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		0.0f,  0.5f, 0.0f
-	};
-
 	unsigned int VBO, VAO;//顶点缓冲对象
 	// 0. 复制顶点数组到缓冲中供OpenGL使用
 	glGenVertexArrays(1, &VAO);
