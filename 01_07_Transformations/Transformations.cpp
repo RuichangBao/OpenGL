@@ -44,20 +44,6 @@ int main()
 	// 构建并编译shader程序
 	Shader ourShader("shader/Vertex.shader", "shader/Fragment.shader");
 
-	// 设置顶点数据（和缓冲区）并配置顶点属性
-	float vertices[] = {
-		// 位置               // 颜色             // texture coords
-		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // 右上角
-		 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // 右下角
-		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // 左下角
-		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // 左上角
-	};
-	unsigned int indices[] = {
-		0, 1, 3, // 第一个三角形
-		1, 2, 3  // 第二个三角形
-	};
-
-
 	unsigned int VBO, VAO, EBO;
 	glGenVertexArrays(1, &VAO);//生成顶点数组对象。VAO 在 OpenGL 中用来存储顶点属性的配置，以便在后续绘制时快速访问这些属性。
 	glGenBuffers(1, &VBO);		//生成顶点缓存对象VBO(Vertex Buffer Object)对象
