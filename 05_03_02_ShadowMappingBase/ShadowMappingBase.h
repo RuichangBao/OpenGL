@@ -31,10 +31,10 @@ unsigned int loadTexture(char const* path, bool gammaCorrection);//加载纹理
 //      ^
 //      |
 //      |
-//      |------->x
-//      /
+//      |_______->x
 //     /
-//    z
+//    /
+//   z
 float planeVertices[] = {
     // 位置               // 法线              // 纹理
       25.0f, -0.5f,  25.0f,  0.0f, 1.0f, 0.0f,  25.0f,  0.0f,

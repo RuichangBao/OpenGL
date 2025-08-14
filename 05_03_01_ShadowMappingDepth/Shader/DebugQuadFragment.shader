@@ -9,7 +9,7 @@ uniform sampler2D depthMap;
 uniform float near_plane;   //近平面
 uniform float far_plane;    //远平面
 
-// 使用透视投影矩阵时需要
+// 将非线性的深度值转换成线性深度值
 float LinearizeDepth(float depth)
 {
     float z = depth * 2.0 - 1.0; // 回到NDC
