@@ -7,16 +7,16 @@ layout (location = 2) in vec2 aTexCoords;
 out vec2 TexCoords;
 
 out VS_OUT {
-    vec3 FragPos;
-    vec3 Normal;
+    vec3 FragPos; //世界坐标位置
+    vec3 Normal;  //世界坐标下的法线
     vec2 TexCoords;
-    vec4 FragPosLightSpace;
+    vec4 FragPosLightSpace;//灯光空间下的位置
 } vs_out;
 
 uniform mat4 projection;
 uniform mat4 view;
 uniform mat4 model;
-uniform mat4 lightSpaceMatrix;
+uniform mat4 lightSpaceMatrix;//世界空间中的顶点坐标变换到光源空间的矩阵
 
 void main()
 {

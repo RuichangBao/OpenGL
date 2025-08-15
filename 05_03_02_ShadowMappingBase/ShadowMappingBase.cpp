@@ -40,9 +40,9 @@ int main()
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	// 构建并编译shader程序
-	Shader shader("shader/ShadowMappingVertex.shader", "shader/ShadowMappingFragment.shader");
+	Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
 	Shader simpleDepthShader("shader/ShadowMappingDepthVertex.shader", "shader/ShadowMappingDepthFragment.shader");
-	Shader debugDepthQuad("shader/DebugQuadVertex.shader", "shader/DebugQuadFragment.shader");
+	//Shader debugDepthQuad("shader/DebugQuadVertex.shader", "shader/DebugQuadFragment.shader");
 	
 	unsigned int planeVBO;
 	glGenVertexArrays(1, &planeVAO);//生成顶点数组对象。VAO 在 OpenGL 中用来存储顶点属性的配置，以便在后续绘制时快速访问这些属性。
@@ -88,8 +88,8 @@ int main()
 	shader.use();
 	shader.setInt("diffuseTexture", 0);
 	shader.setInt("shadowMap", 1);
-	debugDepthQuad.use();
-	debugDepthQuad.setInt("depthMap", 0);
+	//debugDepthQuad.use();
+	//debugDepthQuad.setInt("depthMap", 0);
 
 	//循环渲染
 	while (!glfwWindowShouldClose(window))
@@ -109,8 +109,9 @@ int main()
 		float near_plane = 1.0f, far_plane = 7.5f;
 		lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);//创建正交投影矩阵
 		lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
+		//将向量转换到光源空间的矩阵 最终结果是在视图空间中
 		lightSpaceMatrix = lightProjection * lightView;
-		//从光的角度渲染场景
+		//从光源的角度渲染场景
 		simpleDepthShader.use();
 		simpleDepthShader.setMat4("lightSpaceMatrix", lightSpaceMatrix);
 
@@ -142,9 +143,9 @@ int main()
 		renderScene(shader);
 
 		//渲染深度图到quad进行可视化调试
-		debugDepthQuad.use();
+		/*debugDepthQuad.use();
 		debugDepthQuad.setFloat("near_plane", near_plane);
-		debugDepthQuad.setFloat("far_plane", far_plane);
+		debugDepthQuad.setFloat("far_plane", far_plane);*/
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, depthMap);
 		//renderQuad();

@@ -105,6 +105,7 @@ int main()
 		float near_plane = 1.0f, far_plane = 7.5f;
 		lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);//创建正交投影矩阵
 		lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
+		//将向量转换到光源空间的矩阵 最终结果是在视图空间中
 		lightSpaceMatrix = lightProjection * lightView;
 		//从光的角度渲染场景
 		simpleDepthShader.use();

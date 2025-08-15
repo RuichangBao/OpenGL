@@ -99,7 +99,7 @@ float vertices[] = {
 //     |                    |
 //     |                    |
 //     |                    |
-//  (-1.-1)----------------(1.-1)
+//  (-1.-1)---------------(1.-1)
 
 float quadVertices[] = {
     // positions        // texture Coords
