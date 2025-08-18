@@ -1,6 +1,6 @@
 //https://learnopengl-cn.github.io/05%20Advanced%20Lighting/03%20Shadows/01%20Shadow%20Mapping/
-//深度贴图 阴影偏移
-#include "ShadowMapping.h"
+//深度贴图
+#include "ShadowMappingSSP.h"
 #include<iostream>
 #include <stbimage/stb_image.h>
 #include <learnopengl/filesystem.h>
@@ -18,7 +18,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);//允许修改窗口大小
 #endif
 	// glfw 创建窗口对象
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "ShadowMapping", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "ShadowMappingSSP", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "创建GLFW窗口失败" << std::endl;
@@ -39,11 +39,12 @@ int main()
 		return -1;
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
+	//glEnable(GL_CULL_FACE);  // 启用剔除功能
 	// 构建并编译shader程序
 	Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
 	Shader simpleDepthShader("shader/ShadowMappingDepthVertex.shader", "shader/ShadowMappingDepthFragment.shader");
 	//Shader debugDepthQuad("shader/DebugQuadVertex.shader", "shader/DebugQuadFragment.shader");
-	
+
 	unsigned int planeVBO;
 	glGenVertexArrays(1, &planeVAO);//生成顶点数组对象。VAO 在 OpenGL 中用来存储顶点属性的配置，以便在后续绘制时快速访问这些属性。
 	glGenBuffers(1, &planeVBO);		//生成顶点缓存对象VBO(Vertex Buffer Object)对象
@@ -141,6 +142,7 @@ int main()
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, depthMap);
 		renderScene(shader);
+
 
 		//渲染深度图到quad进行可视化调试
 		/*debugDepthQuad.use();
