@@ -82,6 +82,7 @@ int main()
 		lastFrame = currentFrame;
 		//输入检查
 		processInput(window);
+		//lightPos.z = static_cast<float>(sin(glfwGetTime() * 0.5) * 3.0);
 		// 渲染
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);//清空屏幕所用的颜色
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // GL_DEPTH_BUFFER_BIT:清除深度缓存
@@ -120,7 +121,7 @@ int main()
 		//重置窗口
 		glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
+
 		shader.use();
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		glm::mat4 view = camera.GetViewMatrix();
@@ -134,31 +135,31 @@ int main()
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, woodTexture);
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, depthCubemap);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubemap);
 		renderScene(shader);
-
-		glfwSwapBuffers(window);//交换颜色缓冲区
-		glfwPollEvents();		//检查触发事件，并调用回调函数
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 	}
-
-	glfwSwapBuffers(window);
 	//终止，清除之前分配的所有glfw资源。
 	glfwTerminate();
-
 	return 0;
 }
+
+
 //渲染3D场景
-void renderScene(const Shader &shader)
+void renderScene(const Shader& shader)
 {
 	// floor
 	glm::mat4 model = glm::mat4(1.0f);
 	model = glm::scale(model, glm::vec3(5.0f));
 	shader.setMat4("model", model);
-	glDisable(GL_CULL_FACE); // note that we disable culling here since we render 'inside' the cube instead of the usual 'outside' which throws off the normal culling methods.
+	glDisable(GL_CULL_FACE); // 关闭背面剔除
 	shader.setInt("reverse_normals", 1); // A small little hack to invert normals when drawing cube from the inside so lighting still works.
 	renderCube();
 	shader.setInt("reverse_normals", 0); // and of course disable it
-	glEnable(GL_CULL_FACE);
+	glEnable(GL_CULL_FACE);//开启背面剔除
 	// 正方体
 	model = glm::mat4(1.0f);
 	model = glm::translate(model, glm::vec3(4.0f, -3.5f, 0.0));
@@ -291,15 +292,15 @@ unsigned int loadTexture(char const* path)
 		if (nrChannels == 1)
 			dataFormat = GL_RED;
 		else if (nrChannels == 3)
-			dataFormat =  GL_RGB;
+			dataFormat = GL_RGB;
 		else if (nrChannels == 4)
-			dataFormat =  GL_RGBA;
+			dataFormat = GL_RGBA;
 
 		glBindTexture(GL_TEXTURE_2D, textureID);// 绑定纹理对象
 		//图像数据上传到 GPU 并定义纹理的格式和数据
 		glTexImage2D(GL_TEXTURE_2D, 0, dataFormat, width, height, 0, dataFormat, GL_UNSIGNED_BYTE, data);
 		//生成 Mipmap 纹理层级
-		glGenerateMipmap(GL_TEXTURE_2D); 
+		glGenerateMipmap(GL_TEXTURE_2D);
 
 		//设置纹理环绕
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);//重复平铺

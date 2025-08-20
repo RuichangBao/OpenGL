@@ -10,19 +10,21 @@ out VS_OUT {
     vec3 FragPos; //世界坐标位置
     vec3 Normal;  //世界坐标下的法线
     vec2 TexCoords;
-    vec4 FragPosLightSpace;//灯光空间下的位置
 } vs_out;
 
 uniform mat4 projection;
 uniform mat4 view;
 uniform mat4 model;
-uniform mat4 lightSpaceMatrix;//世界空间中的顶点坐标变换到光源空间的矩阵
+
+uniform bool reverse_normals;
 
 void main()
 {
     vs_out.FragPos = vec3(model * vec4(aPos, 1.0));
-    vs_out.Normal = transpose(inverse(mat3(model))) * aNormal;
+    if(reverse_normals) // 一个小修改，以确保外部大立方体显示从“内部”而不是默认的“外部”照明。
+        vs_out.Normal = transpose(inverse(mat3(model))) * (-1.0 * aNormal);
+    else
+        vs_out.Normal = transpose(inverse(mat3(model))) * aNormal;
     vs_out.TexCoords = aTexCoords;
-    vs_out.FragPosLightSpace = lightSpaceMatrix * vec4(vs_out.FragPos, 1.0);
     gl_Position = projection * view * model * vec4(aPos, 1.0);
 }
