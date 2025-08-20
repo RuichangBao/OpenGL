@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{DA9625DE-125F-4BAD-B50C-FAA0323CB883}</ProjectGuid>
+    <ProjectGuid>{9E2CAEAF-C76A-4E62-BCE0-5744FDE6BF67}</ProjectGuid>
     <RootNamespace>My050102GammaCorrection</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -133,12 +133,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\includes\StbImage\stb_image.h" />
-    <ClInclude Include="ShadowMappingSSP.h" />
+    <ClInclude Include="PointShadows.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\includes\glad\glad.c" />
     <ClCompile Include="..\includes\StbImage\stb_image.cpp" />
-    <ClCompile Include="ShadowMappingSSP.cpp" />
+    <ClCompile Include="PointShadows.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

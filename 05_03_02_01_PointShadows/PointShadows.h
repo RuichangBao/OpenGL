@@ -16,7 +16,16 @@ float lastFrame = 0.0f;
 
 // meshes
 unsigned int planeVAO;
-glm::vec3 lightPos(-2.0f, 4.0f, -1.0f);
+
+bool shadows = true;
+bool shadowsKeyPressed = false;
+
+glm::vec3 lightPos(0.0f, 0.0f, 0.0f);
+const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
+
+float near_plane = 1.0f;
+float far_plane = 25.0f;
+
 //渲染3D场景
 void renderScene(const Shader &shader);
 void renderCube();
@@ -25,7 +34,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
-unsigned int loadTexture(char const* path, bool gammaCorrection);//加载纹理
+unsigned int loadTexture(char const* path);//加载纹理
 //模型空间坐标系 右手定则
 //      Y
 //      ^
@@ -35,17 +44,6 @@ unsigned int loadTexture(char const* path, bool gammaCorrection);//加载纹理
 //     /
 //    /
 //   z
-float planeVertices[] = {
-    // 位置               // 法线              // 纹理
-      25.0f, -0.5f,  25.0f,  0.0f, 1.0f, 0.0f,  25.0f,  0.0f,
-      -25.0f, -0.5f,  25.0f,  0.0f, 1.0f, 0.0f,   0.0f,  0.0f,
-      -25.0f, -0.5f, -25.0f,  0.0f, 1.0f, 0.0f,   0.0f, 25.0f,
-
-      25.0f, -0.5f,  25.0f,  0.0f, 1.0f, 0.0f,  25.0f,  0.0f,
-      -25.0f, -0.5f, -25.0f,  0.0f, 1.0f, 0.0f,   0.0f, 25.0f,
-      25.0f, -0.5f, -25.0f,  0.0f, 1.0f, 0.0f,  25.0f, 25.0f
-};
-
 float vertices[] = {
     // back face
     -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
@@ -89,22 +87,4 @@ float vertices[] = {
       1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 0.0f, // bottom-right
      -1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 1.0f, // top-left
      -1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 0.0f  // bottom-left        
-};
-//在标准化设备坐标中填充整个屏幕的四边形的顶点属性。帧渲染坐标
-//  (-1.1)----------------(1.1)
-//     |                    |
-//     |                    |
-//     |                    |
-//     |                    |
-//     |                    |
-//     |                    |
-//     |                    |
-//  (-1.-1)---------------(1.-1)
-
-float quadVertices[] = {
-    // positions        // texture Coords
-    -1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
-    -1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
-     1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
-     1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
 };
