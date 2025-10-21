@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{4D1F14A3-C918-442E-ADB2-4CE2BD8A979F}</ProjectGuid>
+    <ProjectGuid>{63B57A83-F7C1-4C3B-9BA7-56A3BA0449CA}</ProjectGuid>
     <RootNamespace>My050102GammaCorrection</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
