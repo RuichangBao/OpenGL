@@ -2,13 +2,6 @@
 #version 330 core
 out vec4 FragColor;
 
-// //模型空间下的计算
-// in VS_OUT {
-//     vec3 FragPos;
-//     vec2 TexCoords;
-//     vec3 ModelLightPos;
-//     vec3 ModelViewPos;
-// } fs_in;
 
 //切线空间下的计算
 in VS_OUT {
@@ -37,15 +30,14 @@ void main()
     // 环境光
     vec3 ambient = 0.1 * color;
     // 漫反射
-    // 模型空间下的计算
-    // vec3 lightDir = normalize(fs_in.ModelLightPos - fs_in.FragPos);
+
     // 切线空间下的计算
     vec3 lightDir = normalize(fs_in.TangentLightPos - fs_in.TangentFragPos);
     float diff = max(dot(lightDir, normal), 0.0);
     vec3 diffuse = diff * color;
+
     // specular
-    // 模型空间下的计算
-    // vec3 viewDir = normalize(fs_in.ModelViewPos - fs_in.FragPos);
+
     // 切线空间下的计算
     vec3 viewDir = normalize(fs_in.TangentViewPos - fs_in.TangentFragPos);
     vec3 reflectDir = reflect(-lightDir, normal);

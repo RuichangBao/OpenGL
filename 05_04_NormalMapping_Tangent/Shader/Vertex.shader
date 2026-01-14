@@ -6,13 +6,6 @@ layout (location = 2) in vec2 aTexCoords;
 layout (location = 3) in vec3 aTangent;
 layout (location = 4) in vec3 aBitangent;
 
-// //模型空间下的计算
-// out VS_OUT {
-//     vec3 FragPos;
-//     vec2 TexCoords;
-//     vec3 ModelLightPos;
-//     vec3 ModelViewPos;
-// } vs_out;
 
 //切线空间下的计算
 out VS_OUT {
@@ -34,9 +27,8 @@ void main()
 {
     vs_out.FragPos = vec3(model * vec4(aPos, 1.0));   
     vs_out.TexCoords = aTexCoords;
-    //模型空间下的计算
-    // vs_out.ModelLightPos = vec3(model * vec4(lightPos, 1.0));
-    // vs_out.ModelViewPos = vec3(model * vec4(viewPos, 1.0));
+
+
     //切线空间下的计算
     mat3 normalMatrix = transpose(inverse(mat3(model)));
     vec3 T = normalize(normalMatrix * aTangent);

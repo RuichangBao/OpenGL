@@ -10,15 +10,6 @@ in VS_OUT {
     vec3 ModelViewPos;
 } fs_in;
 
-//切线空间下的计算
-// in VS_OUT {
-//     vec3 FragPos;
-//     vec2 TexCoords;
-//     vec3 TangentLightPos;
-//     vec3 TangentViewPos;
-//     vec3 TangentFragPos;
-// } fs_in;
-
 uniform sampler2D diffuseMap;
 uniform sampler2D normalMap;
 
@@ -39,15 +30,11 @@ void main()
     // 漫反射
     // 模型空间下的计算
     vec3 lightDir = normalize(fs_in.ModelLightPos - fs_in.FragPos);
-    // 切线空间下的计算
-    // vec3 lightDir = normalize(fs_in.TangentLightPos - fs_in.TangentFragPos);
     float diff = max(dot(lightDir, normal), 0.0);
     vec3 diffuse = diff * color;
     // specular
     // 模型空间下的计算
     vec3 viewDir = normalize(fs_in.ModelViewPos - fs_in.FragPos);
-    // 切线空间下的计算
-    // vec3 viewDir = normalize(fs_in.TangentViewPos - fs_in.TangentFragPos);
     vec3 reflectDir = reflect(-lightDir, normal);
     vec3 halfwayDir = normalize(lightDir + viewDir);  
     float spec = pow(max(dot(normal, halfwayDir), 0.0), 32.0);
