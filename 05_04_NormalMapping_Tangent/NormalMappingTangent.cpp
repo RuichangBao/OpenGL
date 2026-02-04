@@ -1,4 +1,5 @@
 //https://learnopengl-cn.github.io/05%20Advanced%20Lighting/04%20Normal%20Mapping/
+//切线空间矩阵求导过程可以参考 https://zhuanlan.zhihu.com/p/1934601901397245987
 //法线贴图(模型空间下)
 #include "NormalMappingTangent.h"
 #include <iostream>
@@ -107,10 +108,11 @@ void renderQuad()
 	if (quadVAO == 0)
 	{
 		//位置
-		glm::vec3 pos1(-1.0f, 1.0f, 0.0f);
-		glm::vec3 pos2(-1.0f, -1.0f, 0.0f);
-		glm::vec3 pos3(1.0f, -1.0f, 0.0f);
-		glm::vec3 pos4(1.0f, 1.0f, 0.0f);
+		glm::vec3 pos1(-0.5f, 0.5f, -0.5f);
+		glm::vec3 pos2(-0.5f, -0.5f, -0.5f);
+		glm::vec3 pos3(0.5f, -0.5f, -0.5f);
+		glm::vec3 pos4(0.5f, 0.5f, -0.5f);
+		
 		// 纹理坐标
 		glm::vec2 uv1(0.0f, 1.0f);
 		glm::vec2 uv2(0.0f, 0.0f);

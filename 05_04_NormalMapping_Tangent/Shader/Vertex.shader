@@ -31,9 +31,9 @@ void main()
 
     //切线空间下的计算
     mat3 normalMatrix = transpose(inverse(mat3(model)));
-    vec3 T = normalize(normalMatrix * aTangent);
-    vec3 N = normalize(normalMatrix * aNormal);
-    T = normalize(T - dot(T, N) * N);
+    vec3 T = normalize(normalMatrix * aTangent);//得到世界空间（或观察空间）下的切线方向
+    vec3 N = normalize(normalMatrix * aNormal); //得到世界空间（或观察空间）下的法线方向。
+    T = normalize(T - dot(T, N) * N);   //修正因变换或模型数据不完美导致的T与N不垂直问题，构造出标准的正交基。
     vec3 B = cross(N, T);
     
     mat3 TBN = transpose(mat3(T, B, N));    

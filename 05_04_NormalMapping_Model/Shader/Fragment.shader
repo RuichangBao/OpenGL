@@ -30,7 +30,7 @@ void main()
     // 漫反射
     // 模型空间下的计算
     vec3 lightDir = normalize(fs_in.ModelLightPos - fs_in.FragPos);
-    float diff = max(dot(lightDir, normal), 0.0);
+    float diff = max(dot(lightDir, normal), 0.0);//漫反射 法线与光照夹角的余弦值
     vec3 diffuse = diff * color;
     // specular
     // 模型空间下的计算
