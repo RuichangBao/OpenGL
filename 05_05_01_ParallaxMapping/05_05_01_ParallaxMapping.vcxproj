@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{0525fdec-d793-4a37-87e6-2a366130794e}</ProjectGuid>
-    <RootNamespace>My050101AdvancedLighting</RootNamespace>
+    <ProjectGuid>{6ef71631-1337-4d88-838a-b4eb2a48f646}</ProjectGuid>
+    <RootNamespace>My050501ParallaxMapping</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)\includes;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>$(SolutionDir)\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>$(SolutionDir)\includes;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -132,12 +132,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AdvancedLighting.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\includes\glad\glad.c" />
     <ClCompile Include="..\includes\StbImage\stb_image.cpp" />
-    <ClCompile Include="AdvancedLighting.cpp" />
+    <ClCompile Include="ParallaxMapping.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ParallaxMapping.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

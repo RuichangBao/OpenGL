@@ -132,7 +132,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\includes\StbImage\stb_image.h" />
     <ClInclude Include="GammaCorrection.h" />
   </ItemGroup>
   <ItemGroup>
