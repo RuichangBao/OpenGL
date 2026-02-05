@@ -9,11 +9,11 @@ layout (location = 4) in vec3 aBitangent;
 
 //切线空间下的计算
 out VS_OUT {
-    vec3 FragPos;
+    vec3 FragPos;           //世界空间位置
     vec2 TexCoords;
-    vec3 TangentLightPos;
-    vec3 TangentViewPos;
-    vec3 TangentFragPos;
+    vec3 TangentLightPos;   //切线空间光源位置
+    vec3 TangentViewPos;    //切线空间视角方向
+    vec3 TangentFragPos;    //切线空间物体位置
 } vs_out;
 
 uniform mat4 projection;
