@@ -179,6 +179,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_04_NormalMapping_Tangent
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_05_01_ParallaxMapping", "05_05_01_ParallaxMapping\05_05_01_ParallaxMapping.vcxproj", "{6EF71631-1337-4D88-838A-B4EB2A48F646}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_05_02_SteepParallaxMapping", "05_05_02_SteepParallaxMapping\05_05_02_SteepParallaxMapping.vcxproj", "{187B5BF1-E0DC-4DB5-BF80-F12C2FEF8ADA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -851,6 +853,14 @@ Global
 		{6EF71631-1337-4D88-838A-B4EB2A48F646}.Release|x64.Build.0 = Release|x64
 		{6EF71631-1337-4D88-838A-B4EB2A48F646}.Release|x86.ActiveCfg = Release|Win32
 		{6EF71631-1337-4D88-838A-B4EB2A48F646}.Release|x86.Build.0 = Release|Win32
+		{187B5BF1-E0DC-4DB5-BF80-F12C2FEF8ADA}.Debug|x64.ActiveCfg = Debug|x64
+		{187B5BF1-E0DC-4DB5-BF80-F12C2FEF8ADA}.Debug|x64.Build.0 = Debug|x64
+		{187B5BF1-E0DC-4DB5-BF80-F12C2FEF8ADA}.Debug|x86.ActiveCfg = Debug|Win32
+		{187B5BF1-E0DC-4DB5-BF80-F12C2FEF8ADA}.Debug|x86.Build.0 = Debug|Win32
+		{187B5BF1-E0DC-4DB5-BF80-F12C2FEF8ADA}.Release|x64.ActiveCfg = Release|x64
+		{187B5BF1-E0DC-4DB5-BF80-F12C2FEF8ADA}.Release|x64.Build.0 = Release|x64
+		{187B5BF1-E0DC-4DB5-BF80-F12C2FEF8ADA}.Release|x86.ActiveCfg = Release|Win32
+		{187B5BF1-E0DC-4DB5-BF80-F12C2FEF8ADA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -938,6 +948,7 @@ Global
 		{4D1F14A3-C918-442E-ADB2-4CE2BD8A979F} = {2332E91D-ACF5-480F-AEE6-4406152D0D4B}
 		{63B57A83-F7C1-4C3B-9BA7-56A3BA0449CA} = {2332E91D-ACF5-480F-AEE6-4406152D0D4B}
 		{6EF71631-1337-4D88-838A-B4EB2A48F646} = {2332E91D-ACF5-480F-AEE6-4406152D0D4B}
+		{187B5BF1-E0DC-4DB5-BF80-F12C2FEF8ADA} = {2332E91D-ACF5-480F-AEE6-4406152D0D4B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {157ED797-3273-476F-B4CA-7CB538F722B1}

@@ -1,4 +1,3 @@
-
 /*片段着色器**/
 #version 330 core
 out vec4 FragColor;
@@ -24,10 +23,36 @@ uniform float heightScale;
 
 vec2 ParallaxMapping(vec2 texCoords, vec3 viewDir)
 { 
-    //高度采样
-    float height = texture(depthMap, texCoords).r;
-    //高度越高 影响越大 高度越低，影响越小  
-    return texCoords - viewDir.xy * (height * heightScale);        
+    // //高度采样
+    // float height = texture(depthMap, texCoords).r;
+    // //高度越高 影响越大 高度越低，影响越小  
+    // return texCoords - viewDir.xy * (height * heightScale);        
+
+    // 深度层的数量
+    const float numLayers = 10;
+    // 计算每一层的尺寸
+    float layerDepth = 1.0 / numLayers;
+    // 当前层的深度
+    float currentLayerDepth = 0.0;
+    // 每层调整纹理坐标所需的数值（基于向量 P）
+    vec2 P = viewDir.xy * heightScale; 
+    vec2 deltaTexCoords = P / numLayers;
+
+    // 获取初始值
+    vec2 currentTexCoords = texCoords;
+    float currentDepthMapValue = texture(depthMap, currentTexCoords).r;
+  
+    while(currentLayerDepth < currentDepthMapValue)
+    {
+        // 沿 P 方向移动纹理坐标
+        currentTexCoords -= deltaTexCoords;
+        // 获取当前纹理坐标处的深度图值
+        currentDepthMapValue = texture(depthMap, currentTexCoords).r;  
+        // 获取下一层的深度
+        currentLayerDepth += layerDepth;  
+    }
+
+    return currentTexCoords;
 }
 
 void main()

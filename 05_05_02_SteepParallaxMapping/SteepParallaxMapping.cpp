@@ -1,6 +1,6 @@
 //https://learnopengl-cn.github.io/05%20Advanced%20Lighting/05%20Parallax%20Mapping/
-//视差贴图
-#include "ParallaxMapping.h"
+//陡峭视差贴图(不太明白)
+#include "SteepParallaxMapping.h"
 #include <iostream>
 #include <stbimage/stb_image.h>
 #include <learnopengl/filesystem.h>
@@ -20,7 +20,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);//允许修改窗口大小
 #endif
 	// glfw 创建窗口对象
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "PointShadows", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "视差贴图", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "创建GLFW窗口失败" << std::endl;
@@ -117,7 +117,6 @@ void renderQuad()
 		glm::vec3 pos2(-1.0f, -1.0f, 0.0f);
 		glm::vec3 pos3(1.0f, -1.0f, 0.0f);
 		glm::vec3 pos4(1.0f, 1.0f, 0.0f);
-
 		// 纹理坐标
 		glm::vec2 uv1(0.0f, 1.0f);
 		glm::vec2 uv2(0.0f, 0.0f);
