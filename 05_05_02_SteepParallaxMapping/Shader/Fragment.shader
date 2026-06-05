@@ -1,4 +1,6 @@
-/*片段着色器**/
+/*
+陡峭视差贴图
+**/
 #version 330 core
 out vec4 FragColor;
 
