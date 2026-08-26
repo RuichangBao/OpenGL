@@ -130,7 +130,6 @@ int main()
 	//—≠ª∑‰÷»æ
 	while (!glfwWindowShouldClose(window))
 	{
-		
 		float currentFrame = static_cast<float>(glfwGetTime());
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
