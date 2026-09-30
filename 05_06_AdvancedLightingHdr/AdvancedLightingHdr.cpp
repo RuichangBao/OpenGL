@@ -312,13 +312,13 @@ void processInput(GLFWwindow* window)
 	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
 	{
 		if (exposure > 0.0f)
-			exposure -= 0.001f;
+			exposure -= 0.01f;
 		else
 			exposure = 0.0f;
 	}
 	else if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
 	{
-		exposure += 0.001f;
+		exposure += 0.01f;
 	}
 }
 
