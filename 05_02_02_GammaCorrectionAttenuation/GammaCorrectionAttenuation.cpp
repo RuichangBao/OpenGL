@@ -1,6 +1,6 @@
 //https://learnopengl-cn.github.io/05%20Advanced%20Lighting/02%20Gamma%20Correction/
-//伽马校正
-#include "GammaCorrection.h"
+//伽马校正加光照衰减
+#include "GammaCorrectionAttenuation.h"
 #include<iostream>
 #include <learnopengl/shader.h>
 #include <stbimage/stb_image.h>

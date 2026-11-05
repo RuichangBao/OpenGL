@@ -8,7 +8,7 @@ const unsigned int SCR_WIDTH = 800;//unsigned �޷���
 const unsigned int SCR_HEIGHT = 600;
 
 float vertices[] = {
-	-1.0f, -0.5f, 0.5f,
+	-0.5f, -0.5f, 0.5f,
 	0.5f, -0.5f, 0.5f,
 	0.0f,  0.5f, 0.5f
 };
