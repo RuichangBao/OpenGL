@@ -13,9 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04", "04", "{4272ABA9-C48F-
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05", "05", "{2332E91D-ACF5-480F-AEE6-4406152D0D4B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.vcxproj", "{A8F0B38A-4180-4AE8-9720-287F29E1DC39}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleApplication1", "Test\ConsoleApplication1\ConsoleApplication1.vcxproj", "{A8F0B38A-4180-4AE8-9720-287F29E1DC39}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_07_Transformations", "01\01_07_Transformations\01_07_Transformations.vcxproj", "{5D88E8C0-15F0-45FA-A0F7-310BFCDE05F2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_03_HelloWindows", "01\01_03_HelloWindows\01_03_HelloWindows.vcxproj", "{3F50598B-8759-45F1-AC08-5E55090433BB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_04_HelloTriangle", "01\01_04_HelloTriangle\01_04_HelloTriangle.vcxproj", "{FEB5D46B-018C-4E51-A002-56DE68BEE81B}"
 EndProject
@@ -27,6 +27,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_04_HelloTriangle_Exercis
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_04_HelloTriangleIndex", "01\01_04_HelloTriangleIndex\01_04_HelloTriangleIndex.vcxproj", "{32C546C5-EA6C-4416-A259-823BCA6058E0}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_05_01_ShaderUniform", "01\01_05_01_ShaderUniform\01_05_01_ShaderUniform.vcxproj", "{473313B1-7497-480F-AD7E-8F40538C1B48}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_05_02_ShaderInterpolation", "01\01_05_02_ShaderInterpolation\01_05_02_ShaderInterpolation.vcxproj", "{5B94C27B-2696-4702-AD05-2B5E81A26AF4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_05_03_ShaderClass", "01\01_05_03_ShaderClass\01_05_03_ShaderClass.vcxproj", "{01717B6D-D0CB-4716-A2C6-F3418FB1241E}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_06_Textures", "01\01_06_Textures\01_06_Textures.vcxproj", "{0A17F459-46BB-4BB5-99C8-B00221F289BB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_06_Textures_Surround", "01\01_06_Textures_Surround\01_06_Textures_Surround.vcxproj", "{B1554D58-1B6B-47C1-9B89-B12E23E6D397}"
@@ -34,6 +40,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_06_TexturesCombined", "01\01_06_TexturesCombined\01_06_TexturesCombined.vcxproj", "{904A8584-E0BD-452F-BC12-E8ED73DF06D7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_06_TexturesTriangle", "01\01_06_TexturesTriangle\01_06_TexturesTriangle.vcxproj", "{29E3AED5-4506-492A-ACFD-0B204A5F1316}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_07_Transformations", "01\01_07_Transformations\01_07_Transformations.vcxproj", "{5D88E8C0-15F0-45FA-A0F7-310BFCDE05F2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_07_Transformations_Exercise2", "01\01_07_Transformations_Exercise2\01_07_Transformations_Exercise2.vcxproj", "{0E4ACB68-F38C-47A0-8B8E-13FA7B52BB6C}"
 EndProject
@@ -78,12 +86,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_05_04_LightCastersSpotSoft", "02\02_05_04_LightCastersSpotSoft\02_05_04_LightCastersSpotSoft.vcxproj", "{F4ED5733-26EA-420B-BBF6-8255FC6F4D4A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_06_MultipleLights", "02\02_06_MultipleLights\02_06_MultipleLights.vcxproj", "{80ACBA6F-44CA-48E1-93D8-04EEE118AAE6}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_05_01_ShaderUniform", "01\01_05_01_ShaderUniform\01_05_01_ShaderUniform.vcxproj", "{473313B1-7497-480F-AD7E-8F40538C1B48}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_05_02_ShaderInterpolation", "01\01_05_02_ShaderInterpolation\01_05_02_ShaderInterpolation.vcxproj", "{5B94C27B-2696-4702-AD05-2B5E81A26AF4}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_05_03_ShaderClass", "01\01_05_03_ShaderClass\01_05_03_ShaderClass.vcxproj", "{01717B6D-D0CB-4716-A2C6-F3418FB1241E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03_01_ModelLoading", "03_01_ModelLoading\03_01_ModelLoading.vcxproj", "{61F4865D-AB82-46DF-90B9-66B4BE8026D9}"
 EndProject
@@ -184,8 +186,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_02_01_GammaCorrection", "05\05_02_01_GammaCorrection\05_02_01_GammaCorrection.vcxproj", "{F9CDCF5B-47D4-4E9C-BE0F-F191A3722035}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_02_02_GammaCorrectionAttenuation", "05\05_02_02_GammaCorrectionAttenuation\05_02_02_GammaCorrectionAttenuation.vcxproj", "{18E3290F-101E-44D7-84E0-AFDF065E895C}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_03_HelloWindows", "01\01_03_HelloWindows\01_03_HelloWindows.vcxproj", "{3F50598B-8759-45F1-AC08-5E55090433BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
