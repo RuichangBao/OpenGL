@@ -102,9 +102,9 @@ int main()
 	//glBindVertexArray(0);
 
 	// ¼ÓÔØÌùÍ¼
-	unsigned int cubeTexture = loadTexture(FileSystem::getPath("resources/textures/marble.jpg").c_str());
-	unsigned int floorTexture = loadTexture(FileSystem::getPath("resources/textures/metal.png").c_str());
-	unsigned int grassTexture = loadTexture(FileSystem::getPath("resources/textures/grass.png").c_str());//²İµÄÌùÍ¼
+	unsigned int cubeTexture = loadTexture(FileSystem::getPath("../resources/textures/marble.jpg").c_str());
+	unsigned int floorTexture = loadTexture(FileSystem::getPath("../resources/textures/metal.png").c_str());
+	unsigned int grassTexture = loadTexture(FileSystem::getPath("../resources/textures/grass.png").c_str());//²İµÄÌùÍ¼
 
 	vector<glm::vec3> vegetation = {
 		glm::vec3(-1.5f, 0.0f, -0.48f),

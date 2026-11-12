@@ -53,8 +53,8 @@ int main()
 	Shader asteroidShader("shader/AsteroidsVertex.shader", "shader/AsteroidsFragment.shader");//小行星
 
 	//加载模型
-	Model planet(FileSystem::getPath("resources/objects/planet/planet.obj"));//地球
-	Model rock(FileSystem::getPath("resources/objects/rock/rock.obj"));	//岩石
+	Model planet(FileSystem::getPath("../resources/objects/planet/planet.obj"));//地球
+	Model rock(FileSystem::getPath("../resources/objects/rock/rock.obj"));	//岩石
 	
 	//生成一个大的半随机模型转换矩阵列表
 	unsigned int amount = 1000;

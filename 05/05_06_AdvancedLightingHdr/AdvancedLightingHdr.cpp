@@ -47,7 +47,7 @@ int main()
 	Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
 	Shader hdrShader("shader/HDRVertex.shader", "shader/HDRFragment.shader");
 	//将纹理加载为 SRGB 格式的纹理
-	unsigned int woodTexture = loadTexture(FileSystem::getPath("resources/textures/wood.png").c_str(), true); // note that we're loading the texture as an SRGB texture
+	unsigned int woodTexture = loadTexture(FileSystem::getPath("../resources/textures/wood.png").c_str(), true); // note that we're loading the texture as an SRGB texture
 
 	// 配置浮点帧缓冲区
 	unsigned int hdrFBO;

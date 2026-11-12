@@ -59,7 +59,7 @@ int main()
 	glEnableVertexAttribArray(2);	
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 	glBindVertexArray(0);
-	unsigned int floorTexture = loadTexture(FileSystem::getPath("resources/textures/wood.png").c_str());
+	unsigned int floorTexture = loadTexture(FileSystem::getPath("../resources/textures/wood.png").c_str());
 	shader.use();
 	shader.setInt("texture1", 0);
 	glm::vec3 lightPos(0.0f, 0.0f, 0.0f);

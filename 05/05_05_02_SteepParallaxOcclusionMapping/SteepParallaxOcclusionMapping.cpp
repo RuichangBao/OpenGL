@@ -45,9 +45,9 @@ int main()
 	// 构建并编译shader程序
 	Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
 
-	unsigned int diffuseMap = loadTexture(FileSystem::getPath("resources/textures/bricks2.jpg").c_str());
-	unsigned int normalMap = loadTexture(FileSystem::getPath("resources/textures/bricks2_normal.jpg").c_str());
-	unsigned int heightMap = loadTexture(FileSystem::getPath("resources/textures/bricks2_disp.jpg").c_str());
+	unsigned int diffuseMap = loadTexture(FileSystem::getPath("../resources/textures/bricks2.jpg").c_str());
+	unsigned int normalMap = loadTexture(FileSystem::getPath("../resources/textures/bricks2_normal.jpg").c_str());
+	unsigned int heightMap = loadTexture(FileSystem::getPath("../resources/textures/bricks2_disp.jpg").c_str());
 
 	shader.use();
 	shader.setInt("diffuseMap", 0);

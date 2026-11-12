@@ -80,7 +80,7 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	unsigned int woodTexture = loadTexture(FileSystem::getPath("resources/textures/awesomeface.png").c_str());
+	unsigned int woodTexture = loadTexture(FileSystem::getPath("../resources/textures/awesomeface.png").c_str());
 	shader.use();
 	shader.setInt("ourTexture", 0);
 	//—≠ª∑‰÷»æ

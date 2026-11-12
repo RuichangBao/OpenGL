@@ -76,7 +76,7 @@ int main()
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);	//∆Ù”√∂•µ„ Ù–‘
-	unsigned int diffuseMap = loadTexture(FileSystem::getPath("Resources/Textures/container2.png").c_str());
+	unsigned int diffuseMap = loadTexture(FileSystem::getPath("../resources/Textures/container2.png").c_str());
 	diffuseMapShader.use();
 	diffuseMapShader.setInt("material.diffuse", 0);
 

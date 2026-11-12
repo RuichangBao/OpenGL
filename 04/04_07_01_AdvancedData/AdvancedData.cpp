@@ -105,19 +105,19 @@ int main()
 
 	vector<string>faces
 	{
-		FileSystem::getPath("resources/textures/skybox/right.jpg"),
-		FileSystem::getPath("resources/textures/skybox/left.jpg"),
-		FileSystem::getPath("resources/textures/skybox/top.jpg"),
-		FileSystem::getPath("resources/textures/skybox/bottom.jpg"),
-		FileSystem::getPath("resources/textures/skybox/front.jpg"),
-		FileSystem::getPath("resources/textures/skybox/back.jpg")
+		FileSystem::getPath("../resources/textures/skybox/right.jpg"),
+		FileSystem::getPath("../resources/textures/skybox/left.jpg"),
+		FileSystem::getPath("../resources/textures/skybox/top.jpg"),
+		FileSystem::getPath("../resources/textures/skybox/bottom.jpg"),
+		FileSystem::getPath("../resources/textures/skybox/front.jpg"),
+		FileSystem::getPath("../resources/textures/skybox/back.jpg")
 	};
 	unsigned int cubemapTexture = loadCubemap(faces);
 	//-----------天空盒子 End----------------------------
 
 
 	// 加载贴图
-	unsigned int floorTexture = loadTexture(FileSystem::getPath("resources/textures/metal.png").c_str());
+	unsigned int floorTexture = loadTexture(FileSystem::getPath("../resources/textures/metal.png").c_str());
 
 
 	// 配置着色器

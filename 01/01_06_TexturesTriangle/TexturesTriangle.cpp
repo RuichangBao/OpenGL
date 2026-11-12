@@ -105,7 +105,7 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	//加载图像，创建纹理生成贴图
 	int width, height, nrChannels;
-	unsigned char* data = stbi_load(FileSystem::getPath("resources/textures/wall.jpg").c_str(), &width, &height, &nrChannels, 0);
+	unsigned char* data = stbi_load(FileSystem::getPath("../resources/textures/wall.jpg").c_str(), &width, &height, &nrChannels, 0);
 
 	if (data)
 	{

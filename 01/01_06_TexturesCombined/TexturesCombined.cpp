@@ -92,7 +92,7 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	//加载图像，创建纹理生成贴图
-	data = stbi_load(FileSystem::getPath("resources/textures/container.jpg").c_str(), &width, &height, &nrChannels, 0);
+	data = stbi_load(FileSystem::getPath("../resources/textures/container.jpg").c_str(), &width, &height, &nrChannels, 0);
 	if (data)
 	{
 		//图像数据上传到 GPU 并定义纹理的格式和数据
@@ -117,7 +117,7 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	//加载图像，创建纹理生成贴图
-	data = stbi_load(FileSystem::getPath("resources/textures/awesomeface.png").c_str(), &width, &height, &nrChannels, 0);
+	data = stbi_load(FileSystem::getPath("../resources/textures/awesomeface.png").c_str(), &width, &height, &nrChannels, 0);
 	if (data)
 	{
 		//图像数据上传到 GPU 并定义纹理的格式和数据

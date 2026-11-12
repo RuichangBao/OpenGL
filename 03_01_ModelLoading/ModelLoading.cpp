@@ -44,7 +44,7 @@ int main()
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
 	// 构建并编译shader程序
 	Shader ourShader("shader/Vertex.shader", "shader/Fragment.shader");
-	Model ourModel(FileSystem::getPath("resources/objects/backpack/backpack.obj"));
+	Model ourModel(FileSystem::getPath("../resources/objects/backpack/backpack.obj"));
 
 	//循环渲染
 	while (!glfwWindowShouldClose(window))

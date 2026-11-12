@@ -47,7 +47,7 @@ int main()
 	Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
 	Shader simpleDepthShader("shader/ShadowDepthVertex.shader", "shader/ShadowDepthFragment.shader", "shader/ShadowDepthSurface.shader");
 
-	unsigned int woodTexture = loadTexture(FileSystem::getPath("resources/textures/wood.png").c_str());
+	unsigned int woodTexture = loadTexture(FileSystem::getPath("../resources/textures/wood.png").c_str());
 
 
 	unsigned int depthMapFBO;

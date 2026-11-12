@@ -105,9 +105,9 @@ int main()
 	glBindVertexArray(0);
 
 	// ¼ÓÔØÌùÍ¼
-	unsigned int cubeTexture = loadTexture(FileSystem::getPath("resources/textures/marble.jpg").c_str());
-	unsigned int floorTexture = loadTexture(FileSystem::getPath("resources/textures/metal.png").c_str());
-	unsigned int transparentTexture = loadTexture(FileSystem::getPath("resources/textures/window.png").c_str());//²İµÄÌùÍ¼
+	unsigned int cubeTexture = loadTexture(FileSystem::getPath("../resources/textures/marble.jpg").c_str());
+	unsigned int floorTexture = loadTexture(FileSystem::getPath("../resources/textures/metal.png").c_str());
+	unsigned int transparentTexture = loadTexture(FileSystem::getPath("../resources/textures/window.png").c_str());//²İµÄÌùÍ¼
 
 	vector<glm::vec3> windows = {
 		glm::vec3(-1.5f, 0.0f, -0.48f),

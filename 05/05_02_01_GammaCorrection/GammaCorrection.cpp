@@ -63,9 +63,9 @@ int main()
 	glBindVertexArray(0);
 
 	//伽马校正前的纹理（上拱过的纹理）
-	unsigned int floorTexture = loadTexture(FileSystem::getPath("resources/textures/wood.png").c_str(), false);
+	unsigned int floorTexture = loadTexture(FileSystem::getPath("../resources/textures/wood.png").c_str(), false);
 	//伽马校正后的纹理（线性纹理）
-	unsigned int floorTextureGammaCorrected = loadTexture(FileSystem::getPath("resources/textures/wood.png").c_str(), true);
+	unsigned int floorTextureGammaCorrected = loadTexture(FileSystem::getPath("../resources/textures/wood.png").c_str(), true);
 
 	shader.use();
 	shader.setInt("floorTexture", 0);

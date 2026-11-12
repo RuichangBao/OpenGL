@@ -86,8 +86,8 @@ int main()
 	glBindVertexArray(0);
 
 	// ¼ÓÔØÌùÍ¼
-	unsigned int cubeTexture = loadTexture(FileSystem::getPath("resources/textures/marble.jpg").c_str());
-	unsigned int floorTexture = loadTexture(FileSystem::getPath("resources/textures/metal.png").c_str());
+	unsigned int cubeTexture = loadTexture(FileSystem::getPath("../resources/textures/marble.jpg").c_str());
+	unsigned int floorTexture = loadTexture(FileSystem::getPath("../resources/textures/metal.png").c_str());
 
 	// ÅäÖÃ×ÅÉ«Æ÷
 	shader.use();

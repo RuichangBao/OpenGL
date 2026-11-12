@@ -61,7 +61,7 @@ int main()
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(1);//ÌùÍ¼
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-	unsigned int cubeTexture = loadTexture(FileSystem::getPath("resources/textures/marble.jpg").c_str());
+	unsigned int cubeTexture = loadTexture(FileSystem::getPath("../resources/textures/marble.jpg").c_str());
 	shader.use();
 	shader.setInt("texture1", 0);
 	glBindTexture(GL_TEXTURE_2D, cubeTexture);

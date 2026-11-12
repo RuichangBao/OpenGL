@@ -133,11 +133,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\includes\glad\glad.c" />
-    <ClCompile Include="..\includes\StbImage\stb_image.cpp" />
+    <ClCompile Include="..\..\includes\StbImage\stb_image.cpp" />
     <ClCompile Include="UniformBufferObj_InterfaceBlock.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\includes\StbImage\stb_image.h" />
     <ClInclude Include="UniformBufferObj_InterfaceBlock.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

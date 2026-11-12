@@ -76,9 +76,9 @@ int main()
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);	//启用顶点属性
-	unsigned int diffuseMap = loadTexture(FileSystem::getPath("Resources/Textures/container2.png").c_str());
-	unsigned int specularMap = loadTexture(FileSystem::getPath("resources/textures/container2_specular.png").c_str());
-	unsigned int emissionMap = loadTexture(FileSystem::getPath("resources/textures/lighting_maps_specular_color.png").c_str());//彩色高光贴图
+	unsigned int diffuseMap = loadTexture(FileSystem::getPath("../resources/Textures/container2.png").c_str());
+	unsigned int specularMap = loadTexture(FileSystem::getPath("../resources/textures/container2_specular.png").c_str());
+	unsigned int emissionMap = loadTexture(FileSystem::getPath("../resources/textures/lighting_maps_specular_color.png").c_str());//彩色高光贴图
 	specularMapShader.use();
 	specularMapShader.setInt("material.diffuse", 0);
 	specularMapShader.setInt("material.specular", 1);

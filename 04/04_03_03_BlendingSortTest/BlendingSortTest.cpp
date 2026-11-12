@@ -69,8 +69,8 @@ int main()
 	glBindVertexArray(0);
 
 	// º”‘ÿÃ˘Õº
-	unsigned int colorRTexture = loadTexture(FileSystem::getPath("resources/textures/colorR.png").c_str());//
-	unsigned int colorGTexture = loadTexture(FileSystem::getPath("resources/textures/colorG.png").c_str());//
+	unsigned int colorRTexture = loadTexture(FileSystem::getPath("../resources/textures/colorR.png").c_str());//
+	unsigned int colorGTexture = loadTexture(FileSystem::getPath("../resources/textures/colorG.png").c_str());//
 
 	vector<glm::vec3> vegetation = {
 		glm::vec3(0.0f, 0.0f, -0.0001f),

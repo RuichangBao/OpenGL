@@ -46,7 +46,7 @@ int main()
 	//Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
 	Shader shader("shader/Vertex.shader", "shader/Fragment.shader","shader/Geometry.shader");
 	
-	Model nanosuit(FileSystem::getPath("resources/objects/nanosuit/nanosuit.obj"));
+	Model nanosuit(FileSystem::getPath("../resources/objects/nanosuit/nanosuit.obj"));
 	//—≠ª∑‰÷»æ
 	while (!glfwWindowShouldClose(window))
 	{

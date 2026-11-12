@@ -47,7 +47,7 @@ int main()
 	Shader normalShader("shader/NormalVertex.shader", "shader/NormalFragment.shader","shader/NormalGeometry.shader");
 	
 	stbi_set_flip_vertically_on_load(true);
-	Model backpack(FileSystem::getPath("resources/objects/backpack/backpack.obj"));
+	Model backpack(FileSystem::getPath("../resources/objects/backpack/backpack.obj"));
 	//—≠ª∑‰÷»æ
 	while (!glfwWindowShouldClose(window))
 	{
