@@ -42,15 +42,15 @@ vec3 BlinnPhong(vec3 normal, vec3 fragPos, vec3 lightPos, vec3 lightColor)
 void main()
 {
    vec3 color = texture(floorTexture, fs_in.TexCoords).rgb;
-   vec3 lighting = vec3(0.0);
-   for(int i = 0; i < 4; i++)
-   {
-      lighting += BlinnPhong(normalize(fs_in.Normal), fs_in.FragPos, lightPositions[i], lightColors[i]);
-   }
-   color *= lighting;
-   // if(gamma)
+   // vec3 lighting = vec3(0.0);
+   // for(int i = 0; i < 4; i++)
    // {
-   //    color = pow(color, vec3(1.0/2.2));
+   //    lighting += BlinnPhong(normalize(fs_in.Normal), fs_in.FragPos, lightPositions[i], lightColors[i]);
    // }
+   // color *= lighting;
+   if(gamma)
+   {
+      color = pow(color, vec3(1.0/2.2));
+   }
    FragColor = vec4(color, 1.0);
 }

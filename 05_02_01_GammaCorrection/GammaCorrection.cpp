@@ -40,6 +40,7 @@ int main()
 		return -1;
 	}
 	glEnable(GL_DEPTH_TEST);//开启透明度测试
+	//glEnable(GL_FRAMEBUFFER_SRGB);//所有通道开启伽马校正
 	//glEnable(GL_MULTISAMPLE); //（多重采样抗锯齿）在某些驱动程序上默认启用，但并非全部启用，因此始终启用以确保
 	// 构建并编译shader程序
 	Shader shader("shader/Vertex.shader", "shader/Fragment.shader");
@@ -101,13 +102,13 @@ int main()
 		glUniform3fv(glGetUniformLocation(shader.ID, "lightColors"), 4, &lightColors[0][0]);
 		shader.setVec3("viewPos", camera.Position);
 		shader.setInt("gamma", gammaEnabled);
-		cout << gammaEnabled << endl;
 
 		glBindVertexArray(planeVAO);//绑定顶点数组
 		glActiveTexture(GL_TEXTURE0);
 		//glBindTexture(GL_TEXTURE_2D, floorTexture);
+		//glBindTexture(GL_TEXTURE_2D, floorTextureGammaCorrected);
 		glBindTexture(GL_TEXTURE_2D, gammaEnabled ? floorTextureGammaCorrected : floorTexture);
-
+		
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		glfwSwapBuffers(window);//交换颜色缓冲区
@@ -145,10 +146,12 @@ void processInput(GLFWwindow* window)
 	{
 		gammaEnabled = !gammaEnabled;
 		gammaKeyPressed = true;
+		cout << "gammaEnabled:" << gammaEnabled << endl;
 	}
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_RELEASE)
 	{
 		gammaKeyPressed = false;
+		cout << "gammaEnabled:" << gammaEnabled << endl;
 	}
 }
 
@@ -200,6 +203,8 @@ unsigned int loadTexture(char const* path, bool gammaCorrection)
 		GLenum dataFormat;
 		if (nrChannels == 1)
 			dataFormat = GL_RED;
+		//GL_SRGB和GL_SRGB_ALPHA会把上拱过(进行过Gamma运算后)的贴图进行还原
+		//也就是把非线性空间中的贴图变换到线性空间
 		else if (nrChannels == 3)
 		{
 			internalFormat = gammaCorrection ? GL_SRGB : GL_RGB;
