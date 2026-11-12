@@ -135,7 +135,7 @@
     <ClInclude Include="ModelLoading.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\includes\glad\glad.c" />
+    <ClCompile Include="..\..\includes\glad\glad.c" />
     <ClCompile Include="..\includes\StbImage\stb_image.cpp" />
     <ClCompile Include="ModelLoading.cpp" />
   </ItemGroup>

@@ -3,191 +3,189 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.vcxproj", "{A8F0B38A-4180-4AE8-9720-287F29E1DC39}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_07_Transformations", "01_07_Transformations\01_07_Transformations.vcxproj", "{5D88E8C0-15F0-45FA-A0F7-310BFCDE05F2}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_04_HelloTriangle", "01_04_HelloTriangle\01_04_HelloTriangle.vcxproj", "{FEB5D46B-018C-4E51-A002-56DE68BEE81B}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_04_HelloTriangle_Exercise1", "01_04_HelloTriangle_Exercise1\01_04_HelloTriangle_Exercise1.vcxproj", "{FE5B23AF-2E86-42C6-AA55-90F16BF25CD7}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_04_HelloTriangle_Exercise2", "01_04_HelloTriangle_Exercise2\01_04_HelloTriangle_Exercise2.vcxproj", "{5C373546-9CA9-4D61-9763-3AE42F6A92EA}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_04_HelloTriangle_Exercise3", "01_04_HelloTriangle_Exercise3\01_04_HelloTriangle_Exercise3.vcxproj", "{E27DE357-7119-4532-95F3-7398690224B8}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_04_HelloTriangleIndex", "01_04_HelloTriangleIndex\01_04_HelloTriangleIndex.vcxproj", "{32C546C5-EA6C-4416-A259-823BCA6058E0}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_03_HelloWindows", "01_03_HelloWindows\01_03_HelloWindows.vcxproj", "{3F50598B-8759-45F1-AC08-5E55090433BB}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_06_Textures", "01_06_Textures\01_06_Textures.vcxproj", "{0A17F459-46BB-4BB5-99C8-B00221F289BB}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_06_Textures_Surround", "01_06_Textures_Surround\01_06_Textures_Surround.vcxproj", "{B1554D58-1B6B-47C1-9B89-B12E23E6D397}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_06_TexturesCombined", "01_06_TexturesCombined\01_06_TexturesCombined.vcxproj", "{904A8584-E0BD-452F-BC12-E8ED73DF06D7}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_06_TexturesTriangle", "01_06_TexturesTriangle\01_06_TexturesTriangle.vcxproj", "{29E3AED5-4506-492A-ACFD-0B204A5F1316}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_07_Transformations_Exercise2", "01_07_Transformations_Exercise2\01_07_Transformations_Exercise2.vcxproj", "{0E4ACB68-F38C-47A0-8B8E-13FA7B52BB6C}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_08_CoordinateSystems", "01_08_CoordinateSystems\01_08_CoordinateSystems.vcxproj", "{028B6B7A-695D-4F9F-89B1-7E30B9E2D1B3}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_08_CoordinateSystemsDepth", "01_08_CoordinateSystemsDepth\01_08_CoordinateSystemsDepth.vcxproj", "{E846E544-990E-4B14-99B0-A33A520CDA37}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_08_CoordinateSystemsMultiple", "01_08_CoordinateSystemsMultiple\01_08_CoordinateSystemsMultiple.vcxproj", "{F8DE7C0B-81AF-4E28-A8AB-D871A1A63262}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_08_CoordinateSystemsMultiple_Exercise", "01_08_CoordinateSystemsMultiple_Exercise\01_08_CoordinateSystemsMultiple_Exercise.vcxproj", "{7ADF14A9-E3AE-463D-8F4C-588870377AB1}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_09_CameraCircle", "01_09_CameraCircle\01_09_CameraCircle.vcxproj", "{CB194966-0FA4-49E9-B9C1-AB607282EC5B}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_09_CameraKeyboard", "01_09_CameraKeyboard\01_09_CameraKeyboard.vcxproj", "{7C7B480C-C93A-4BFB-A5E8-205A3B0A71C1}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_09_CameraMouseRoom", "01_09_CameraMouseRoom\01_09_CameraMouseRoom.vcxproj", "{757BB072-ED36-4350-9B34-21EE5AF1C6A3}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_09_CameraClass", "01_09_CameraClass\01_09_CameraClass.vcxproj", "{92A5DE7E-FEFC-49A2-98C8-66616596A5E1}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_01_LightColor", "02_01_LightColor\02_01_LightColor.vcxproj", "{005D416A-D978-4501-A997-A8DF891EB732}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_02_01_BasicLightingDiffuse", "02_02_01_BasicLightingDiffuse\02_02_01_BasicLightingDiffuse.vcxproj", "{8F9A3DBA-80E8-4092-BE40-3471B2CD57D8}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_02_02_BasicLightingSpecular", "02_02_02_BasicLightingSpecular\02_02_02_BasicLightingSpecular.vcxproj", "{B6ECEBF8-63CB-4D0E-B228-7DBAE7559D40}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_03_Materials_Exercise", "02_03_Materials\02_03_Materials.vcxproj", "{CB2BA665-7E48-49A2-AD82-11A2500649D0}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_03_Materials", "02_03_Materials_Exercise\02_03_Materials_Exercise.vcxproj", "{0A472A8E-AEFF-4C98-B2CC-2168384A7766}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_04_01_LightingMapsDiffuse", "02_04_01_LightingMapsDiffuseMap\02_04_01_LightingMapsDiffuseMap.vcxproj", "{AEF93CEC-BF0E-4FE8-A586-C8D71D3876C9}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_04_02_LightingSpecularDiffuse", "02_04_02_LightingMapsSpecularMap\02_04_02_LightingMapsSpecularMap.vcxproj", "{C854CDDF-A094-451B-905D-817B205B4ABD}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_04_02_LightingSpecularDiffuse_Exercise", "02_04_02_LightingMapsSpecularMap_Exercise\02_04_02_LightingMapsSpecularMap_Exercise.vcxproj", "{B1E59956-D284-4397-AEDA-250E7A07DEE2}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_05_01_LightCastersDirectional", "02_05_01_LightCastersDirectional\02_05_01_LightCastersDirectional.vcxproj", "{20E2936D-EB5D-4C0C-A8F8-6190EBEFD61D}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_05_02_LightCastersPoint", "02_05_02_LightCastersPoint\02_05_02_LightCastersPoint.vcxproj", "{429F9267-CB73-4DBC-9554-D304FE1DC6A2}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_05_03_LightCastersSpot", "02_05_03_LightCastersSpot\02_05_03_LightCastersSpot.vcxproj", "{DD1C1A30-D5C6-42CD-B3AE-201A70B0A5B3}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_05_04_LightCastersSpotSoft", "02_05_04_LightCastersSpotSoft\02_05_04_LightCastersSpotSoft.vcxproj", "{F4ED5733-26EA-420B-BBF6-8255FC6F4D4A}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_06_MultipleLights", "02_06_MultipleLights\02_06_MultipleLights.vcxproj", "{80ACBA6F-44CA-48E1-93D8-04EEE118AAE6}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_05_01_ShaderUniform", "01_05_01_ShaderUniform\01_05_01_ShaderUniform.vcxproj", "{473313B1-7497-480F-AD7E-8F40538C1B48}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_05_02_ShaderInterpolation", "01_05_02_ShaderInterpolation\01_05_02_ShaderInterpolation.vcxproj", "{5B94C27B-2696-4702-AD05-2B5E81A26AF4}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_05_03_ShaderClass", "01_05_03_ShaderClass\01_05_03_ShaderClass.vcxproj", "{01717B6D-D0CB-4716-A2C6-F3418FB1241E}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03_01_ModelLoading", "03_01_ModelLoading\03_01_ModelLoading.vcxproj", "{61F4865D-AB82-46DF-90B9-66B4BE8026D9}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_01_01_DepthTesting", "04_01_01_DepthTesting\04_01_01_DepthTesting.vcxproj", "{5E67B56A-F23F-403A-BB93-97158722055E}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_02_01_StencilTesting", "04_02_01_StencilTesting\04_02_01_StencilTesting.vcxproj", "{62F6E2ED-8E37-4ACE-8A3B-FC0BFC42D0A0}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_03_01_BlendingDiscard", "04_03_01_BlendingDiscard\04_03_01_BlendingDiscard.vcxproj", "{9711C38C-DEDC-4A17-8FDB-46D80FEF603E}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_03_02_BlendingSort", "04_03_02_BlendingSort\04_03_02_BlendingSort.vcxproj", "{3948DF63-E14A-4E24-8CBD-C6479C910A0C}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_04_01_FaceCulling", "04_04_01_FaceCulling\04_04_01_FaceCulling.vcxproj", "{DD2F4CB6-9BFB-4681-8688-75E1C202060B}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_05_01_FrameBuffers", "04_05_01_FrameBuffers\04_05_01_FrameBuffers.vcxproj", "{E75A8897-2019-4349-8A45-D03ECD23D2EE}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_01_02_DepthTestingView", "04_01_02_DepthTestingView\04_01_02_DepthTestingView.vcxproj", "{B5EE5163-E596-4D98-AC9B-4A63787FE6CD}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_05_02_FrameBuffers_Exercise", "04_05_02_FrameBuffers_Exercise\04_05_02_FrameBuffers_Exercise.vcxproj", "{5A25D2FF-24C5-4EAD-928F-2F4E29839F62}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_02_02_StencilTestingTest", "04_02_02_StencilTestingTest\04_02_02_StencilTestingTest.vcxproj", "{F2CD474A-6554-4A65-93DF-D8F05718F036}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_03_03_BlendingSortTest", "04_03_03_BlendingSortTest\04_03_03_BlendingSortTest.vcxproj", "{31E89068-C9B4-4E30-893A-66EBC0FBE11A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01", "01", "{A3CE707E-FE3D-4917-B327-86393791557D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02", "02", "{5EB7C434-8FFB-4643-8708-A9B7546E9380}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04", "04", "{4272ABA9-C48F-4F67-8E64-519BA7FF0222}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03", "03", "{16885536-958C-4DD7-8CD1-FDECDDBD4F7D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_06_01_CubeMapsSkybox", "04_06_01_CubeMapsSkybox\04_06_01_CubeMapsSkybox.vcxproj", "{AA6EFA2D-9A9D-4178-9B8D-93DFAE819C8E}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_05_01_FrameBuffersTest", "04_05_01_FrameBuffersTest\04_05_01_FrameBuffersTest.vcxproj", "{052B5C5C-F27B-42A4-A175-6A6F7A042E5C}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_06_02_CubeMapSenvironmentMapping", "04_06_02_CubeMapSenvironmentMapping\04_06_02_CubeMapSenvironmentMapping.vcxproj", "{CB2654CD-553A-4C1F-BEF5-0D30624B0B8B}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_07_01_AdvancedData", "04_07_01_AdvancedData\04_07_01_AdvancedData.vcxproj", "{3C7DFC58-8CD7-4D1D-91C2-DFA07661DEC9}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_07_02_AdvancedDataBatchVertices", "04_07_02_AdvancedDataBatchVertices\04_07_02_AdvancedDataBatchVertices.vcxproj", "{04E2D4E9-E94F-4824-B796-B8DD98F6748F}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_07_03_AdvancedDataCopyBuffer", "04_07_03_AdvancedDataCopyBuffer\04_07_03_AdvancedDataCopyBuffer.vcxproj", "{69B1DAEE-5ABC-43E2-85BC-1541DC1BB2FB}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_08_01_UniformBufferObj", "04_08_01_UniformBufferObj\04_08_01_UniformBufferObj.vcxproj", "{8C676639-B94E-4393-96D6-D3F8E450F541}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_08_02_UniformBufferObj_gl_VertexID", "04_08_02_UniformBufferObj_gl_VertexID\04_08_02_UniformBufferObj_gl_VertexID.vcxproj", "{893BF85F-A4A1-4032-ACAC-CF0B6A3CA136}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_08_03_UniformBufferObj_gl_FrontFacing", "04_08_03_UniformBufferObj_gl_FrontFacing\04_08_03_UniformBufferObj_gl_FrontFacing.vcxproj", "{37DE655A-6099-4369-83C7-1D9B27B04D8B}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_08_04_UniformBufferObj_gl_FragDepth", "04_08_04_UniformBufferObj_gl_FragDepth\04_08_04_UniformBufferObj_gl_FragDepth.vcxproj", "{5F25FA7E-BF01-4B0D-962E-B8AE01952898}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_08_05_UniformBufferObj_InterfaceBlock", "04_08_05_UniformBufferObj_InterfaceBlock\04_08_05_UniformBufferObj_InterfaceBlock.vcxproj", "{37BD1E6C-309A-40A1-B8E1-06EC2AC555FB}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_08_06_UniformBufferObj_Uniform", "04_08_06_UniformBufferObj_Uniform\04_08_06_UniformBufferObj_Uniform.vcxproj", "{8D9DE9C4-108D-4649-A0CA-6F4B90F49D13}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_09_01_GeometryShaderHouses", "04_09_01_GeometryShaderHouses\04_09_01_GeometryShaderHouses.vcxproj", "{0FD44E0E-8A2A-4723-9EE1-4595720EC3F9}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_09_01_GeometryShaderHousesTest", "04_09_01_GeometryShaderHousesTest\04_09_01_GeometryShaderHousesTest.vcxproj", "{E7D9E317-6152-4FFE-956D-CB63018959DC}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_09_02_GeometryShaderExploding", "04_09_02_GeometryShaderExploding\04_09_02_GeometryShaderExploding.vcxproj", "{8BCBB1DC-17B1-4FD2-B3D5-FCD1EB665BC2}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_09_03_GeometryShaderNormal", "04_09_03_GeometryShaderNormal\04_09_03_GeometryShaderNormal.vcxproj", "{30984291-A3C5-4CB9-B295-C82F311ED656}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_09_02_GeometryShaderExplodingCube", "04_09_02_GeometryShaderExplodingCube\04_09_02_GeometryShaderExplodingCube.vcxproj", "{D7E35562-47E6-4AA3-A20F-4858FB582517}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_10_01_InstancingQuads", "04_10_01_InstancingQuads\04_10_01_InstancingQuads.vcxproj", "{7F2E218F-AF6D-4E4D-885B-41F3C117F171}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_10_02_InstancedArray", "04_10_02_InstancedArray\04_10_02_InstancedArray.vcxproj", "{E0D1FA75-BCF1-4469-9C48-F3C39FD3E1F1}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_10_03_Asteroids", "04_10_03_Asteroids\04_10_03_Asteroids.vcxproj", "{9439071A-A857-42CA-BC0F-B5EF63C33D63}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_10_04_AsteroidsInstanced", "04_10_04_AsteroidsInstanced\04_10_04_AsteroidsInstanced.vcxproj", "{25420861-DDC3-4F9B-9083-35703EFD23C2}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_11_01_AntiAliasingMsaa", "04_11_01_AntiAliasingMsaa\04_11_01_AntiAliasingMsaa.vcxproj", "{15B88980-670F-42C5-9D08-8123F037A919}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_11_01_AntiAliasingOffscreen", "04_11_01_AntiAliasingOffscreen\04_11_01_AntiAliasingOffscreen.vcxproj", "{80A79F03-A862-48FC-B4AC-53BCA02F2D2E}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_01_AdvancedLighting", "05_01_AdvancedLighting\05_01_AdvancedLighting.vcxproj", "{0525FDEC-D793-4A37-87E6-2A366130794E}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_01_Test", "05_01_Test\05_01_Test.vcxproj", "{13ECB53C-D833-4AEB-B78C-C518FAD8FA22}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_02_GammaCorrection", "05_02_GammaCorrection\05_02_GammaCorrection.vcxproj", "{317E90BF-4F78-4962-8D8D-D61778290D76}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_03_01_01_ShadowMappingDepth", "05_03_01_01_ShadowMappingDepth\05_03_01_01_ShadowMappingDepth.vcxproj", "{A1AD2E9A-C177-42C1-B0F0-98869BADF7FE}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_03_01_02_ShadowMappingBase", "05_03_01_02_ShadowMappingBase\05_03_01_02_ShadowMappingBase.vcxproj", "{7D502F2C-7AAF-4530-B2CA-92B6327C7059}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_03_01_03_ShadowMappingShadowBias", "05_03_01_03_ShadowMappingShadowBias\05_03_01_03_ShadowMappingShadowBias.vcxproj", "{C627B2DD-10D4-40EA-B292-532A8E45F7D3}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_03_01_04_ShadowMappingSSP", "05_03_01_04_ShadowMappingSSP\05_03_01_04_ShadowMappingSSP.vcxproj", "{DA9625DE-125F-4BAD-B50C-FAA0323CB883}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_03_01_04_ShadowMappingTest", "05_03_01_04_ShadowMappingTest\05_03_01_04_ShadowMappingTest.vcxproj", "{5B4D6603-F28B-45FC-9D5A-86941CD6B610}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_03_02_01_PointShadows", "05_03_02_01_PointShadows\05_03_02_01_PointShadows.vcxproj", "{9E2CAEAF-C76A-4E62-BCE0-5744FDE6BF67}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04", "04", "{4272ABA9-C48F-4F67-8E64-519BA7FF0222}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05", "05", "{2332E91D-ACF5-480F-AEE6-4406152D0D4B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_04_NormalMapping_Model", "05_04_NormalMapping_Model\05_04_NormalMapping_Model.vcxproj", "{4D1F14A3-C918-442E-ADB2-4CE2BD8A979F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.vcxproj", "{A8F0B38A-4180-4AE8-9720-287F29E1DC39}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_04_NormalMapping_Tangent", "05_04_NormalMapping_Tangent\05_04_NormalMapping_Tangent.vcxproj", "{63B57A83-F7C1-4C3B-9BA7-56A3BA0449CA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_07_Transformations", "01\01_07_Transformations\01_07_Transformations.vcxproj", "{5D88E8C0-15F0-45FA-A0F7-310BFCDE05F2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_05_01_ParallaxMapping", "05_05_01_ParallaxMapping\05_05_01_ParallaxMapping.vcxproj", "{6EF71631-1337-4D88-838A-B4EB2A48F646}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_04_HelloTriangle", "01\01_04_HelloTriangle\01_04_HelloTriangle.vcxproj", "{FEB5D46B-018C-4E51-A002-56DE68BEE81B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_05_02_SteepParallaxMapping", "05_05_02_SteepParallaxMapping\05_05_02_SteepParallaxMapping.vcxproj", "{187B5BF1-E0DC-4DB5-BF80-F12C2FEF8ADA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_04_HelloTriangle_Exercise1", "01\01_04_HelloTriangle_Exercise1\01_04_HelloTriangle_Exercise1.vcxproj", "{FE5B23AF-2E86-42C6-AA55-90F16BF25CD7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_05_02_SteepParallaxOcclusionMapping", "05_05_02_SteepParallaxOcclusionMapping\05_05_02_SteepParallaxOcclusionMapping.vcxproj", "{B1063D8C-8DFD-4BAA-9456-1CD01BFE8C68}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_04_HelloTriangle_Exercise2", "01\01_04_HelloTriangle_Exercise2\01_04_HelloTriangle_Exercise2.vcxproj", "{5C373546-9CA9-4D61-9763-3AE42F6A92EA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_06_AdvancedLightingHdr", "05_06_AdvancedLightingHdr\05_06_AdvancedLightingHdr.vcxproj", "{F028E37A-324E-4966-84CC-A0B5D9B63FDF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_04_HelloTriangle_Exercise3", "01\01_04_HelloTriangle_Exercise3\01_04_HelloTriangle_Exercise3.vcxproj", "{E27DE357-7119-4532-95F3-7398690224B8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_02_01_GammaCorrection", "05_02_01_GammaCorrection\05_02_01_GammaCorrection.vcxproj", "{F9CDCF5B-47D4-4E9C-BE0F-F191A3722035}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_04_HelloTriangleIndex", "01\01_04_HelloTriangleIndex\01_04_HelloTriangleIndex.vcxproj", "{32C546C5-EA6C-4416-A259-823BCA6058E0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_02_02_GammaCorrectionAttenuation", "05_02_02_GammaCorrectionAttenuation\05_02_02_GammaCorrectionAttenuation.vcxproj", "{18E3290F-101E-44D7-84E0-AFDF065E895C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_06_Textures", "01\01_06_Textures\01_06_Textures.vcxproj", "{0A17F459-46BB-4BB5-99C8-B00221F289BB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_06_Textures_Surround", "01\01_06_Textures_Surround\01_06_Textures_Surround.vcxproj", "{B1554D58-1B6B-47C1-9B89-B12E23E6D397}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_06_TexturesCombined", "01\01_06_TexturesCombined\01_06_TexturesCombined.vcxproj", "{904A8584-E0BD-452F-BC12-E8ED73DF06D7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_06_TexturesTriangle", "01\01_06_TexturesTriangle\01_06_TexturesTriangle.vcxproj", "{29E3AED5-4506-492A-ACFD-0B204A5F1316}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_07_Transformations_Exercise2", "01\01_07_Transformations_Exercise2\01_07_Transformations_Exercise2.vcxproj", "{0E4ACB68-F38C-47A0-8B8E-13FA7B52BB6C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_08_CoordinateSystems", "01\01_08_CoordinateSystems\01_08_CoordinateSystems.vcxproj", "{028B6B7A-695D-4F9F-89B1-7E30B9E2D1B3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_08_CoordinateSystemsDepth", "01\01_08_CoordinateSystemsDepth\01_08_CoordinateSystemsDepth.vcxproj", "{E846E544-990E-4B14-99B0-A33A520CDA37}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_08_CoordinateSystemsMultiple", "01\01_08_CoordinateSystemsMultiple\01_08_CoordinateSystemsMultiple.vcxproj", "{F8DE7C0B-81AF-4E28-A8AB-D871A1A63262}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_08_CoordinateSystemsMultiple_Exercise", "01\01_08_CoordinateSystemsMultiple_Exercise\01_08_CoordinateSystemsMultiple_Exercise.vcxproj", "{7ADF14A9-E3AE-463D-8F4C-588870377AB1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_09_CameraCircle", "01\01_09_CameraCircle\01_09_CameraCircle.vcxproj", "{CB194966-0FA4-49E9-B9C1-AB607282EC5B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_09_CameraKeyboard", "01\01_09_CameraKeyboard\01_09_CameraKeyboard.vcxproj", "{7C7B480C-C93A-4BFB-A5E8-205A3B0A71C1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_09_CameraMouseRoom", "01\01_09_CameraMouseRoom\01_09_CameraMouseRoom.vcxproj", "{757BB072-ED36-4350-9B34-21EE5AF1C6A3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_09_CameraClass", "01\01_09_CameraClass\01_09_CameraClass.vcxproj", "{92A5DE7E-FEFC-49A2-98C8-66616596A5E1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_01_LightColor", "02\02_01_LightColor\02_01_LightColor.vcxproj", "{005D416A-D978-4501-A997-A8DF891EB732}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_02_01_BasicLightingDiffuse", "02\02_02_01_BasicLightingDiffuse\02_02_01_BasicLightingDiffuse.vcxproj", "{8F9A3DBA-80E8-4092-BE40-3471B2CD57D8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_02_02_BasicLightingSpecular", "02\02_02_02_BasicLightingSpecular\02_02_02_BasicLightingSpecular.vcxproj", "{B6ECEBF8-63CB-4D0E-B228-7DBAE7559D40}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_03_Materials_Exercise", "02\02_03_Materials\02_03_Materials.vcxproj", "{CB2BA665-7E48-49A2-AD82-11A2500649D0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_03_Materials", "02\02_03_Materials_Exercise\02_03_Materials_Exercise.vcxproj", "{0A472A8E-AEFF-4C98-B2CC-2168384A7766}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_04_01_LightingMapsDiffuse", "02\02_04_01_LightingMapsDiffuseMap\02_04_01_LightingMapsDiffuseMap.vcxproj", "{AEF93CEC-BF0E-4FE8-A586-C8D71D3876C9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_04_02_LightingSpecularDiffuse", "02\02_04_02_LightingMapsSpecularMap\02_04_02_LightingMapsSpecularMap.vcxproj", "{C854CDDF-A094-451B-905D-817B205B4ABD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_04_02_LightingSpecularDiffuse_Exercise", "02\02_04_02_LightingMapsSpecularMap_Exercise\02_04_02_LightingMapsSpecularMap_Exercise.vcxproj", "{B1E59956-D284-4397-AEDA-250E7A07DEE2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_05_01_LightCastersDirectional", "02\02_05_01_LightCastersDirectional\02_05_01_LightCastersDirectional.vcxproj", "{20E2936D-EB5D-4C0C-A8F8-6190EBEFD61D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_05_02_LightCastersPoint", "02\02_05_02_LightCastersPoint\02_05_02_LightCastersPoint.vcxproj", "{429F9267-CB73-4DBC-9554-D304FE1DC6A2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_05_03_LightCastersSpot", "02\02_05_03_LightCastersSpot\02_05_03_LightCastersSpot.vcxproj", "{DD1C1A30-D5C6-42CD-B3AE-201A70B0A5B3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_05_04_LightCastersSpotSoft", "02\02_05_04_LightCastersSpotSoft\02_05_04_LightCastersSpotSoft.vcxproj", "{F4ED5733-26EA-420B-BBF6-8255FC6F4D4A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_06_MultipleLights", "02\02_06_MultipleLights\02_06_MultipleLights.vcxproj", "{80ACBA6F-44CA-48E1-93D8-04EEE118AAE6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_05_01_ShaderUniform", "01\01_05_01_ShaderUniform\01_05_01_ShaderUniform.vcxproj", "{473313B1-7497-480F-AD7E-8F40538C1B48}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_05_02_ShaderInterpolation", "01\01_05_02_ShaderInterpolation\01_05_02_ShaderInterpolation.vcxproj", "{5B94C27B-2696-4702-AD05-2B5E81A26AF4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_05_03_ShaderClass", "01\01_05_03_ShaderClass\01_05_03_ShaderClass.vcxproj", "{01717B6D-D0CB-4716-A2C6-F3418FB1241E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03_01_ModelLoading", "03_01_ModelLoading\03_01_ModelLoading.vcxproj", "{61F4865D-AB82-46DF-90B9-66B4BE8026D9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_01_01_DepthTesting", "04\04_01_01_DepthTesting\04_01_01_DepthTesting.vcxproj", "{5E67B56A-F23F-403A-BB93-97158722055E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_02_01_StencilTesting", "04\04_02_01_StencilTesting\04_02_01_StencilTesting.vcxproj", "{62F6E2ED-8E37-4ACE-8A3B-FC0BFC42D0A0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_03_01_BlendingDiscard", "04\04_03_01_BlendingDiscard\04_03_01_BlendingDiscard.vcxproj", "{9711C38C-DEDC-4A17-8FDB-46D80FEF603E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_03_02_BlendingSort", "04\04_03_02_BlendingSort\04_03_02_BlendingSort.vcxproj", "{3948DF63-E14A-4E24-8CBD-C6479C910A0C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_04_01_FaceCulling", "04\04_04_01_FaceCulling\04_04_01_FaceCulling.vcxproj", "{DD2F4CB6-9BFB-4681-8688-75E1C202060B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_05_01_FrameBuffers", "04\04_05_01_FrameBuffers\04_05_01_FrameBuffers.vcxproj", "{E75A8897-2019-4349-8A45-D03ECD23D2EE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_01_02_DepthTestingView", "04\04_01_02_DepthTestingView\04_01_02_DepthTestingView.vcxproj", "{B5EE5163-E596-4D98-AC9B-4A63787FE6CD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_05_02_FrameBuffers_Exercise", "04\04_05_02_FrameBuffers_Exercise\04_05_02_FrameBuffers_Exercise.vcxproj", "{5A25D2FF-24C5-4EAD-928F-2F4E29839F62}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_02_02_StencilTestingTest", "04\04_02_02_StencilTestingTest\04_02_02_StencilTestingTest.vcxproj", "{F2CD474A-6554-4A65-93DF-D8F05718F036}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_03_03_BlendingSortTest", "04\04_03_03_BlendingSortTest\04_03_03_BlendingSortTest.vcxproj", "{31E89068-C9B4-4E30-893A-66EBC0FBE11A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_06_01_CubeMapsSkybox", "04\04_06_01_CubeMapsSkybox\04_06_01_CubeMapsSkybox.vcxproj", "{AA6EFA2D-9A9D-4178-9B8D-93DFAE819C8E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_05_01_FrameBuffersTest", "04\04_05_01_FrameBuffersTest\04_05_01_FrameBuffersTest.vcxproj", "{052B5C5C-F27B-42A4-A175-6A6F7A042E5C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_06_02_CubeMapSenvironmentMapping", "04\04_06_02_CubeMapSenvironmentMapping\04_06_02_CubeMapSenvironmentMapping.vcxproj", "{CB2654CD-553A-4C1F-BEF5-0D30624B0B8B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_07_01_AdvancedData", "04\04_07_01_AdvancedData\04_07_01_AdvancedData.vcxproj", "{3C7DFC58-8CD7-4D1D-91C2-DFA07661DEC9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_07_02_AdvancedDataBatchVertices", "04\04_07_02_AdvancedDataBatchVertices\04_07_02_AdvancedDataBatchVertices.vcxproj", "{04E2D4E9-E94F-4824-B796-B8DD98F6748F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_07_03_AdvancedDataCopyBuffer", "04\04_07_03_AdvancedDataCopyBuffer\04_07_03_AdvancedDataCopyBuffer.vcxproj", "{69B1DAEE-5ABC-43E2-85BC-1541DC1BB2FB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_08_01_UniformBufferObj", "04\04_08_01_UniformBufferObj\04_08_01_UniformBufferObj.vcxproj", "{8C676639-B94E-4393-96D6-D3F8E450F541}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_08_02_UniformBufferObj_gl_VertexID", "04\04_08_02_UniformBufferObj_gl_VertexID\04_08_02_UniformBufferObj_gl_VertexID.vcxproj", "{893BF85F-A4A1-4032-ACAC-CF0B6A3CA136}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_08_03_UniformBufferObj_gl_FrontFacing", "04\04_08_03_UniformBufferObj_gl_FrontFacing\04_08_03_UniformBufferObj_gl_FrontFacing.vcxproj", "{37DE655A-6099-4369-83C7-1D9B27B04D8B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_08_04_UniformBufferObj_gl_FragDepth", "04\04_08_04_UniformBufferObj_gl_FragDepth\04_08_04_UniformBufferObj_gl_FragDepth.vcxproj", "{5F25FA7E-BF01-4B0D-962E-B8AE01952898}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_08_05_UniformBufferObj_InterfaceBlock", "04\04_08_05_UniformBufferObj_InterfaceBlock\04_08_05_UniformBufferObj_InterfaceBlock.vcxproj", "{37BD1E6C-309A-40A1-B8E1-06EC2AC555FB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_08_06_UniformBufferObj_Uniform", "04\04_08_06_UniformBufferObj_Uniform\04_08_06_UniformBufferObj_Uniform.vcxproj", "{8D9DE9C4-108D-4649-A0CA-6F4B90F49D13}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_09_01_GeometryShaderHouses", "04\04_09_01_GeometryShaderHouses\04_09_01_GeometryShaderHouses.vcxproj", "{0FD44E0E-8A2A-4723-9EE1-4595720EC3F9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_09_01_GeometryShaderHousesTest", "04\04_09_01_GeometryShaderHousesTest\04_09_01_GeometryShaderHousesTest.vcxproj", "{E7D9E317-6152-4FFE-956D-CB63018959DC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_09_02_GeometryShaderExploding", "04\04_09_02_GeometryShaderExploding\04_09_02_GeometryShaderExploding.vcxproj", "{8BCBB1DC-17B1-4FD2-B3D5-FCD1EB665BC2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_09_03_GeometryShaderNormal", "04\04_09_03_GeometryShaderNormal\04_09_03_GeometryShaderNormal.vcxproj", "{30984291-A3C5-4CB9-B295-C82F311ED656}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_09_02_GeometryShaderExplodingCube", "04\04_09_02_GeometryShaderExplodingCube\04_09_02_GeometryShaderExplodingCube.vcxproj", "{D7E35562-47E6-4AA3-A20F-4858FB582517}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_10_01_InstancingQuads", "04\04_10_01_InstancingQuads\04_10_01_InstancingQuads.vcxproj", "{7F2E218F-AF6D-4E4D-885B-41F3C117F171}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_10_02_InstancedArray", "04\04_10_02_InstancedArray\04_10_02_InstancedArray.vcxproj", "{E0D1FA75-BCF1-4469-9C48-F3C39FD3E1F1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_10_03_Asteroids", "04\04_10_03_Asteroids\04_10_03_Asteroids.vcxproj", "{9439071A-A857-42CA-BC0F-B5EF63C33D63}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_10_04_AsteroidsInstanced", "04\04_10_04_AsteroidsInstanced\04_10_04_AsteroidsInstanced.vcxproj", "{25420861-DDC3-4F9B-9083-35703EFD23C2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_11_01_AntiAliasingMsaa", "04\04_11_01_AntiAliasingMsaa\04_11_01_AntiAliasingMsaa.vcxproj", "{15B88980-670F-42C5-9D08-8123F037A919}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_11_01_AntiAliasingOffscreen", "04\04_11_01_AntiAliasingOffscreen\04_11_01_AntiAliasingOffscreen.vcxproj", "{80A79F03-A862-48FC-B4AC-53BCA02F2D2E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_01_AdvancedLighting", "05\05_01_AdvancedLighting\05_01_AdvancedLighting.vcxproj", "{0525FDEC-D793-4A37-87E6-2A366130794E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_01_Test", "05\05_01_Test\05_01_Test.vcxproj", "{13ECB53C-D833-4AEB-B78C-C518FAD8FA22}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_03_01_01_ShadowMappingDepth", "05\05_03_01_01_ShadowMappingDepth\05_03_01_01_ShadowMappingDepth.vcxproj", "{A1AD2E9A-C177-42C1-B0F0-98869BADF7FE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_03_01_02_ShadowMappingBase", "05\05_03_01_02_ShadowMappingBase\05_03_01_02_ShadowMappingBase.vcxproj", "{7D502F2C-7AAF-4530-B2CA-92B6327C7059}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_03_01_03_ShadowMappingShadowBias", "05\05_03_01_03_ShadowMappingShadowBias\05_03_01_03_ShadowMappingShadowBias.vcxproj", "{C627B2DD-10D4-40EA-B292-532A8E45F7D3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_03_01_04_ShadowMappingSSP", "05\05_03_01_04_ShadowMappingSSP\05_03_01_04_ShadowMappingSSP.vcxproj", "{DA9625DE-125F-4BAD-B50C-FAA0323CB883}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_03_01_04_ShadowMappingTest", "05\05_03_01_04_ShadowMappingTest\05_03_01_04_ShadowMappingTest.vcxproj", "{5B4D6603-F28B-45FC-9D5A-86941CD6B610}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_03_02_01_PointShadows", "05\05_03_02_01_PointShadows\05_03_02_01_PointShadows.vcxproj", "{9E2CAEAF-C76A-4E62-BCE0-5744FDE6BF67}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_04_NormalMapping_Model", "05\05_04_NormalMapping_Model\05_04_NormalMapping_Model.vcxproj", "{4D1F14A3-C918-442E-ADB2-4CE2BD8A979F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_04_NormalMapping_Tangent", "05\05_04_NormalMapping_Tangent\05_04_NormalMapping_Tangent.vcxproj", "{63B57A83-F7C1-4C3B-9BA7-56A3BA0449CA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_05_01_ParallaxMapping", "05\05_05_01_ParallaxMapping\05_05_01_ParallaxMapping.vcxproj", "{6EF71631-1337-4D88-838A-B4EB2A48F646}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_05_02_SteepParallaxMapping", "05\05_05_02_SteepParallaxMapping\05_05_02_SteepParallaxMapping.vcxproj", "{187B5BF1-E0DC-4DB5-BF80-F12C2FEF8ADA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_05_02_SteepParallaxOcclusionMapping", "05\05_05_02_SteepParallaxOcclusionMapping\05_05_02_SteepParallaxOcclusionMapping.vcxproj", "{B1063D8C-8DFD-4BAA-9456-1CD01BFE8C68}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_06_AdvancedLightingHdr", "05\05_06_AdvancedLightingHdr\05_06_AdvancedLightingHdr.vcxproj", "{F028E37A-324E-4966-84CC-A0B5D9B63FDF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_02_01_GammaCorrection", "05\05_02_01_GammaCorrection\05_02_01_GammaCorrection.vcxproj", "{F9CDCF5B-47D4-4E9C-BE0F-F191A3722035}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_02_02_GammaCorrectionAttenuation", "05\05_02_02_GammaCorrectionAttenuation\05_02_02_GammaCorrectionAttenuation.vcxproj", "{18E3290F-101E-44D7-84E0-AFDF065E895C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_03_HelloWindows", "01\01_03_HelloWindows\01_03_HelloWindows.vcxproj", "{3F50598B-8759-45F1-AC08-5E55090433BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -253,14 +251,6 @@ Global
 		{32C546C5-EA6C-4416-A259-823BCA6058E0}.Release|x64.Build.0 = Release|x64
 		{32C546C5-EA6C-4416-A259-823BCA6058E0}.Release|x86.ActiveCfg = Release|Win32
 		{32C546C5-EA6C-4416-A259-823BCA6058E0}.Release|x86.Build.0 = Release|Win32
-		{3F50598B-8759-45F1-AC08-5E55090433BB}.Debug|x64.ActiveCfg = Debug|x64
-		{3F50598B-8759-45F1-AC08-5E55090433BB}.Debug|x64.Build.0 = Debug|x64
-		{3F50598B-8759-45F1-AC08-5E55090433BB}.Debug|x86.ActiveCfg = Debug|Win32
-		{3F50598B-8759-45F1-AC08-5E55090433BB}.Debug|x86.Build.0 = Debug|Win32
-		{3F50598B-8759-45F1-AC08-5E55090433BB}.Release|x64.ActiveCfg = Release|x64
-		{3F50598B-8759-45F1-AC08-5E55090433BB}.Release|x64.Build.0 = Release|x64
-		{3F50598B-8759-45F1-AC08-5E55090433BB}.Release|x86.ActiveCfg = Release|Win32
-		{3F50598B-8759-45F1-AC08-5E55090433BB}.Release|x86.Build.0 = Release|Win32
 		{0A17F459-46BB-4BB5-99C8-B00221F289BB}.Debug|x64.ActiveCfg = Debug|x64
 		{0A17F459-46BB-4BB5-99C8-B00221F289BB}.Debug|x64.Build.0 = Debug|x64
 		{0A17F459-46BB-4BB5-99C8-B00221F289BB}.Debug|x86.ActiveCfg = Debug|Win32
@@ -781,14 +771,6 @@ Global
 		{13ECB53C-D833-4AEB-B78C-C518FAD8FA22}.Release|x64.Build.0 = Release|x64
 		{13ECB53C-D833-4AEB-B78C-C518FAD8FA22}.Release|x86.ActiveCfg = Release|Win32
 		{13ECB53C-D833-4AEB-B78C-C518FAD8FA22}.Release|x86.Build.0 = Release|Win32
-		{317E90BF-4F78-4962-8D8D-D61778290D76}.Debug|x64.ActiveCfg = Debug|x64
-		{317E90BF-4F78-4962-8D8D-D61778290D76}.Debug|x64.Build.0 = Debug|x64
-		{317E90BF-4F78-4962-8D8D-D61778290D76}.Debug|x86.ActiveCfg = Debug|Win32
-		{317E90BF-4F78-4962-8D8D-D61778290D76}.Debug|x86.Build.0 = Debug|Win32
-		{317E90BF-4F78-4962-8D8D-D61778290D76}.Release|x64.ActiveCfg = Release|x64
-		{317E90BF-4F78-4962-8D8D-D61778290D76}.Release|x64.Build.0 = Release|x64
-		{317E90BF-4F78-4962-8D8D-D61778290D76}.Release|x86.ActiveCfg = Release|Win32
-		{317E90BF-4F78-4962-8D8D-D61778290D76}.Release|x86.Build.0 = Release|Win32
 		{A1AD2E9A-C177-42C1-B0F0-98869BADF7FE}.Debug|x64.ActiveCfg = Debug|x64
 		{A1AD2E9A-C177-42C1-B0F0-98869BADF7FE}.Debug|x64.Build.0 = Debug|x64
 		{A1AD2E9A-C177-42C1-B0F0-98869BADF7FE}.Debug|x86.ActiveCfg = Debug|Win32
@@ -901,6 +883,14 @@ Global
 		{18E3290F-101E-44D7-84E0-AFDF065E895C}.Release|x64.Build.0 = Release|x64
 		{18E3290F-101E-44D7-84E0-AFDF065E895C}.Release|x86.ActiveCfg = Release|Win32
 		{18E3290F-101E-44D7-84E0-AFDF065E895C}.Release|x86.Build.0 = Release|Win32
+		{3F50598B-8759-45F1-AC08-5E55090433BB}.Debug|x64.ActiveCfg = Debug|x64
+		{3F50598B-8759-45F1-AC08-5E55090433BB}.Debug|x64.Build.0 = Debug|x64
+		{3F50598B-8759-45F1-AC08-5E55090433BB}.Debug|x86.ActiveCfg = Debug|Win32
+		{3F50598B-8759-45F1-AC08-5E55090433BB}.Debug|x86.Build.0 = Debug|Win32
+		{3F50598B-8759-45F1-AC08-5E55090433BB}.Release|x64.ActiveCfg = Release|x64
+		{3F50598B-8759-45F1-AC08-5E55090433BB}.Release|x64.Build.0 = Release|x64
+		{3F50598B-8759-45F1-AC08-5E55090433BB}.Release|x86.ActiveCfg = Release|Win32
+		{3F50598B-8759-45F1-AC08-5E55090433BB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -912,7 +902,6 @@ Global
 		{5C373546-9CA9-4D61-9763-3AE42F6A92EA} = {A3CE707E-FE3D-4917-B327-86393791557D}
 		{E27DE357-7119-4532-95F3-7398690224B8} = {A3CE707E-FE3D-4917-B327-86393791557D}
 		{32C546C5-EA6C-4416-A259-823BCA6058E0} = {A3CE707E-FE3D-4917-B327-86393791557D}
-		{3F50598B-8759-45F1-AC08-5E55090433BB} = {A3CE707E-FE3D-4917-B327-86393791557D}
 		{0A17F459-46BB-4BB5-99C8-B00221F289BB} = {A3CE707E-FE3D-4917-B327-86393791557D}
 		{B1554D58-1B6B-47C1-9B89-B12E23E6D397} = {A3CE707E-FE3D-4917-B327-86393791557D}
 		{904A8584-E0BD-452F-BC12-E8ED73DF06D7} = {A3CE707E-FE3D-4917-B327-86393791557D}
@@ -978,7 +967,6 @@ Global
 		{80A79F03-A862-48FC-B4AC-53BCA02F2D2E} = {4272ABA9-C48F-4F67-8E64-519BA7FF0222}
 		{0525FDEC-D793-4A37-87E6-2A366130794E} = {2332E91D-ACF5-480F-AEE6-4406152D0D4B}
 		{13ECB53C-D833-4AEB-B78C-C518FAD8FA22} = {2332E91D-ACF5-480F-AEE6-4406152D0D4B}
-		{317E90BF-4F78-4962-8D8D-D61778290D76} = {2332E91D-ACF5-480F-AEE6-4406152D0D4B}
 		{A1AD2E9A-C177-42C1-B0F0-98869BADF7FE} = {2332E91D-ACF5-480F-AEE6-4406152D0D4B}
 		{7D502F2C-7AAF-4530-B2CA-92B6327C7059} = {2332E91D-ACF5-480F-AEE6-4406152D0D4B}
 		{C627B2DD-10D4-40EA-B292-532A8E45F7D3} = {2332E91D-ACF5-480F-AEE6-4406152D0D4B}
@@ -993,6 +981,7 @@ Global
 		{F028E37A-324E-4966-84CC-A0B5D9B63FDF} = {2332E91D-ACF5-480F-AEE6-4406152D0D4B}
 		{F9CDCF5B-47D4-4E9C-BE0F-F191A3722035} = {2332E91D-ACF5-480F-AEE6-4406152D0D4B}
 		{18E3290F-101E-44D7-84E0-AFDF065E895C} = {2332E91D-ACF5-480F-AEE6-4406152D0D4B}
+		{3F50598B-8759-45F1-AC08-5E55090433BB} = {A3CE707E-FE3D-4917-B327-86393791557D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {157ED797-3273-476F-B4CA-7CB538F722B1}
